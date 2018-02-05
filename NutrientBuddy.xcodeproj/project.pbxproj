@@ -8,22 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D662028779F00076E5E /* AppDelegate.swift */; };
-		ACDD5D692028779F00076E5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D682028779F00076E5E /* ViewController.swift */; };
-		ACDD5D6C2028779F00076E5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D6A2028779F00076E5E /* Main.storyboard */; };
-		ACDD5D6F2028779F00076E5E /* NutrientBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D6D2028779F00076E5E /* NutrientBuddy.xcdatamodeld */; };
 		ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D702028779F00076E5E /* Assets.xcassets */; };
 		ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */; };
+		ACDD5D8420287E2300076E5E /* FoodInformationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8120287E2300076E5E /* FoodInformationTableViewCell.swift */; };
+		ACDD5D8520287E2300076E5E /* NutrientTypeSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */; };
+		ACDD5D8620287E2300076E5E /* FoodInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */; };
+		ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */; };
+		ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */; };
+		ACDD5D8F20287ED700076E5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8E20287ED700076E5E /* ViewController.swift */; };
+		ACDD5D9320287F8400076E5E /* NutrientBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9120287F8400076E5E /* NutrientBuddy.xcdatamodeld */; };
+		ACDD5D99202880C500076E5E /* NutrientTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */; };
+		ACDD5D9A202880C500076E5E /* NutrientTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */; };
+		ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9B202880D200076E5E /* FoodInformation.swift */; };
+		ACDD5D9E202880D200076E5E /* foodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9C202880D200076E5E /* foodData.swift */; };
+		ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9F202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift */; };
+		ACDD5DA2202880DE00076E5E /* NutrientDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5DA0202880DE00076E5E /* NutrientDiary.swift */; };
+		ACDD5DA72028815E00076E5E /* NatrualLanguageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5DA52028815E00076E5E /* NatrualLanguageProcess.swift */; };
+		ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5DA62028815E00076E5E /* BagOfWords.swift */; };
+		ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5DA92028819D00076E5E /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		ACDD5D632028779F00076E5E /* NutrientBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutrientBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDD5D662028779F00076E5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ACDD5D682028779F00076E5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ACDD5D6B2028779F00076E5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		ACDD5D6E2028779F00076E5E /* NutrientBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NutrientBuddy.xcdatamodel; sourceTree = "<group>"; };
 		ACDD5D702028779F00076E5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACDD5D732028779F00076E5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ACDD5D752028779F00076E5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACDD5D8120287E2300076E5E /* FoodInformationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInformationTableViewCell.swift; sourceTree = "<group>"; };
+		ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeSelectionViewController.swift; sourceTree = "<group>"; };
+		ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInformationTableViewController.swift; sourceTree = "<group>"; };
+		ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDetailsViewController.swift; sourceTree = "<group>"; };
+		ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		ACDD5D8E20287ED700076E5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ACDD5D9220287F8400076E5E /* DemoSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DemoSearch.xcdatamodel; sourceTree = "<group>"; };
+		ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeCoreDataHandler.swift; sourceTree = "<group>"; };
+		ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeSelection.swift; sourceTree = "<group>"; };
+		ACDD5D9B202880D200076E5E /* FoodInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInformation.swift; sourceTree = "<group>"; };
+		ACDD5D9C202880D200076E5E /* foodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodData.swift; sourceTree = "<group>"; };
+		ACDD5D9F202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientDiaryCoreDataHandler.swift; sourceTree = "<group>"; };
+		ACDD5DA0202880DE00076E5E /* NutrientDiary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientDiary.swift; sourceTree = "<group>"; };
+		ACDD5DA52028815E00076E5E /* NatrualLanguageProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NatrualLanguageProcess.swift; sourceTree = "<group>"; };
+		ACDD5DA62028815E00076E5E /* BagOfWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BagOfWords.swift; sourceTree = "<group>"; };
+		ACDD5DA92028819D00076E5E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = NutrientBuddy/View/Main.storyboard; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +82,109 @@
 		ACDD5D652028779F00076E5E /* NutrientBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				ACDD5D9420287FCD00076E5E /* Model */,
+				ACDD5D8B20287E5200076E5E /* Controller */,
+				ACDD5D8020287D7A00076E5E /* View */,
 				ACDD5D662028779F00076E5E /* AppDelegate.swift */,
-				ACDD5D682028779F00076E5E /* ViewController.swift */,
-				ACDD5D6A2028779F00076E5E /* Main.storyboard */,
 				ACDD5D702028779F00076E5E /* Assets.xcassets */,
 				ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */,
 				ACDD5D752028779F00076E5E /* Info.plist */,
-				ACDD5D6D2028779F00076E5E /* NutrientBuddy.xcdatamodeld */,
+				ACDD5D9120287F8400076E5E /* NutrientBuddy.xcdatamodeld */,
 			);
 			path = NutrientBuddy;
+			sourceTree = "<group>";
+		};
+		ACDD5D8020287D7A00076E5E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5DA92028819D00076E5E /* Main.storyboard */,
+			);
+			name = View;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		ACDD5D8B20287E5200076E5E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D9020287EE700076E5E /* Home */,
+				ACDD5D8D20287E8800076E5E /* FoodInformation */,
+				ACDD5D8C20287E6400076E5E /* DatabaseCategoryBrowse */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ACDD5D8C20287E6400076E5E /* DatabaseCategoryBrowse */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */,
+				ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */,
+			);
+			path = DatabaseCategoryBrowse;
+			sourceTree = "<group>";
+		};
+		ACDD5D8D20287E8800076E5E /* FoodInformation */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D8120287E2300076E5E /* FoodInformationTableViewCell.swift */,
+				ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */,
+				ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */,
+			);
+			path = FoodInformation;
+			sourceTree = "<group>";
+		};
+		ACDD5D9020287EE700076E5E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D8E20287ED700076E5E /* ViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ACDD5D9420287FCD00076E5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5DA42028812F00076E5E /* Search */,
+				ACDD5DA3202880E300076E5E /* NutrientDiary */,
+				ACDD5D9620287FE900076E5E /* NutrientSelection */,
+				ACDD5D9520287FD900076E5E /* LoadDatabase */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ACDD5D9520287FD900076E5E /* LoadDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D9C202880D200076E5E /* foodData.swift */,
+				ACDD5D9B202880D200076E5E /* FoodInformation.swift */,
+			);
+			path = LoadDatabase;
+			sourceTree = "<group>";
+		};
+		ACDD5D9620287FE900076E5E /* NutrientSelection */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */,
+				ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */,
+			);
+			path = NutrientSelection;
+			sourceTree = "<group>";
+		};
+		ACDD5DA3202880E300076E5E /* NutrientDiary */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5DA0202880DE00076E5E /* NutrientDiary.swift */,
+				ACDD5D9F202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift */,
+			);
+			path = NutrientDiary;
+			sourceTree = "<group>";
+		};
+		ACDD5DA42028812F00076E5E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5DA62028815E00076E5E /* BagOfWords.swift */,
+				ACDD5DA52028815E00076E5E /* NatrualLanguageProcess.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,9 +246,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */,
 				ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */,
 				ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */,
-				ACDD5D6C2028779F00076E5E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,23 +259,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACDD5D6F2028779F00076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
-				ACDD5D692028779F00076E5E /* ViewController.swift in Sources */,
+				ACDD5D8620287E2300076E5E /* FoodInformationTableViewController.swift in Sources */,
+				ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */,
+				ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */,
+				ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */,
+				ACDD5D9A202880C500076E5E /* NutrientTypeSelection.swift in Sources */,
+				ACDD5D8420287E2300076E5E /* FoodInformationTableViewCell.swift in Sources */,
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
+				ACDD5D8F20287ED700076E5E /* ViewController.swift in Sources */,
+				ACDD5D9E202880D200076E5E /* foodData.swift in Sources */,
+				ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */,
+				ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */,
+				ACDD5DA2202880DE00076E5E /* NutrientDiary.swift in Sources */,
+				ACDD5D9320287F8400076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
+				ACDD5D8520287E2300076E5E /* NutrientTypeSelectionViewController.swift in Sources */,
+				ACDD5D99202880C500076E5E /* NutrientTypeCoreDataHandler.swift in Sources */,
+				ACDD5DA72028815E00076E5E /* NatrualLanguageProcess.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		ACDD5D6A2028779F00076E5E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ACDD5D6B2028779F00076E5E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -328,13 +453,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		ACDD5D6D2028779F00076E5E /* NutrientBuddy.xcdatamodeld */ = {
+		ACDD5D9120287F8400076E5E /* NutrientBuddy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				ACDD5D6E2028779F00076E5E /* NutrientBuddy.xcdatamodel */,
+				ACDD5D9220287F8400076E5E /* DemoSearch.xcdatamodel */,
 			);
-			currentVersion = ACDD5D6E2028779F00076E5E /* NutrientBuddy.xcdatamodel */;
-			path = NutrientBuddy.xcdatamodeld;
+			currentVersion = ACDD5D9220287F8400076E5E /* DemoSearch.xcdatamodel */;
+			name = NutrientBuddy.xcdatamodeld;
+			path = DemoSearch.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

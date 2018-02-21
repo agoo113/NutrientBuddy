@@ -111,6 +111,7 @@ class foodInformation {
 }
 
 
+
 //MARK: captilize the first letter
 //(not used yet 26/12/17)
 extension String{

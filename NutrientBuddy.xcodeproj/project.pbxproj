@@ -16,7 +16,6 @@
 		ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */; };
 		ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */; };
 		ACDD5D8F20287ED700076E5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8E20287ED700076E5E /* ViewController.swift */; };
-		ACDD5D9320287F8400076E5E /* NutrientBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9120287F8400076E5E /* NutrientBuddy.xcdatamodeld */; };
 		ACDD5D99202880C500076E5E /* NutrientTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */; };
 		ACDD5D9A202880C500076E5E /* NutrientTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */; };
 		ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9B202880D200076E5E /* FoodInformation.swift */; };
@@ -26,6 +25,9 @@
 		ACDD5DA72028815E00076E5E /* NatrualLanguageProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5DA52028815E00076E5E /* NatrualLanguageProcess.swift */; };
 		ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5DA62028815E00076E5E /* BagOfWords.swift */; };
 		ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5DA92028819D00076E5E /* Main.storyboard */; };
+		ACDD5DAC202C9E4800076E5E /* datasetJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5DAB202C9E4800076E5E /* datasetJSON.json */; };
+		ACDD5DAF202CA2E300076E5E /* NutrientBuddy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5DAD202CA2E300076E5E /* NutrientBuddy.xcdatamodeld */; };
+		ACDD5E022039CE9400076E5E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5E012039CE9400076E5E /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,7 +42,6 @@
 		ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDetailsViewController.swift; sourceTree = "<group>"; };
 		ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		ACDD5D8E20287ED700076E5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ACDD5D9220287F8400076E5E /* DemoSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DemoSearch.xcdatamodel; sourceTree = "<group>"; };
 		ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeCoreDataHandler.swift; sourceTree = "<group>"; };
 		ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeSelection.swift; sourceTree = "<group>"; };
 		ACDD5D9B202880D200076E5E /* FoodInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInformation.swift; sourceTree = "<group>"; };
@@ -50,6 +51,9 @@
 		ACDD5DA52028815E00076E5E /* NatrualLanguageProcess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NatrualLanguageProcess.swift; sourceTree = "<group>"; };
 		ACDD5DA62028815E00076E5E /* BagOfWords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BagOfWords.swift; sourceTree = "<group>"; };
 		ACDD5DA92028819D00076E5E /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = NutrientBuddy/View/Main.storyboard; sourceTree = SOURCE_ROOT; };
+		ACDD5DAB202C9E4800076E5E /* datasetJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = datasetJSON.json; sourceTree = "<group>"; };
+		ACDD5DAE202CA2E300076E5E /* NutrientBuddy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NutrientBuddy.xcdatamodel; sourceTree = "<group>"; };
+		ACDD5E012039CE9400076E5E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,14 +86,15 @@
 		ACDD5D652028779F00076E5E /* NutrientBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				ACDD5D9420287FCD00076E5E /* Model */,
+				ACDD5DAD202CA2E300076E5E /* NutrientBuddy.xcdatamodeld */,
 				ACDD5D8B20287E5200076E5E /* Controller */,
 				ACDD5D8020287D7A00076E5E /* View */,
+				ACDD5D9420287FCD00076E5E /* Model */,
 				ACDD5D662028779F00076E5E /* AppDelegate.swift */,
+				ACDD5DAB202C9E4800076E5E /* datasetJSON.json */,
 				ACDD5D702028779F00076E5E /* Assets.xcassets */,
 				ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */,
 				ACDD5D752028779F00076E5E /* Info.plist */,
-				ACDD5D9120287F8400076E5E /* NutrientBuddy.xcdatamodeld */,
 			);
 			path = NutrientBuddy;
 			sourceTree = "<group>";
@@ -99,16 +104,14 @@
 			children = (
 				ACDD5DA92028819D00076E5E /* Main.storyboard */,
 			);
-			name = View;
-			path = "New Group";
+			path = View;
 			sourceTree = "<group>";
 		};
 		ACDD5D8B20287E5200076E5E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				ACDD5D9020287EE700076E5E /* Home */,
-				ACDD5D8D20287E8800076E5E /* FoodInformation */,
-				ACDD5D8C20287E6400076E5E /* DatabaseCategoryBrowse */,
+				ACDD5DB2202CABC300076E5E /* SearchView */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -125,8 +128,8 @@
 		ACDD5D8D20287E8800076E5E /* FoodInformation */ = {
 			isa = PBXGroup;
 			children = (
-				ACDD5D8120287E2300076E5E /* FoodInformationTableViewCell.swift */,
 				ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */,
+				ACDD5D8120287E2300076E5E /* FoodInformationTableViewCell.swift */,
 				ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */,
 			);
 			path = FoodInformation;
@@ -185,6 +188,16 @@
 				ACDD5DA52028815E00076E5E /* NatrualLanguageProcess.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		ACDD5DB2202CABC300076E5E /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5E012039CE9400076E5E /* SearchViewController.swift */,
+				ACDD5D8D20287E8800076E5E /* FoodInformation */,
+				ACDD5D8C20287E6400076E5E /* DatabaseCategoryBrowse */,
+			);
+			path = SearchView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -246,6 +259,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACDD5DAC202C9E4800076E5E /* datasetJSON.json in Resources */,
 				ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */,
 				ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */,
 				ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */,
@@ -263,15 +277,16 @@
 				ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */,
 				ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */,
 				ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */,
+				ACDD5DAF202CA2E300076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
 				ACDD5D9A202880C500076E5E /* NutrientTypeSelection.swift in Sources */,
 				ACDD5D8420287E2300076E5E /* FoodInformationTableViewCell.swift in Sources */,
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
 				ACDD5D8F20287ED700076E5E /* ViewController.swift in Sources */,
 				ACDD5D9E202880D200076E5E /* foodData.swift in Sources */,
 				ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */,
+				ACDD5E022039CE9400076E5E /* SearchViewController.swift in Sources */,
 				ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */,
 				ACDD5DA2202880DE00076E5E /* NutrientDiary.swift in Sources */,
-				ACDD5D9320287F8400076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
 				ACDD5D8520287E2300076E5E /* NutrientTypeSelectionViewController.swift in Sources */,
 				ACDD5D99202880C500076E5E /* NutrientTypeCoreDataHandler.swift in Sources */,
 				ACDD5DA72028815E00076E5E /* NatrualLanguageProcess.swift in Sources */,
@@ -453,14 +468,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		ACDD5D9120287F8400076E5E /* NutrientBuddy.xcdatamodeld */ = {
+		ACDD5DAD202CA2E300076E5E /* NutrientBuddy.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				ACDD5D9220287F8400076E5E /* DemoSearch.xcdatamodel */,
+				ACDD5DAE202CA2E300076E5E /* NutrientBuddy.xcdatamodel */,
 			);
-			currentVersion = ACDD5D9220287F8400076E5E /* DemoSearch.xcdatamodel */;
+			currentVersion = ACDD5DAE202CA2E300076E5E /* NutrientBuddy.xcdatamodel */;
 			name = NutrientBuddy.xcdatamodeld;
-			path = DemoSearch.xcdatamodeld;
+			path = Model/NutrientSelection/NutrientBuddy.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

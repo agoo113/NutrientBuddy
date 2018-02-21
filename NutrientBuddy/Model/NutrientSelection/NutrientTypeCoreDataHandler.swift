@@ -20,7 +20,7 @@ class NutrientTypeCoreDataHandler: NSObject {
     //save object
     class func saveObject(type: String, select: Int16, unit: String, amount:Double) {
         let context = getContext()
-        let entity = NSEntityDescription.entity(forEntityName: "Nutrient", in: context) //"Nutrient" comes from the .xcdatamodeled file
+        let entity = NSEntityDescription.entity(forEntityName: "NutrientToView", in: context) //"Nutrient" comes from the .xcdatamodeled file
         let manageObject = NSManagedObject(entity: entity!, insertInto: context)
         
         manageObject.setValue(type, forKey: "type")
@@ -36,53 +36,53 @@ class NutrientTypeCoreDataHandler: NSObject {
     }
     
     //change object selection
-    class func changeSelection(nutrient: Nutrient, select: Int16) {
+    class func changeSelection(nutrientToView: NutrientToView, select: Int16) {
         let context = getContext()
         
-        nutrient.select = select
+        nutrientToView.select = select
         do{
             try context.save()
         } catch {
-            print("GJ: Something goes wrong with changing core data - Nutrient")
+            print("GJ: Something goes wrong with changing core data - NutrientToView")
         }
         
     }
     
     //fetch object
-    class func fetchObject() -> [Nutrient]?{
+    class func fetchObject() -> [NutrientToView]?{
         let context = getContext()
-        var nutrient:[Nutrient] = []
+        var nutrientToView:[NutrientToView] = []
         do {
-            nutrient = try context.fetch(Nutrient.fetchRequest())
-            return nutrient
+            nutrientToView = try context.fetch(NutrientToView.fetchRequest())
+            return nutrientToView
         } catch {
-            print("GJ: Something goes wrong with fetching core data - Nutrient")
-            return nutrient // will be nil if things go wrong
+            print("GJ: Something goes wrong with fetching core data - NutrientToView")
+            return nutrientToView // will be nil if things go wrong
         }
     }
     
     
     //delete object
-    class func deleteObject(nutrient: Nutrient) {
+    class func deleteObject(nutrientToView: NutrientToView) {
         let context = getContext()
-        context.delete(nutrient)
+        context.delete(nutrientToView)
         
         do {
             try context.save()
         } catch {
-            print("GJ: Something goes wrong with deleting core data - Nutrient")
+            print("GJ: Something goes wrong with deleting core data - NutrientToView")
         }
     }
     
     //clean delete
     class func clearnDelete(){
         let context = getContext()
-        let delete = NSBatchDeleteRequest(fetchRequest: Nutrient.fetchRequest())
+        let delete = NSBatchDeleteRequest(fetchRequest: NutrientToView.fetchRequest())
         
         do{
             try context.execute(delete)
         } catch {
-            print("GJ: Something goes wrong with deleting core data - Nutrient")
+            print("GJ: Something goes wrong with deleting core data - NutrientToView")
         }
     }
 }

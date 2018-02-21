@@ -16,6 +16,9 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.hidesBarsOnSwipe = true
+        self.navigationItem.hidesBackButton = false
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,9 +56,9 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         let singleNutrient = nutrients[sender.tag]
        
         if sender.isOn {
-            NutrientTypeCoreDataHandler.changeSelection(nutrient: singleNutrient, select: 1)
+            NutrientTypeCoreDataHandler.changeSelection(nutrientToView: singleNutrient, select: 1)
         } else {
-            NutrientTypeCoreDataHandler.changeSelection(nutrient: singleNutrient, select: 0)
+            NutrientTypeCoreDataHandler.changeSelection(nutrientToView: singleNutrient, select: 0)
         }
         
     }

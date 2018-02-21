@@ -71,19 +71,7 @@ class NutrientDiaryCoreDataHandler: NSObject {
             print("GJ: Something goes wrong with saving core data")
         }
     }
-    //change object selection
-    class func changeSelection(nutrient: Nutrient, select: Int16) {
-        let context = getContext()
-        
-        nutrient.select = select
-        do{
-            try context.save()
-        } catch {
-            print("GJ: Something goes wrong with changing core data - Diary")
-        }
-        
-    }
-    
+  
     //fetch object
     class func fetchObject() -> [Diary]?{
         let context = getContext()

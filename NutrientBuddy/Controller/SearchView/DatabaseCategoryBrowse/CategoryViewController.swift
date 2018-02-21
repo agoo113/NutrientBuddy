@@ -12,12 +12,13 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
+        self.navigationController?.hidesBarsOnSwipe = true
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -100,7 +101,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
             
             guard let categoryDetials = dict[item]
                 else{
-                    print("something wrong with category string array")
+                    print("GJ: something wrong with category string array")
                     return
                 }
             categoryDetailsViewController.foodItems = categoryDetials

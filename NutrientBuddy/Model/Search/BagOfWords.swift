@@ -44,10 +44,6 @@ class BagOfWord {
             }
             foodItemNamesCodeDictNoComma.updateValue(indexArray, forKey: name)
         }
-        // sort the dictionary
-        //let sortedFoodItemNameCodeDictNoComma = Array(foodItemNamesCodeDictNoComma.sorted(by:{$0.key < $1.key}))
-        
-        
         return foodItemNamesCodeDictNoComma
     }
     
@@ -65,5 +61,48 @@ class BagOfWord {
         }
         return codedSearch
     }
+    
+    //MARK: Search
+    func searchItem(searchFood:String, codeDict:[String: [Int]]) ->[String]{
+        var filteredData: [String] = []
+        
+        var filteredDict: [String: Double] = [:] //[food_item_name: number_of_words_matched]
+       
+        let codedSearch = encodeSearchString(searchStr: searchFood)
+        for (key, value) in codeDict {
+            let common = value.filter(codedSearch.contains)
+            
+            if common.count > 0 {
+                var indices: [Double] = []
+                for eachSearch in common{
+                    let index = Double(Array(value).index(of: eachSearch)!)
+                    indices.append(index)
+                }
+                
+                var n = Double(common.count)
+                for index in indices {
+                    n = n / (index + 1.0)
+                }
+                filteredDict[key] = n
+            }
+        }
+        if filteredDict.count > 0 {
+            //load [nameWithoutComma: nameWithComma]
+            let foodItemNameCommaDict = foodData().loadFoodNames()
+            //sort list
+            // 1.alphabetically sorting
+            // 2.in terms of number of elements matched
+            let sortedFilteredDictAlphabet = Array(filteredDict).sorted(by: <)
+            let sortedFilteredDict = Array(sortedFilteredDictAlphabet).sorted(by: {$0.value > $1.value})
+            
+            for (key, _) in sortedFilteredDict {
+                let searchedResult = foodItemNameCommaDict[key]
+                filteredData.append(searchedResult!)
+            }
+        }
+        
+        return filteredData
+    }
+    
 
 }

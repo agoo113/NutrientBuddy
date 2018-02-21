@@ -13,24 +13,19 @@ class ViewController: UIViewController {
     var database: [FoodInfo] = []
     var dictViewCont: [String:[String]] = [:]
     var categoryViewCont: [String] = []
-    var allWords: [String] = []
+    //var allWords: [String] = []
     var codeDict: [String: [Int]] = [:]
     
     //MARK: pass to the next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // CatagoryDetailsViewController
-        if segue.identifier == "loadDatabase" {
-            let categoryViewController: CategoryViewController = segue.destination as! CategoryViewController
-            categoryViewController.dict = dictViewCont
-            categoryViewController.categories = categoryViewCont
-            categoryViewController.database = database
-        }
-        // SpeechViewControlller
-        if segue.identifier == "loadSpeechDatabase" {
-            let speechViewController: SpeechViewController = segue.destination as! SpeechViewController
-            
-            speechViewController.allWords = allWords
-            speechViewController.codeDict = codeDict
+        // SearchViewControlller
+        if segue.identifier == "loadSearchPage" {
+            let searchViewController: SearchViewController = segue.destination as! SearchViewController
+            searchViewController.codeDict = codeDict
+            searchViewController.database = database
+            //pass for catogory view controller
+            searchViewController.catDict = dictViewCont
+            searchViewController.catCategories = categoryViewCont  
         }
     }
 
@@ -41,14 +36,13 @@ class ViewController: UIViewController {
         database = foodData().loadFoodDatabase()!
         dictViewCont = foodData().categorizeItems()
         categoryViewCont = foodData().categorizeItems().keys.sorted(by: <)
-        allWords = BagOfWord().loadAllWords()
+        //allWords = BagOfWord().loadAllWords()
         codeDict = BagOfWord().loadDictionary()
      
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func testingTapped(_ sender: UIButton) {
@@ -58,6 +52,8 @@ class ViewController: UIViewController {
                 print("GJ: date: \(String(describing: eachItem.date)), food (\(String(describing: eachItem.foodname)), amount: \(eachItem.amount)")
             }
         }
+        let nutrientSelectionViewController = storyboard?.instantiateViewController(withIdentifier: "nutrientSelection") as! NutrientTypeSelectionViewController
+        present(nutrientSelectionViewController, animated: true, completion: nil)
         
         
     }

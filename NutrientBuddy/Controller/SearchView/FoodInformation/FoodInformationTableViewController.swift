@@ -83,18 +83,6 @@ class FoodInformationTableViewController: UITableViewController {
         cell.contentView.setNeedsLayout()
         return cell
     }
-    /*
-    //freeze the first cell
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 387
-    }
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UITableView.init()
-        
-        
-        
-        return header
-    }*/
     
     //MARK: prepare for the first type of cell
     func getFoodNameAndImage() -> [String] {
@@ -115,9 +103,15 @@ class FoodInformationTableViewController: UITableViewController {
             let indexPath = IndexPath(row: 0, section: 0)
             let cell = self.tableView.cellForRow(at: indexPath) as! FoodInformationTableViewCell
             self.amount = Double(cell.amountSlider.value)
-            print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
-            NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount)
-            self.goToHome()
+            if self.amount == 0{
+                let alertSecond = UIAlertController(title: "Nutrient Buddy", message: "You did not specify food amount! Please cancel and select amount!", preferredStyle: UIAlertControllerStyle.alert)
+                self.present(alertSecond, animated: true, completion: nil)
+            }
+            else{
+                print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
+                NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount)
+                self.goToHome()
+            }
         }
         let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
             print("GJ: canceled adding food item")
@@ -129,8 +123,8 @@ class FoodInformationTableViewController: UITableViewController {
     }
     private func goToHome(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "homeView") as! HomeViewController
-        self.navigationController?.pushViewController(homeViewController, animated: true)
+        let logFoodViewController = storyBoard.instantiateViewController(withIdentifier: "myMeals") as! LogFoodViewController
+        self.navigationController?.pushViewController(logFoodViewController, animated: true)
     }
 
 }

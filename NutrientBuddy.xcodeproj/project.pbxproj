@@ -17,7 +17,7 @@
 		AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */; };
 		AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB220441BD700C26309 /* SettingViewController.swift */; };
 		AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */; };
-		AC7E724B20459A1400D0393F /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E724A20459A1400D0393F /* Debug.swift */; };
+		AC7E72512045B04B00D0393F /* HomeViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */; };
 		ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */; };
 		ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */; };
 		ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D662028779F00076E5E /* AppDelegate.swift */; };
@@ -52,7 +52,7 @@
 		AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDiaryCoreDataHandler.swift; sourceTree = "<group>"; };
 		AC5C9BB220441BD700C26309 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
-		AC7E724A20459A1400D0393F /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFunctions.swift; sourceTree = "<group>"; };
 		ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWaterBarView.swift; sourceTree = "<group>"; };
 		ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWaterBarView.xib; sourceTree = "<group>"; };
 		ACDD5D632028779F00076E5E /* NutrientBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutrientBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDD5D8E20287ED700076E5E /* HomeViewController.swift */,
+				AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */,
 				AC39434C2042208500EE31FA /* HomeTableViewCell.swift */,
 			);
 			path = Home;
@@ -234,7 +235,6 @@
 		ACDD5D9420287FCD00076E5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AC7E724A20459A1400D0393F /* Debug.swift */,
 				AC321F52204085140070D289 /* MKRingProgressModel */,
 				ACDD5DA42028812F00076E5E /* Search */,
 				ACDD5DA3202880E300076E5E /* NutrientDiary */,
@@ -371,10 +371,10 @@
 				ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */,
 				ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */,
 				AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */,
-				AC7E724B20459A1400D0393F /* Debug.swift in Sources */,
 				ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */,
 				ACDD5DAF202CA2E300076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
 				ACDD5D9A202880C500076E5E /* NutrientSelectionSetting.swift in Sources */,
+				AC7E72512045B04B00D0393F /* HomeViewFunctions.swift in Sources */,
 				AC321F56204085340070D289 /* MKRingProgressView.swift in Sources */,
 				ACDD5D8420287E2300076E5E /* FoodInformationTableViewCell.swift in Sources */,
 				AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */,

@@ -138,18 +138,23 @@ class SummaryDiaryCoreDataHandler: NSObject {
         
     }*/
     //MARK: fetch object with date
-    class func fetchObject(date: String) -> Summary?{
+    class func fetchObject(date: String) -> [Summary] {
         let context = getContext()
         var summarys:[Summary] = []
         do {
             summarys = try context.fetch(Summary.fetchRequest())
             let summary = summarys.filter{$0.date == date}
+            
+            for each in summary{
+                print("\(each.totalWeight)")
+            }
+            
             print("GJ: the summary is updated \(summary.count) times")
-            return summary.last
+            return summary
         } catch {
             print("GJ: Something goes wrong with fetching core data - Summary")
             print("GJ: it could be that the summary with given date does not exist")
-            return nil
+            return []
         }
     }
 

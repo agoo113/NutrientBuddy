@@ -14,36 +14,81 @@ func delay(_ delay: Double, closure: @escaping ()->()) {
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    //MARK: IBoutlet
+    //MARK: IBoutlet with the view
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var groupContainerView: UIView!
     @IBOutlet weak var progressGroup: MKRingProgressGroupView!
     @IBOutlet weak var waterBar: HomeWaterBarView!
-    
-    //MARK: global variables
-    var selectedFoodInfo = FoodInfo()
-    var nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
-    var display_nutrient: [foodInformation] = []
-    let date = NutrientDiary().getDate()
-    //let date = "26/02/2018"
-    
-    var energyGoal = 8700.0 // function to set
-    var waterGoal = 1000.0 // function to set
-    
-    var waterPercentage = 0.0
+    @IBOutlet weak var navigationBar: UINavigationItem!
     //ring graph button
     var buttons: [MKRingProgressGroupButton] = []
     var selectedIndex = 0
-    var proteinPercentage = 0.0
-    var fatPercentage = 0.0
-    var carboPercentage = 0.0
-    var energyPercentage = 0.0
+    
+    //MARK: global variables
+    var nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
+    var display_nutrient: [foodInformation] = []
+    let date = NutrientDiary().getDate()
+    var energyGoal = 8700.0 // function to set
+    var waterGoal = 1200.0 // function to set
+    var percentages = percentageConsumed()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("GJ: view did appear")
+        //load summary
+        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: waterGoal, energyGoal: energyGoal, date: date)
+        let summary = summaryAndPercentages.summary
+        percentages = summaryAndPercentages.percentages
+        
+        display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
+        
+        //delete extra summaries
+        HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
+        let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
+        print("GJ: there are \(newSummary.count) summaries in the core data now")
+        
+        //ring graph
+        randeringRingView()
+        getSummaryPrecentageForRings()
+        //water bar
+        waterBar.drawProgressLayer(percentage: percentages.waterPercentage)
+        //reload table
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print("GJ: today's date is \(date)")
+
+        //MARK: load the views
+        //nutrient to view
+        nutrientToView = HomeViewFunctions().getNutrientToView(nutrientToView: nutrientToView)
         
-        //MARK: ring graphs
+        //load summary
+        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: waterGoal, energyGoal: energyGoal, date: date)
+        let summary = summaryAndPercentages.summary
+        percentages = summaryAndPercentages.percentages
+        
+        display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
+        
+        //delete extra summaries
+        HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
+        let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
+        print("GJ: there are \(newSummary.count) summaries in the core data now")
+        
+        //ring graph
+        randeringRingView()
+        getSummaryPrecentageForRings()
+        //water bar
+        waterBar.drawProgressLayer(percentage: percentages.waterPercentage)
+        //reload table
+        tableView.reloadData()
+        
+        //MARK: navigation item to setting and calendar
+       navigationBar.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settingView"), style: .plain, target: self, action: #selector(settingButtonItemTapped))
+    }
+
+    //MARK: ring graphs
+    func randeringRingView() {
         let containerView = UIView(frame: navigationController!.navigationBar.bounds)
         navigationController!.navigationBar.addSubview(containerView)
         let w = (containerView.bounds.width - 16) / CGFloat(7)
@@ -63,82 +108,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         buttons.append(button)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         buttons[0].isSelected = true
-
+        
         delay(0.5) {
             self.updateMainGroupProgress()
         }
-        //MARK: nutrient to view
-        //default if not set
-        if nutrientToView.count != 38 {
-            NutrientTypeCoreDataHandler.clearnDelete()
-            NutrientSelectionSetting().setSelectionDefault(selectedFoodInfo: selectedFoodInfo)
-            nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
-        }
-        
-        //load summary
-        let summary = loadSummary()
-        display_nutrient = loadFoodNutrition(nutrientToView: nutrientToView, summary: summary)
-        getSummaryPrecentage()
-        waterBar.drawProgressLayer(percentage: waterPercentage)
-        //reload table
-        tableView.reloadData()
-        
     }
-
-    private func loadSummary() -> Summary{
-        let summary = NutrientDiary().updateNutrientsSummaryOfTheDay(date: date)
-        if summary.date != nil{
-            waterPercentage = (summary.water)/waterGoal
-            //MARK: ring graphs
-            let totalOfThree = summary.fat + summary.carbohydrate + proteinPercentage
-            proteinPercentage = (summary.protein)/totalOfThree
-            fatPercentage = (summary.fat)/totalOfThree
-            carboPercentage = (summary.carbohydrate)/totalOfThree
-            energyPercentage = (summary.energy)/(energyGoal)
-            print("GJ: cunsumed water \(waterPercentage) g, protein \(proteinPercentage), fat \(fatPercentage), carbo \(energyPercentage)")
-        }
-        else{
-            waterPercentage = 0
-            //MARK: ring graphs
-            proteinPercentage = 0
-            fatPercentage = 0
-            carboPercentage = 0
-            energyPercentage = 0
-        }
-        
-        return summary
-    }
-    
-    //MARK: get nutrient information
-    private func loadFoodNutrition(nutrientToView: [NutrientToView], summary: Summary) -> [foodInformation]{
-        var displayNutrient: [foodInformation] = []
-        var nutrientToAppend: foodInformation
-        
-        var summaryExist = true
-        if summary.date != nil{
-            summaryExist = false
-        }
-        
-        for singleNutrient in nutrientToView {
-            if singleNutrient.select == 1 {
-                if summaryExist {
-                    let amount = NutrientSelectionSetting().getSummaryAmount(type: singleNutrient.type!, date: date, summary:summary)
-                    nutrientToAppend = foodInformation(nutrientType: singleNutrient.type!, amount: amount, unit: "(g)")!
-                }
-                else{
-                    nutrientToAppend = foodInformation(nutrientType: singleNutrient.type!, amount: 0, unit: "(g)")!
-                }
-                displayNutrient.append(nutrientToAppend)
-            }
-        }
-        return displayNutrient
-    }
-   
-    
-    //MARK: ring graphs
     @objc func buttonTapped(_ sender: MKRingProgressGroupButton) {
         let newIndex = buttons.index(of: sender) ?? 0
-        
         let dx = (newIndex > selectedIndex) ? -self.view.frame.width : self.view.frame.width
         
         buttons[selectedIndex].isSelected = false
@@ -176,12 +152,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //get summart for protain, fat, carbohydrate and energy
-    @IBAction func getSummaryPrecentage(_ sender: AnyObject? = nil) {
+    @IBAction func getSummaryPrecentageForRings(_ sender: AnyObject? = nil) {
         for button in buttons {
-            button.contentView.ring1.progress = energyPercentage
-            button.contentView.ring2.progress = fatPercentage
-            button.contentView.ring3.progress = proteinPercentage
-            button.contentView.ring4.progress = carboPercentage
+            button.contentView.ring1.progress = percentages.energyPercentage
+            button.contentView.ring2.progress = percentages.fatPercentage
+            button.contentView.ring3.progress = percentages.proteinPercentage
+            button.contentView.ring4.progress = percentages.carboPercentage
         }
         updateMainGroupProgress()
     }
@@ -202,6 +178,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.nutrientAmountLabel.text = amountString
         //cell.contentView.setNeedsLayout()
         return cell
+    }
+    
+    //MARK: navigation bar items
+    @objc func settingButtonItemTapped(_ sender: UIBarButtonItem!){
+        print("GJ: pressed setting button item")
+        let myStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let settingViewController = myStoryBoard.instantiateViewController(withIdentifier: "settingView") as! SettingViewController
+        self.navigationController?.pushViewController(settingViewController, animated: true)
     }
 }
 

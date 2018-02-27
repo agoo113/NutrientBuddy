@@ -68,9 +68,12 @@ class NutrientDiary {
         //get diary of the same date
         let diary = NutrientDiaryCoreDataHandler.fetchObject()!
         let diaryOfDate = diary.filter { $0.date == date }
-        
+       
         //get initialized summary
         let summary = initialiseSummary(date: date)
+        if diaryOfDate.count == 0 {
+            return summary
+        }
         
         for each in diaryOfDate {
             print("GJ: food loged on \(date): - NutrientDiary")
@@ -117,28 +120,19 @@ class NutrientDiary {
         summary.totalWeight = summary.aoac_fibre + summary.water + summary.protein + summary.protein + summary.fat + summary.carbohydrate + summary.nsp
         print("GJ: summary of food is - NutrientDiary")
         print(summary)
+        SummaryDiaryCoreDataHandler.saveObject(summary: summary)
+        print("GJ: saved new summary at \(date), total weight is \(summary.totalWeight) grams - NutrientDiary")
         
-        let newSummary = summary
-        print("GJ: now you have eaten \(summary.totalWeight) grams of food - NutrientDiary")
-        deleteNutrientSummaryIfExist(date: date)
-        
-        print(newSummary)
-        //save the new summary
-        SummaryDiaryCoreDataHandler.saveObject(summary:         newSummary)
-        print("GJ: saved new summary at \(date), total weight was \(newSummary.totalWeight) grams - NutrientDiary")
-        return newSummary
+        return summary
     }
     private func initialiseSummary(date: String) -> Summary {
-        SummaryDiaryCoreDataHandler.saveInitialObject(date: date, totalWeight: 0, water: 0, fat: 0, protein: 0, carbohydrate: 0, nsp: 0, energy: 0, aoac_fibre: 0, sodium: 0, potassium: 0, calcium: 0, magnesium: 0, phosphorus: 0, iron: 0, copper: 0, zinc: 0, chloride: 0, manganese: 0, selenium: 0, iodine: 0, retinol: 0, carotene: 0, retinol_equivalent: 0, vitamin_d: 0, vitamin_e: 0, vitamin_k1: 0, thiamin: 0, riboflavin: 0, niacin: 0, tryptophan_p60: 0, niacin_equivalent: 0, vitamin_b6: 0, vitamin_b12: 0, folate: 0, pantothenate: 0, biotin: 0, vitamin_c: 0, mineral_total: 0, vitamin_total: 0)
-        let summary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
-        return summary!
+        //let existedSummary = SummaryDiaryCoreDataHandler.fetchObject(date: //date)
+        //if existedSummary?.date == nil {
+            SummaryDiaryCoreDataHandler.saveInitialObject(date: date, totalWeight: 0, water: 0, fat: 0, protein: 0, carbohydrate: 0, nsp: 0, energy: 0, aoac_fibre: 0, sodium: 0, potassium: 0, calcium: 0, magnesium: 0, phosphorus: 0, iron: 0, copper: 0, zinc: 0, chloride: 0, manganese: 0, selenium: 0, iodine: 0, retinol: 0, carotene: 0, retinol_equivalent: 0, vitamin_d: 0, vitamin_e: 0, vitamin_k1: 0, thiamin: 0, riboflavin: 0, niacin: 0, tryptophan_p60: 0, niacin_equivalent: 0, vitamin_b6: 0, vitamin_b12: 0, folate: 0, pantothenate: 0, biotin: 0, vitamin_c: 0, mineral_total: 0, vitamin_total: 0)
+            let summary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
+        //the initilized summary should be the one that just got added
+        return summary.last!
+        //}
+        //return existedSummary!
     }
-    private func deleteNutrientSummaryIfExist(date: String) {
-        let summary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
-        if summary?.date != nil {
-            SummaryDiaryCoreDataHandler.deleteObject(summary: summary!)
-            print("GJ: deleted OLD summary at \(date), total weight was \(String(describing: summary?.totalWeight)) grams - NutrientDiary")
-        }
-    }
-    
 }

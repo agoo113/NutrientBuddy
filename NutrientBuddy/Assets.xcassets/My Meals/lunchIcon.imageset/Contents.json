@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "searchView.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "lunchicon.jpg",
       "scale" : "2x"
     },
     {

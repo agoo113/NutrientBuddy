@@ -16,21 +16,6 @@ class FoodInformationTableViewController: UITableViewController {
     //display nutrient on this page
     var display_nutrient: [foodInformation] = []
     var amount: Double = 0
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
-        if nutrientToView.count != 38 {
-        NutrientSelectionSetting().setSelectionDefault(selectedFoodInfo: selectedFoodInfo)
-            nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
-        }
-        
-        display_nutrient.removeAll()
-        loadFoodNutrition(nutrientToView: nutrientToView)
-        tableView.reloadData()
-    }
-*/
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,21 +24,15 @@ class FoodInformationTableViewController: UITableViewController {
         
         //MARK: add default if there is nothing in the nutrient selection core data
         nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
-        if nutrientToView.count != 38 {
-            NutrientTypeCoreDataHandler.clearnDelete()
-            NutrientSelectionSetting().setSelectionDefault(selectedFoodInfo: selectedFoodInfo)
-            nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
-        }
         loadFoodNutrition(nutrientToView: nutrientToView)
     }
-    
    
     // MARK: get nutrient information
     private func loadFoodNutrition(nutrientToView: [NutrientToView]){
-     
         for singleNutrient in nutrientToView {
             if singleNutrient.select == 1 {
-                let nutrientToView = foodInformation(nutrientType: singleNutrient.type!, amount: singleNutrient.amount, unit: singleNutrient.unit!)
+                let selectedNutrientAmount = NutrientSelectionSetting().getNutrientAmount(selectedFoodInfo: selectedFoodInfo, type: singleNutrient.type!)
+                let nutrientToView = foodInformation(nutrientType: singleNutrient.type!, amount: selectedNutrientAmount, unit: singleNutrient.unit!)
                     display_nutrient.append(nutrientToView!)
             }
         }
@@ -98,15 +77,26 @@ class FoodInformationTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientInfo", for: indexPath) as! FoodInformationSecondTableViewCell
         let nutrientToView = display_nutrient[indexPath.row - 1]
         cell.nutrientTypeLabel.text = nutrientToView.nutrientType
-        //print("displaying nutrientToView type: \(nutrient.nutrientType)")
         var amountString = String(format: "%.3f", nutrientToView.amount)
         amountString.append(nutrientToView.unit)
         cell.amountLabel.text = amountString
         cell.contentView.setNeedsLayout()
         return cell
     }
+    /*
+    //freeze the first cell
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 387
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UITableView.init()
+        
+        
+        
+        return header
+    }*/
     
-    // MARK: prepare for the first type of cell
+    //MARK: prepare for the first type of cell
     func getFoodNameAndImage() -> [String] {
         let refindedName = selectedFoodInfo.Food_Name.replacingOccurrences(of: "_", with: " ")
         let substringArray = refindedName.split(separator: ",", maxSplits: 1, omittingEmptySubsequences: true)
@@ -125,17 +115,22 @@ class FoodInformationTableViewController: UITableViewController {
             let indexPath = IndexPath(row: 0, section: 0)
             let cell = self.tableView.cellForRow(at: indexPath) as! FoodInformationTableViewCell
             self.amount = Double(cell.amountSlider.value)
-            print("GJ: amount = \(self.amount)")
-            
+            print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
             NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount)
+            self.goToHome()
         }
         let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
             print("GJ: canceled adding food item")
         }
         alert.addAction(actionOkay)
         alert.addAction(actionCancel)
+        present(alert, animated: true, completion: nil)
         
-        UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    private func goToHome(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let homeViewController = storyBoard.instantiateViewController(withIdentifier: "homeView") as! HomeViewController
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
 
 }

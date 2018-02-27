@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC321F4F204084FD0070D289 /* MKGradientGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */; };
+		AC321F51204085100070D289 /* MKRingProgressGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */; };
+		AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F53204085340070D289 /* MKRingProgressGroupView.swift */; };
+		AC321F56204085340070D289 /* MKRingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F54204085340070D289 /* MKRingProgressView.swift */; };
+		AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F812041B5B00070D289 /* LogFoodViewController.swift */; };
+		AC39071920443D0D00EC644B /* NutrientTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */; };
+		AC39434D2042208500EE31FA /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC39434C2042208500EE31FA /* HomeTableViewCell.swift */; };
+		AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */; };
+		AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB220441BD700C26309 /* SettingViewController.swift */; };
+		AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */; };
+		AC7E724B20459A1400D0393F /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E724A20459A1400D0393F /* Debug.swift */; };
+		ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */; };
+		ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */; };
 		ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D662028779F00076E5E /* AppDelegate.swift */; };
 		ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D702028779F00076E5E /* Assets.xcassets */; };
 		ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */; };
@@ -15,9 +28,8 @@
 		ACDD5D8620287E2300076E5E /* FoodInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */; };
 		ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */; };
 		ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */; };
-		ACDD5D8F20287ED700076E5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8E20287ED700076E5E /* ViewController.swift */; };
-		ACDD5D99202880C500076E5E /* NutrientTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */; };
-		ACDD5D9A202880C500076E5E /* NutrientTypeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */; };
+		ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D8E20287ED700076E5E /* HomeViewController.swift */; };
+		ACDD5D9A202880C500076E5E /* NutrientSelectionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D98202880C500076E5E /* NutrientSelectionSetting.swift */; };
 		ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9B202880D200076E5E /* FoodInformation.swift */; };
 		ACDD5D9E202880D200076E5E /* foodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9C202880D200076E5E /* foodData.swift */; };
 		ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D9F202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift */; };
@@ -31,6 +43,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKGradientGenerator.swift; sourceTree = "<group>"; };
+		AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupButton.swift; sourceTree = "<group>"; };
+		AC321F53204085340070D289 /* MKRingProgressGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupView.swift; sourceTree = "<group>"; };
+		AC321F54204085340070D289 /* MKRingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressView.swift; sourceTree = "<group>"; };
+		AC321F812041B5B00070D289 /* LogFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFoodViewController.swift; sourceTree = "<group>"; };
+		AC39434C2042208500EE31FA /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDiaryCoreDataHandler.swift; sourceTree = "<group>"; };
+		AC5C9BB220441BD700C26309 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
+		AC7E724A20459A1400D0393F /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWaterBarView.swift; sourceTree = "<group>"; };
+		ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWaterBarView.xib; sourceTree = "<group>"; };
 		ACDD5D632028779F00076E5E /* NutrientBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutrientBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDD5D662028779F00076E5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACDD5D702028779F00076E5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -41,9 +65,9 @@
 		ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInformationTableViewController.swift; sourceTree = "<group>"; };
 		ACDD5D8720287E2C00076E5E /* CategoryDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryDetailsViewController.swift; sourceTree = "<group>"; };
 		ACDD5D8820287E2C00076E5E /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
-		ACDD5D8E20287ED700076E5E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ACDD5D8E20287ED700076E5E /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeCoreDataHandler.swift; sourceTree = "<group>"; };
-		ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientTypeSelection.swift; sourceTree = "<group>"; };
+		ACDD5D98202880C500076E5E /* NutrientSelectionSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientSelectionSetting.swift; sourceTree = "<group>"; };
 		ACDD5D9B202880D200076E5E /* FoodInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodInformation.swift; sourceTree = "<group>"; };
 		ACDD5D9C202880D200076E5E /* foodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodData.swift; sourceTree = "<group>"; };
 		ACDD5D9F202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientDiaryCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -67,6 +91,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC321F52204085140070D289 /* MKRingProgressModel */ = {
+			isa = PBXGroup;
+			children = (
+				AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */,
+				AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */,
+			);
+			path = MKRingProgressModel;
+			sourceTree = "<group>";
+		};
+		AC321F57204085470070D289 /* MKRingProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				AC321F53204085340070D289 /* MKRingProgressGroupView.swift */,
+				AC321F54204085340070D289 /* MKRingProgressView.swift */,
+			);
+			path = MKRingProgressView;
+			sourceTree = "<group>";
+		};
+		AC39434E2042281A00EE31FA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ACDD5D8E20287ED700076E5E /* HomeViewController.swift */,
+				AC39434C2042208500EE31FA /* HomeTableViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		AC39434F2042282800EE31FA /* LogFood */ = {
+			isa = PBXGroup;
+			children = (
+				AC321F812041B5B00070D289 /* LogFoodViewController.swift */,
+			);
+			path = LogFood;
+			sourceTree = "<group>";
+		};
+		AC5C9BB120441BA000C26309 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				AC5C9BB220441BD700C26309 /* SettingViewController.swift */,
+				ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		AC5C9BB420441C6400C26309 /* ImageSearch */ = {
+			isa = PBXGroup;
+			children = (
+				AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */,
+			);
+			path = ImageSearch;
+			sourceTree = "<group>";
+		};
+		ACC078E72044B56500A686EE /* HomeWaterBar */ = {
+			isa = PBXGroup;
+			children = (
+				ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */,
+				ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */,
+			);
+			path = HomeWaterBar;
+			sourceTree = "<group>";
+		};
 		ACDD5D5A2028779F00076E5E = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +188,8 @@
 			isa = PBXGroup;
 			children = (
 				ACDD5DA92028819D00076E5E /* Main.storyboard */,
+				ACC078E72044B56500A686EE /* HomeWaterBar */,
+				AC321F57204085470070D289 /* MKRingProgressView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -110,7 +197,7 @@
 		ACDD5D8B20287E5200076E5E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				ACDD5D9020287EE700076E5E /* Home */,
+				ACDD5D9020287EE700076E5E /* MainControllers */,
 				ACDD5DB2202CABC300076E5E /* SearchView */,
 			);
 			path = Controller;
@@ -130,22 +217,25 @@
 			children = (
 				ACDD5D8320287E2300076E5E /* FoodInformationTableViewController.swift */,
 				ACDD5D8120287E2300076E5E /* FoodInformationTableViewCell.swift */,
-				ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */,
 			);
 			path = FoodInformation;
 			sourceTree = "<group>";
 		};
-		ACDD5D9020287EE700076E5E /* Home */ = {
+		ACDD5D9020287EE700076E5E /* MainControllers */ = {
 			isa = PBXGroup;
 			children = (
-				ACDD5D8E20287ED700076E5E /* ViewController.swift */,
+				AC39434E2042281A00EE31FA /* Home */,
+				AC5C9BB120441BA000C26309 /* Setting */,
+				AC39434F2042282800EE31FA /* LogFood */,
 			);
-			path = Home;
+			path = MainControllers;
 			sourceTree = "<group>";
 		};
 		ACDD5D9420287FCD00076E5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC7E724A20459A1400D0393F /* Debug.swift */,
+				AC321F52204085140070D289 /* MKRingProgressModel */,
 				ACDD5DA42028812F00076E5E /* Search */,
 				ACDD5DA3202880E300076E5E /* NutrientDiary */,
 				ACDD5D9620287FE900076E5E /* NutrientSelection */,
@@ -167,7 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */,
-				ACDD5D98202880C500076E5E /* NutrientTypeSelection.swift */,
+				ACDD5D98202880C500076E5E /* NutrientSelectionSetting.swift */,
 			);
 			path = NutrientSelection;
 			sourceTree = "<group>";
@@ -177,6 +267,7 @@
 			children = (
 				ACDD5DA0202880DE00076E5E /* NutrientDiary.swift */,
 				ACDD5D9F202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift */,
+				AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */,
 			);
 			path = NutrientDiary;
 			sourceTree = "<group>";
@@ -194,8 +285,9 @@
 			isa = PBXGroup;
 			children = (
 				ACDD5E012039CE9400076E5E /* SearchViewController.swift */,
-				ACDD5D8D20287E8800076E5E /* FoodInformation */,
+				AC5C9BB420441C6400C26309 /* ImageSearch */,
 				ACDD5D8C20287E6400076E5E /* DatabaseCategoryBrowse */,
+				ACDD5D8D20287E8800076E5E /* FoodInformation */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -259,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */,
 				ACDD5DAC202C9E4800076E5E /* datasetJSON.json in Resources */,
 				ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */,
 				ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */,
@@ -273,23 +366,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC321F51204085100070D289 /* MKRingProgressGroupButton.swift in Sources */,
 				ACDD5D8620287E2300076E5E /* FoodInformationTableViewController.swift in Sources */,
 				ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */,
 				ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */,
+				AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */,
+				AC7E724B20459A1400D0393F /* Debug.swift in Sources */,
 				ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */,
 				ACDD5DAF202CA2E300076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
-				ACDD5D9A202880C500076E5E /* NutrientTypeSelection.swift in Sources */,
+				ACDD5D9A202880C500076E5E /* NutrientSelectionSetting.swift in Sources */,
+				AC321F56204085340070D289 /* MKRingProgressView.swift in Sources */,
 				ACDD5D8420287E2300076E5E /* FoodInformationTableViewCell.swift in Sources */,
+				AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */,
+				AC39434D2042208500EE31FA /* HomeTableViewCell.swift in Sources */,
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
-				ACDD5D8F20287ED700076E5E /* ViewController.swift in Sources */,
+				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
+				ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */,
+				AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */,
+				AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */,
 				ACDD5D9E202880D200076E5E /* foodData.swift in Sources */,
 				ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */,
 				ACDD5E022039CE9400076E5E /* SearchViewController.swift in Sources */,
+				ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */,
 				ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */,
 				ACDD5DA2202880DE00076E5E /* NutrientDiary.swift in Sources */,
 				ACDD5D8520287E2300076E5E /* NutrientTypeSelectionViewController.swift in Sources */,
-				ACDD5D99202880C500076E5E /* NutrientTypeCoreDataHandler.swift in Sources */,
 				ACDD5DA72028815E00076E5E /* NatrualLanguageProcess.swift in Sources */,
+				AC39071920443D0D00EC644B /* NutrientTypeCoreDataHandler.swift in Sources */,
+				AC321F4F204084FD0070D289 /* MKGradientGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

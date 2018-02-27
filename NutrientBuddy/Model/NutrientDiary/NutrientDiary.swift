@@ -9,8 +9,18 @@
 import Foundation
 
 class NutrientDiary {
-    func saveDiaryToCoredata(savedFood: FoodInfo, amount: Double){
+    //MARK: get date (dd/mm/yyyy)
+    func getDate() -> String{
         let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateFormatter.dateStyle = DateFormatter.Style.short
+        
+        return dateFormatter.string(from: date)
+    }
+    //MARK: save diary with amount
+    func saveDiaryToCoredata(savedFood: FoodInfo, amount: Double){
+        let date = getDate() // saved as 26/02/2018 e.g
         let water = savedFood.Water_g * amount/100
         let fat = savedFood.Fat_g * amount/100
         let protein = savedFood.Protein_g * amount/100
@@ -53,4 +63,82 @@ class NutrientDiary {
         NutrientDiaryCoreDataHandler.saveObject(date: date, foodname: savedFood.Food_Name, amount: amount, water: water, fat: fat, protein: protein, carbohydrate: carbohydrate, nsp: nsp, energy: energy, aoac_fibre: aoac_fibre, sodium: sodium, potassium: potassium, calcium: calcium, magnesium: magnesium, phosphorus: phosphorus, iron: iron, copper: copper, zinc: zinc, chloride: chloride, manganese: manganese, selenium: selenium, iodine: iodine, retinol: retinol, carotene: carotene, retinol_equivalent: retinol_equivalent, vitamin_d: vitamin_d, vitamin_e: vitamin_e, vitamin_k1: vitamin_k1, thiamin: thiamin, riboflavin: riboflavin, niacin: niacin, tryptophan_p60: tryptophan_p60, niacin_equivalent: niacin_equivalent, vitamin_b6: vitamin_b6, vitamin_b12: vitamin_b12, folate: folate, pantothenate: pantothenate, biotin: biotin, vitamin_c: vitamin_c, mineral_total: minerals_total, vitamin_total: vitamin_total)
         
     }
+    // MARK: save summary
+    func updateNutrientsSummaryOfTheDay(date: String) -> Summary{
+        //get diary of the same date
+        let diary = NutrientDiaryCoreDataHandler.fetchObject()!
+        let diaryOfDate = diary.filter { $0.date == date }
+        
+        //get initialized summary
+        let summary = initialiseSummary(date: date)
+        
+        for each in diaryOfDate {
+            print("GJ: food loged on \(date): - NutrientDiary")
+            print(each)
+            summary.aoac_fibre += each.aoac_fibre
+            summary.biotin += each.biotin
+            summary.calcium += each.calcium
+            summary.carbohydrate += each.carbohydrate
+            summary.carotene += each.carotene
+            summary.chloride += each.chloride
+            summary.copper += each.copper
+            summary.energy += each.energy
+            summary.fat += each.fat
+            summary.folate += each.folate
+            summary.iodine += each.iodine
+            summary.iron += each.iron
+            summary.magnesium += each.magnesium
+            summary.manganese += each.manganese
+            summary.mineral_total += each.mineral_total
+            summary.niacin += each.niacin
+            summary.niacin_equivalent += each.niacin_equivalent
+            summary.nsp += each.nsp
+            summary.pantothenate += each.pantothenate
+            summary.phosphorus += each.phosphorus
+            summary.potassium += each.potassium
+            summary.protein += each.protein
+            summary.retinol += summary.retinol
+            summary.retinol_equivalent += summary.retinol_equivalent
+            summary.riboflavin += each.riboflavin
+            summary.selenium += each.selenium
+            summary.sodium += each.sodium
+            summary.thiamin += each.thiamin
+            summary.tryptophan_p60 += each.tryptophan_p60
+            summary.vitamin_b12 += each.vitamin_b12
+            summary.vitamin_c += each.vitamin_c
+            summary.vitamin_d += each.vitamin_d
+            summary.vitamin_e += each.vitamin_e
+            summary.vitamin_b6 += each.vitamin_b6
+            summary.vitamin_k1 += each.vitamin_k1
+            summary.vitamin_total += each.vitamin_total
+            summary.water += each.water
+            summary.zinc += each.zinc
+        }
+        summary.totalWeight = summary.aoac_fibre + summary.water + summary.protein + summary.protein + summary.fat + summary.carbohydrate + summary.nsp
+        print("GJ: summary of food is - NutrientDiary")
+        print(summary)
+        
+        let newSummary = summary
+        print("GJ: now you have eaten \(summary.totalWeight) grams of food - NutrientDiary")
+        deleteNutrientSummaryIfExist(date: date)
+        
+        print(newSummary)
+        //save the new summary
+        SummaryDiaryCoreDataHandler.saveObject(summary:         newSummary)
+        print("GJ: saved new summary at \(date), total weight was \(newSummary.totalWeight) grams - NutrientDiary")
+        return newSummary
+    }
+    private func initialiseSummary(date: String) -> Summary {
+        SummaryDiaryCoreDataHandler.saveInitialObject(date: date, totalWeight: 0, water: 0, fat: 0, protein: 0, carbohydrate: 0, nsp: 0, energy: 0, aoac_fibre: 0, sodium: 0, potassium: 0, calcium: 0, magnesium: 0, phosphorus: 0, iron: 0, copper: 0, zinc: 0, chloride: 0, manganese: 0, selenium: 0, iodine: 0, retinol: 0, carotene: 0, retinol_equivalent: 0, vitamin_d: 0, vitamin_e: 0, vitamin_k1: 0, thiamin: 0, riboflavin: 0, niacin: 0, tryptophan_p60: 0, niacin_equivalent: 0, vitamin_b6: 0, vitamin_b12: 0, folate: 0, pantothenate: 0, biotin: 0, vitamin_c: 0, mineral_total: 0, vitamin_total: 0)
+        let summary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
+        return summary!
+    }
+    private func deleteNutrientSummaryIfExist(date: String) {
+        let summary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
+        if summary?.date != nil {
+            SummaryDiaryCoreDataHandler.deleteObject(summary: summary!)
+            print("GJ: deleted OLD summary at \(date), total weight was \(String(describing: summary?.totalWeight)) grams - NutrientDiary")
+        }
+    }
+    
 }

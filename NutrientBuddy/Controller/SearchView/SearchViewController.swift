@@ -14,9 +14,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var foodImage: UIImageView!
-    @IBOutlet weak var backgroundImage: UIImageView!
-    
+
     //MARK: get database and filtered data
     var database: [FoodInfo] = []
     var filteredData: [String] = []
@@ -28,7 +26,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     var catDict: [String:[String]] = [:]
     var catCategories: [String] = []
     
-    //MARK: view did load
     override func viewDidLoad() {
         super.viewDidLoad()
         //search bar
@@ -56,9 +53,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         }
         //navigation bar
         self.navigationController?.hidesBarsOnSwipe = true
-        
-        foodImage.image = #imageLiteral(resourceName: "CollectionOfFood")
-        foodImage.isHidden = false
+
         textView.isEditable = false
         tableView.isHidden = true
     }
@@ -71,7 +66,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             searchBar.showsBookmarkButton = false
         }
     }
-    
     private let speechRecognizer = SFSpeechRecognizer(locale: Locale.init(identifier: "en-UK"))
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
@@ -156,22 +150,21 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     }
 
     //MARK: search for food items
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchForFoodItems()
+        searchBar.endEditing(true)
     }
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         searchForFoodItems()
     }
     private func searchForFoodItems() {
         if !(searchBar.text?.isEmpty)!{
-            foodImage.isHighlighted = true
             //search for food
             filteredData.removeAll(keepingCapacity: false)
             let searchFood = processSpeechSearch(searchBarText: searchBar.text!)
             filteredData = BagOfWord().searchItem(searchFood: searchFood, codeDict: codeDict)
             if filteredData.count != 0{
                 tableView.isHidden = false
-                backgroundImage.isHidden = true
                 tableView.reloadData()
             }
             else{
@@ -231,13 +224,14 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showFoodInfo" {
             var selectedRowIndex = self.tableView.indexPathForSelectedRow
-            let foodInfoTableViewController: FoodInformationTableViewController = segue.destination as! FoodInformationTableViewController
+            let foodInformationTableViewController: FoodInformationTableViewController = segue.destination as! FoodInformationTableViewController
             var item: String = ""
-            item = filteredData[(selectedRowIndex?.row)!]
+            item = filteredData[(selectedRowIndex?.row)!].replacingOccurrences(of: " ", with: "_")
             
-            let strutArray = database.filter{$0.Food_Name == item.replacingOccurrences(of: " ", with: "_")}
-            foodInfoTableViewController.selectedFoodInfo = strutArray[0]
+            let strutArray = database.filter{ $0.Food_Name == item }
+            foodInformationTableViewController.selectedFoodInfo = strutArray[0]
         }
+        
         if segue.identifier == "loadDatabase" {
             let categoryViewController: CategoryViewController = segue.destination as! CategoryViewController
             categoryViewController.categories = catCategories

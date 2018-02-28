@@ -65,7 +65,9 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
 
     // Mark: Done
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
-        print("GJ: log time")
+        if debugViewLoading {
+            print("GJ: selection - go back time \(Date())")
+        }
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let logFoodViewController = storyBoard.instantiateViewController(withIdentifier: "myMeals") as! LogFoodViewController
         self.navigationController?.pushViewController(logFoodViewController, animated: true)

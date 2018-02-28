@@ -124,19 +124,7 @@ class SummaryDiaryCoreDataHandler: NSObject {
             print("GJ: Something goes wrong with saving core data summary")
         }
     }
-    //
-    /*
-    class func changeSelection(nutrientToView: NutrientToView, select: Int16) {
-        let context = getContext()
-        
-        nutrientToView.select = select
-        do{
-            try context.save()
-        } catch {
-            print("GJ: Something goes wrong with changing core data - NutrientToView")
-        }
-        
-    }*/
+
     //MARK: fetch object with date
     class func fetchObject(date: String) -> [Summary] {
         let context = getContext()
@@ -144,12 +132,13 @@ class SummaryDiaryCoreDataHandler: NSObject {
         do {
             summarys = try context.fetch(Summary.fetchRequest())
             let summary = summarys.filter{$0.date == date}
-            
-            for each in summary{
-                print("\(each.totalWeight)")
+
+            if debugHomeView {
+                for each in summary{
+                    print("\(each.totalWeight)")
+                }
+                print("GJ: the summary is updated \(summary.count) times")
             }
-            
-            print("GJ: the summary is updated \(summary.count) times")
             return summary
         } catch {
             print("GJ: Something goes wrong with fetching core data - Summary")
@@ -169,18 +158,4 @@ class SummaryDiaryCoreDataHandler: NSObject {
             print("GJ: Something goes wrong with deleting core data - Summary on \(String(describing: summary.date))")
         }
     }
-    
-/*
-    //clean delete
-    class func clearnDelete(){
-        let context = getContext()
-        let delete = NSBatchDeleteRequest(fetchRequest: Summary.fetchRequest())
-        
-        do{
-            try context.execute(delete)
-        } catch {
-            print("GJ: Something goes wrong with deleting core data - Summary")
-        }
-    }
-*/
 }

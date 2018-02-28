@@ -20,7 +20,7 @@ class FoodInformationTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         amountSlider.minimumValue = 0
-        amountSlider.maximumValue = 100
+        amountSlider.maximumValue = 200
     }
     
     @IBAction func amountSliderChange(_ sender: UISlider) {

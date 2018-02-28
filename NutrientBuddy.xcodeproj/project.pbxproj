@@ -18,6 +18,7 @@
 		AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB220441BD700C26309 /* SettingViewController.swift */; };
 		AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */; };
 		AC7E72512045B04B00D0393F /* HomeViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */; };
+		ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E212046F81D0033FC30 /* Debug.swift */; };
 		ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */; };
 		ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */; };
 		ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D662028779F00076E5E /* AppDelegate.swift */; };
@@ -53,6 +54,7 @@
 		AC5C9BB220441BD700C26309 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 		AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFunctions.swift; sourceTree = "<group>"; };
+		ACAD7E212046F81D0033FC30 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWaterBarView.swift; sourceTree = "<group>"; };
 		ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWaterBarView.xib; sourceTree = "<group>"; };
 		ACDD5D632028779F00076E5E /* NutrientBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutrientBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDD5DAD202CA2E300076E5E /* NutrientBuddy.xcdatamodeld */,
+				ACAD7E212046F81D0033FC30 /* Debug.swift */,
 				ACDD5D8B20287E5200076E5E /* Controller */,
 				ACDD5D8020287D7A00076E5E /* View */,
 				ACDD5D9420287FCD00076E5E /* Model */,
@@ -380,6 +383,7 @@
 				AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */,
 				AC39434D2042208500EE31FA /* HomeTableViewCell.swift in Sources */,
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
+				ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */,
 				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
 				ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */,
 				AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */,

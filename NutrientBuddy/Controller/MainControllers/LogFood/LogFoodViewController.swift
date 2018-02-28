@@ -16,12 +16,17 @@ class LogFoodViewController: UIViewController {
     //var allWords: [String] = []
     var codeDict: [String: [Int]] = [:]
 
+    override func viewDidAppear(_ animated: Bool) {
+        if debugViewLoading {
+             print("GJ: got back to myMeal at \(Date())")
+        }
+       
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         database = foodData().loadFoodDatabase()!
         dictViewCont = foodData().categorizeItems()
         categoryViewCont = foodData().categorizeItems().keys.sorted(by: <)
-        //allWords = BagOfWord().loadAllWords()
         codeDict = BagOfWord().loadDictionary()
         
     }
@@ -38,7 +43,7 @@ class LogFoodViewController: UIViewController {
             let searchViewController: SearchViewController = segue.destination as! SearchViewController
             searchViewController.codeDict = codeDict
             searchViewController.database = database
-            //pass for catogory view controller
+            
             searchViewController.catDict = dictViewCont
             searchViewController.catCategories = categoryViewCont
         }

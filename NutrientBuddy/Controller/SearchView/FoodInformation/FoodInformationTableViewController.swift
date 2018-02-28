@@ -122,6 +122,7 @@ class FoodInformationTableViewController: UITableViewController {
         
     }
     func goToHome(){
+        print("GJ: start to go back to myMeal at \(Date())")
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let logFoodViewController = storyBoard.instantiateViewController(withIdentifier: "myMeals") as! LogFoodViewController
         self.navigationController?.pushViewController(logFoodViewController, animated: true)

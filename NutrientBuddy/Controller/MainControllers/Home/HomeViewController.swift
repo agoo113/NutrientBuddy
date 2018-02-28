@@ -33,7 +33,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var percentages = percentageConsumed()
     
     override func viewDidAppear(_ animated: Bool) {
-        print("GJ: view did appear")
         //load summary
         let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: waterGoal, energyGoal: energyGoal, date: date)
         let summary = summaryAndPercentages.summary
@@ -44,7 +43,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //delete extra summaries
         HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
         let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
-        print("GJ: there are \(newSummary.count) summaries in the core data now")
+        if debugHomeView == true{
+              print("GJ: there are \(newSummary.count) summaries in the core data now")
+        }
         
         //ring graph
         randeringRingView()
@@ -57,8 +58,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("GJ: today's date is \(date)")
-
+        if debugHomeView {
+            print("GJ: today's date is \(date)")
+        }
+        
         //MARK: load the views
         //nutrient to view
         nutrientToView = HomeViewFunctions().getNutrientToView(nutrientToView: nutrientToView)
@@ -73,21 +76,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //delete extra summaries
         HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
         let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
-        print("GJ: there are \(newSummary.count) summaries in the core data now")
+        if debugHomeView {
+             print("GJ: there are \(newSummary.count) summaries in the core data now")
+        }
         
         //ring graph
-        
         randeringRingView()
         getSummaryPrecentageForRings()
         //water bar
         waterBar.drawProgressLayer(percentage: percentages.waterPercentage)
         //reload table
         tableView.reloadData()
-        
-        //MARK: navigation item to setting and calendar
-       //self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settingView"), style: .plain, target: self, action: #selector(settingButtonItemTapped))
-        //navigationBar.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settingView"), style: .plain, target: self, action: #selector(settingButtonItemTapped))
-        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(settingButtonItemTapped))
     }
 
     //MARK: ring graphs
@@ -96,7 +95,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         navigationController!.navigationBar.addSubview(containerView)
         let w = (containerView.bounds.width - 16) / CGFloat(7)
         let h = containerView.bounds.height
-        let button = MKRingProgressGroupButton(frame: CGRect(x: CGFloat(1) * w, y: 0, width: w, height: h))
+        let button = MKRingProgressGroupButton(frame: CGRect(x: CGFloat(0) * w, y: 0, width: w, height: h))
         button.contentView.ringWidth = 4.5
         button.contentView.ringSpacing = 1
         button.contentView.ring1StartColor = progressGroup.ring1StartColor
@@ -183,13 +182,5 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    //MARK: navigation bar items
-    /*
-    @objc func settingButtonItemTapped(_ sender: UIBarButtonItem!){
-        print("GJ: pressed setting button item")
-        let myStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let settingViewController = myStoryBoard.instantiateViewController(withIdentifier: "settingView") as! SettingViewController
-        self.navigationController?.pushViewController(settingViewController, animated: true)
-    }*/
 }
 

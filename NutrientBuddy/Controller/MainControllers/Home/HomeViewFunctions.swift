@@ -66,7 +66,6 @@ class HomeViewFunctions {
     
     func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String) -> (summary: Summary, percentages: percentageConsumed) {
         let summary = NutrientDiary().updateNutrientsSummaryOfTheDay(date: date)
-        //print(summary)
         var percentages = percentageConsumed()
         if summary.date != nil{
             percentages.waterPercentage = summary.water/waterGoal
@@ -76,8 +75,9 @@ class HomeViewFunctions {
             percentages.fatPercentage = (summary.fat)/totalOfThree
             percentages.carboPercentage = (summary.carbohydrate)/totalOfThree
             
-            
-            print("GJ: cunsumed water \(percentages.waterPercentage) g, protein \(percentages.proteinPercentage), fat \(percentages.fatPercentage), carbo \(percentages.energyPercentage)")
+            if debugHomeView {
+                 print("GJ: cunsumed water \(percentages.waterPercentage) g, protein \(percentages.proteinPercentage), fat \(percentages.fatPercentage), carbo \(percentages.energyPercentage)")
+            }
         }
         return (summary, percentages)
     }
@@ -88,7 +88,9 @@ class HomeViewFunctions {
             let numToDelete = summary.count - 2
             for i in 0...numToDelete {
                 let delete = summary[i]
-                print("GJ: deleting OLD summary at \(date), total weight was \(String(describing: delete.totalWeight)) grams - NutrientDiary")
+                if debugHomeView {
+                     print("GJ: deleting OLD summary at \(date), total weight was \(String(describing: delete.totalWeight)) grams - NutrientDiary")
+                }
                 SummaryDiaryCoreDataHandler.deleteObject(summary: delete)
             }
         }

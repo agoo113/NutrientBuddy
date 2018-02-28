@@ -18,7 +18,6 @@ class LogFoodViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         database = foodData().loadFoodDatabase()!
         dictViewCont = foodData().categorizeItems()
         categoryViewCont = foodData().categorizeItems().keys.sorted(by: <)
@@ -44,8 +43,5 @@ class LogFoodViewController: UIViewController {
             searchViewController.catCategories = categoryViewCont
         }
     }
-    
-    
-    
-
 }
+

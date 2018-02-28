@@ -16,9 +16,9 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.hidesBarsOnSwipe = true
+        //self.navigationController?.hidesBarsOnSwipe = true
         self.navigationItem.hidesBackButton = false
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneButtonTapped))
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,18 +64,10 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
     }
 
     // Mark: Done
-    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    @IBAction func redoButtonTapped(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "Alert", message: "Reset nutrient selection to default", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            NutrientTypeCoreDataHandler.clearnDelete()
-            self.nutrients = NutrientTypeCoreDataHandler.fetchObject()!
-            self.dismiss(animated: true, completion: nil)
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-        
+    @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
+        print("GJ: log time")
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let logFoodViewController = storyBoard.instantiateViewController(withIdentifier: "myMeals") as! LogFoodViewController
+        self.navigationController?.pushViewController(logFoodViewController, animated: true)
     }
 }

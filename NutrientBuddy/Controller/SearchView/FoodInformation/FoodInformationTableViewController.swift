@@ -121,7 +121,7 @@ class FoodInformationTableViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
         
     }
-    private func goToHome(){
+    func goToHome(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let logFoodViewController = storyBoard.instantiateViewController(withIdentifier: "myMeals") as! LogFoodViewController
         self.navigationController?.pushViewController(logFoodViewController, animated: true)

@@ -76,6 +76,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         print("GJ: there are \(newSummary.count) summaries in the core data now")
         
         //ring graph
+        
         randeringRingView()
         getSummaryPrecentageForRings()
         //water bar
@@ -84,7 +85,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
         
         //MARK: navigation item to setting and calendar
-       navigationBar.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settingView"), style: .plain, target: self, action: #selector(settingButtonItemTapped))
+       //self.navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settingView"), style: .plain, target: self, action: #selector(settingButtonItemTapped))
+        //navigationBar.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "settingView"), style: .plain, target: self, action: #selector(settingButtonItemTapped))
+        //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(settingButtonItemTapped))
     }
 
     //MARK: ring graphs
@@ -181,11 +184,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //MARK: navigation bar items
+    /*
     @objc func settingButtonItemTapped(_ sender: UIBarButtonItem!){
         print("GJ: pressed setting button item")
         let myStoryBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let settingViewController = myStoryBoard.instantiateViewController(withIdentifier: "settingView") as! SettingViewController
         self.navigationController?.pushViewController(settingViewController, animated: true)
-    }
+    }*/
 }
 

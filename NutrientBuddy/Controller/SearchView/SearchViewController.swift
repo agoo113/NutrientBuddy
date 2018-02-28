@@ -55,7 +55,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         self.navigationController?.hidesBarsOnSwipe = true
 
         textView.isEditable = false
-        tableView.isHidden = true
     }
     
     //MARK: record and speech recognizer

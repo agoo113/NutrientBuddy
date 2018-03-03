@@ -10,3 +10,4 @@ import UIKit
 
 let debugHomeView = false // prints out the calculation and logging of the summary
 let debugViewLoading = true // prints out the time of loading the view
+let debugPersonalSetting = true //print out the personal settings

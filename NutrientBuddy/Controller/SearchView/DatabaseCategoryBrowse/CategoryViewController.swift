@@ -16,7 +16,8 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        self.navigationController?.hidesBarsOnSwipe = true
+        searchBar.showsCancelButton = true
+        //self.navigationController?.hidesBarsOnSwipe = true
     }
     
     override func didReceiveMemoryWarning() {

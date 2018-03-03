@@ -28,13 +28,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
     var display_nutrient: [foodInformation] = []
     let date = NutrientDiary().getDate()
+    var personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
+    
     var energyGoal = 8700.0 // function to set
     var waterGoal = 1200.0 // function to set
     var percentages = percentageConsumed()
     
     override func viewDidAppear(_ animated: Bool) {
+        //load personal goal
+        if personalGoals.count == 0 {
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
+        }
+        personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
+        if  debugPersonalSetting {
+            print("GJ: there are \(personalGoals.count) elements in Goal core data")
+        }
+        let goal = personalGoals[0]
+        
         //load summary
-        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: waterGoal, energyGoal: energyGoal, date: date)
+        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
         let summary = summaryAndPercentages.summary
         percentages = summaryAndPercentages.percentages
         
@@ -61,13 +73,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if debugHomeView {
             print("GJ: today's date is \(date)")
         }
+        //load personal goal
+        if personalGoals.count == 0 {
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
+        }
+        personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
+        if  debugPersonalSetting {
+            print("GJ: there are \(personalGoals.count) elements in Goal core data")
+        }
+        let goal = personalGoals[0]
         
         //MARK: load the views
         //nutrient to view
         nutrientToView = HomeViewFunctions().getNutrientToView(nutrientToView: nutrientToView)
         
         //load summary
-        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: waterGoal, energyGoal: energyGoal, date: date)
+        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
         let summary = summaryAndPercentages.summary
         percentages = summaryAndPercentages.percentages
         

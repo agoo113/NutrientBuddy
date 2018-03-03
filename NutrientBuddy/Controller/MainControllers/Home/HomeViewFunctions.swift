@@ -64,16 +64,23 @@ class HomeViewFunctions {
         return displayNutrient
     }
     
-    func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String) -> (summary: Summary, percentages: percentageConsumed) {
+    func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String, carboGoal: Double, proteinGoal: Double, fatGoal: Double) -> (summary: Summary, percentages: percentageConsumed) {
+        
         let summary = NutrientDiary().updateNutrientsSummaryOfTheDay(date: date)
         var percentages = percentageConsumed()
+        let threeTotalGoal = carboGoal + fatGoal + proteinGoal
+        let carboPro = carboGoal/threeTotalGoal
+        let fatPro = fatGoal/threeTotalGoal
+        let proteinPro = proteinGoal/threeTotalGoal
+        
         if summary.date != nil{
             percentages.waterPercentage = summary.water/waterGoal
-            percentages.energyPercentage = (summary.energy)/(energyGoal)
-            let totalOfThree = summary.fat + summary.carbohydrate + summary.protein
-            percentages.proteinPercentage = (summary.protein)/totalOfThree
-            percentages.fatPercentage = (summary.fat)/totalOfThree
-            percentages.carboPercentage = (summary.carbohydrate)/totalOfThree
+            percentages.energyPercentage = summary.energy/(energyGoal)
+            
+            let totalOfThreeConsumed = summary.fat + summary.carbohydrate + summary.protein
+            percentages.carboPercentage = summary.carbohydrate/(totalOfThreeConsumed*carboPro)
+            percentages.fatPercentage = summary.fat/(totalOfThreeConsumed*fatPro)
+            percentages.proteinPercentage = summary.protein/(totalOfThreeConsumed * proteinPro)
             
             if debugHomeView {
                  print("GJ: cunsumed water \(percentages.waterPercentage) g, protein \(percentages.proteinPercentage), fat \(percentages.fatPercentage), carbo \(percentages.energyPercentage)")

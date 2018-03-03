@@ -19,6 +19,8 @@
 		AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */; };
 		AC7E72512045B04B00D0393F /* HomeViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */; };
 		ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E212046F81D0033FC30 /* Debug.swift */; };
+		ACAD7E2420470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */; };
+		ACAD7E29204722950033FC30 /* GoalSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */; };
 		ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */; };
 		ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */; };
 		ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D662028779F00076E5E /* AppDelegate.swift */; };
@@ -55,6 +57,8 @@
 		AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 		AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFunctions.swift; sourceTree = "<group>"; };
 		ACAD7E212046F81D0033FC30 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
+		ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingCoreDataHandler.swift; sourceTree = "<group>"; };
+		ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingTableViewCell.swift; sourceTree = "<group>"; };
 		ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWaterBarView.swift; sourceTree = "<group>"; };
 		ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWaterBarView.xib; sourceTree = "<group>"; };
 		ACDD5D632028779F00076E5E /* NutrientBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutrientBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -146,6 +150,14 @@
 			path = ImageSearch;
 			sourceTree = "<group>";
 		};
+		ACAD7E2520470A8B0033FC30 /* UserInformation */ = {
+			isa = PBXGroup;
+			children = (
+				ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */,
+			);
+			path = UserInformation;
+			sourceTree = "<group>";
+		};
 		ACC078E72044B56500A686EE /* HomeWaterBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,6 +170,7 @@
 		ACDD5D5A2028779F00076E5E = {
 			isa = PBXGroup;
 			children = (
+				ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */,
 				ACDD5D652028779F00076E5E /* NutrientBuddy */,
 				ACDD5D642028779F00076E5E /* Products */,
 			);
@@ -238,6 +251,7 @@
 		ACDD5D9420287FCD00076E5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ACAD7E2520470A8B0033FC30 /* UserInformation */,
 				AC321F52204085140070D289 /* MKRingProgressModel */,
 				ACDD5DA42028812F00076E5E /* Search */,
 				ACDD5DA3202880E300076E5E /* NutrientDiary */,
@@ -387,6 +401,7 @@
 				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
 				ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */,
 				AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */,
+				ACAD7E2420470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift in Sources */,
 				AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */,
 				ACDD5D9E202880D200076E5E /* foodData.swift in Sources */,
 				ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */,
@@ -396,6 +411,7 @@
 				ACDD5DA2202880DE00076E5E /* NutrientDiary.swift in Sources */,
 				ACDD5D8520287E2300076E5E /* NutrientTypeSelectionViewController.swift in Sources */,
 				ACDD5DA72028815E00076E5E /* NatrualLanguageProcess.swift in Sources */,
+				ACAD7E29204722950033FC30 /* GoalSettingTableViewCell.swift in Sources */,
 				AC39071920443D0D00EC644B /* NutrientTypeCoreDataHandler.swift in Sources */,
 				AC321F4F204084FD0070D289 /* MKGradientGenerator.swift in Sources */,
 			);

@@ -52,7 +52,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             }
         }
         //navigation bar
-        self.navigationController?.hidesBarsOnSwipe = true
+        //self.navigationController?.hidesBarsOnSwipe = true
 
         textView.isEditable = false
     }

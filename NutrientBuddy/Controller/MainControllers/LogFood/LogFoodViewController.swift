@@ -35,6 +35,10 @@ class LogFoodViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    @IBAction func shareUserData(_ sender: UIBarButtonItem) {
+        
+    }
     
     //MARK: pass to the next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -43,7 +47,6 @@ class LogFoodViewController: UIViewController {
             let searchViewController: SearchViewController = segue.destination as! SearchViewController
             searchViewController.codeDict = codeDict
             searchViewController.database = database
-            
             searchViewController.catDict = dictViewCont
             searchViewController.catCategories = categoryViewCont
         }

@@ -9,7 +9,6 @@
 import UIKit
 
 class SettingViewController: UIViewController, UITabBarDelegate, UITableViewDataSource {
-
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,7 +20,23 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         
     }
     @IBAction func saveButtonItemTapped(_ sender: UIBarButtonItem) {
-       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting") as! GoalSettingTableViewCell
+    
+        PersonalSettingCoreDataHandler.cleanDelete()
+        let water = Double(cell.carboGoalTextField.text!)!
+        let energy = Double(cell.energyGoalTextField.text!)!
+        let fat = Double(cell.fatGoalTextField.text!)!
+        let protein = Double(cell.proteinGoalTextField.text!)!
+        let carbo = Double(cell.carboGoalTextField.text!)!
+        
+        PersonalSettingCoreDataHandler.saveObject(carboGoal: carbo, energyGoal: energy, fatGoal: fat, proteinGoal: protein, waterGoal: water)
+        
+        if debugPersonalSetting {
+            let goals = PersonalSettingCoreDataHandler.fetchObject()
+            for each in goals! {
+                print(each)
+            }
+        }
     }
     
     //MARK: table view
@@ -32,13 +47,13 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         return 2
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0{
+        if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientSetting")
             return cell!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting")
-        return cell!
         
+        return cell!
     }
 
     override func didReceiveMemoryWarning() {

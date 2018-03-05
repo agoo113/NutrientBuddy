@@ -53,7 +53,14 @@ class HomeViewFunctions {
             if singleNutrient.select == 1 {
                 if summaryExist {
                     let amount = NutrientSelectionSetting().getSummaryAmount(type: singleNutrient.type!, date: date, summary:summary)
-                    nutrientToAppend = foodInformation(nutrientType: singleNutrient.type!, amount: amount, unit: "(g)")!
+                    var unit = "(g)"
+                    if singleNutrient.type == "Energy" {
+                        unit = "(Kcal)"
+                    }
+                    if singleNutrient.type == "Water" {
+                        unit = "(ml)"
+                    }
+                    nutrientToAppend = foodInformation(nutrientType: singleNutrient.type!, amount: amount, unit: unit)!
                 }
                 else{
                     nutrientToAppend = foodInformation(nutrientType: singleNutrient.type!, amount: 0, unit: "(g)")!

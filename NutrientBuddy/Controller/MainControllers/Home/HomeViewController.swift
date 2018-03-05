@@ -30,8 +30,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let date = NutrientDiary().getDate()
     var personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
     
-    var energyGoal = 8700.0 // function to set
-    var waterGoal = 1200.0 // function to set
     var percentages = percentageConsumed()
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,11 +38,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
         }
         personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
-        if  debugPersonalSetting {
-            print("GJ: there are \(personalGoals.count) elements in Goal core data")
-        }
         let goal = personalGoals[0]
-        
+    
         //load summary
         let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
         let summary = summaryAndPercentages.summary
@@ -54,10 +49,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //delete extra summaries
         HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
-        let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
-        if debugHomeView == true{
-              print("GJ: there are \(newSummary.count) summaries in the core data now")
-        }
         
         //ring graph
         randeringRingView()
@@ -76,13 +67,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //load personal goal
         if personalGoals.count == 0 {
             PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
-        }
-        personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
-        if  debugPersonalSetting {
-            print("GJ: there are \(personalGoals.count) elements in Goal core data")
+            personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         }
         let goal = personalGoals[0]
-        
+        if  debugPersonalSetting {
+            print("GJ: there are \(personalGoals.count) elements in Goal core data")
+            print("It is carbo: \(goal.carbo_goal), fat: \(goal.fat_goal), protein: \(goal.protein_goal), water: \(goal.water_goal), energy: \(goal.energy_goal)")
+        }
+
         //MARK: load the views
         //nutrient to view
         nutrientToView = HomeViewFunctions().getNutrientToView(nutrientToView: nutrientToView)
@@ -96,8 +88,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //delete extra summaries
         HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
-        let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
+        
         if debugHomeView {
+             let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
              print("GJ: there are \(newSummary.count) summaries in the core data now")
         }
         
@@ -113,7 +106,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     //MARK: ring graphs
     func randeringRingView() {
         let containerView = UIView(frame: navigationController!.navigationBar.bounds)
-        navigationController!.navigationBar.addSubview(containerView)
+        
+        //navigationController!.navigationBar.addSubview(containerView)
+        groupContainerView.addSubview(containerView)
         let w = (containerView.bounds.width - 16) / CGFloat(7)
         let h = containerView.bounds.height
         let button = MKRingProgressGroupButton(frame: CGRect(x: CGFloat(0) * w, y: 0, width: w, height: h))
@@ -201,6 +196,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.nutrientAmountLabel.text = amountString
         //cell.contentView.setNeedsLayout()
         return cell
+    }
+   // @IBAction func mybuttonTapped(_ sender: ) {
+     //   print("GJ: home button tapped")
+    //}
+    
+    @IBAction func myhomeYapped(_ sender: UIBarButtonItem) {
+         print("GJ: home button tapped")
     }
     
 }

@@ -129,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				AC321F812041B5B00070D289 /* LogFoodViewController.swift */,
+				AC5C9BB120441BA000C26309 /* Setting */,
 			);
 			path = LogFood;
 			sourceTree = "<group>";
@@ -137,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				AC5C9BB220441BD700C26309 /* SettingViewController.swift */,
+				ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */,
 				ACDD5D8220287E2300076E5E /* NutrientTypeSelectionViewController.swift */,
 			);
 			path = Setting;
@@ -170,7 +172,6 @@
 		ACDD5D5A2028779F00076E5E = {
 			isa = PBXGroup;
 			children = (
-				ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */,
 				ACDD5D652028779F00076E5E /* NutrientBuddy */,
 				ACDD5D642028779F00076E5E /* Products */,
 			);
@@ -242,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				AC39434E2042281A00EE31FA /* Home */,
-				AC5C9BB120441BA000C26309 /* Setting */,
 				AC39434F2042282800EE31FA /* LogFood */,
 			);
 			path = MainControllers;

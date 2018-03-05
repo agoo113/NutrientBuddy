@@ -79,6 +79,17 @@ class PersonalSettingCoreDataHandler: NSObject {
             print("GJ: Something goes wrong with deleting core data - Goals")
         }
     }
+    //clean delete
+    class func cleanDelete(){
+        let context = getContext()
+        let delete = NSBatchDeleteRequest(fetchRequest: Goals.fetchRequest())
+        
+        do{
+            try context.execute(delete)
+        } catch {
+            print("GJ: Something goes wrong with deleting core data - Goals")
+        }
+    }
 }
 
 

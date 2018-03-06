@@ -147,6 +147,19 @@ class SummaryDiaryCoreDataHandler: NSObject {
         }
     }
 
+    //MARK: fetch all object
+    class func fetchAllObject() -> [Summary] {
+        let context = getContext()
+        var summarys:[Summary] = []
+        do {
+            summarys = try context.fetch(Summary.fetchRequest())
+            return summarys
+        } catch {
+            print("GJ: Something goes wrong with fetching core data - Summary")
+            print("GJ: it could be that the summary with given date does not exist")
+            return []
+        }
+    }
     //delete object
     class func deleteObject(summary: Summary) {
         let context = getContext()

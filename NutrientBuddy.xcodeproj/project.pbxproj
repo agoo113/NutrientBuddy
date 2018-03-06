@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC03D464204D972B00C9AA16 /* LoadAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D463204D972B00C9AA16 /* LoadAttachment.swift */; };
+		AC03D468204EEB3E00C9AA16 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D467204EEB3E00C9AA16 /* LaunchViewController.swift */; };
 		AC321F4F204084FD0070D289 /* MKGradientGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */; };
 		AC321F51204085100070D289 /* MKRingProgressGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */; };
 		AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F53204085340070D289 /* MKRingProgressGroupView.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC03D463204D972B00C9AA16 /* LoadAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAttachment.swift; sourceTree = "<group>"; };
+		AC03D467204EEB3E00C9AA16 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKGradientGenerator.swift; sourceTree = "<group>"; };
 		AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupButton.swift; sourceTree = "<group>"; };
 		AC321F53204085340070D289 /* MKRingProgressGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupView.swift; sourceTree = "<group>"; };
@@ -97,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC03D469204EEB5000C9AA16 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AC03D467204EEB3E00C9AA16 /* LaunchViewController.swift */,
+			);
+			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
 		AC321F52204085140070D289 /* MKRingProgressModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,7 +208,6 @@
 				ACDD5D662028779F00076E5E /* AppDelegate.swift */,
 				ACDD5DAB202C9E4800076E5E /* datasetJSON.json */,
 				ACDD5D702028779F00076E5E /* Assets.xcassets */,
-				ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */,
 				ACDD5D752028779F00076E5E /* Info.plist */,
 			);
 			path = NutrientBuddy;
@@ -205,6 +216,7 @@
 		ACDD5D8020287D7A00076E5E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */,
 				ACDD5DA92028819D00076E5E /* Main.storyboard */,
 				ACC078E72044B56500A686EE /* HomeWaterBar */,
 				AC321F57204085470070D289 /* MKRingProgressView */,
@@ -242,6 +254,7 @@
 		ACDD5D9020287EE700076E5E /* MainControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AC03D469204EEB5000C9AA16 /* LaunchScreen */,
 				AC39434E2042281A00EE31FA /* Home */,
 				AC39434F2042282800EE31FA /* LogFood */,
 			);
@@ -251,6 +264,7 @@
 		ACDD5D9420287FCD00076E5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AC03D463204D972B00C9AA16 /* LoadAttachment.swift */,
 				ACAD7E2520470A8B0033FC30 /* UserInformation */,
 				AC321F52204085140070D289 /* MKRingProgressModel */,
 				ACDD5DA42028812F00076E5E /* Search */,
@@ -388,6 +402,7 @@
 				ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */,
 				ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */,
 				AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */,
+				AC03D464204D972B00C9AA16 /* LoadAttachment.swift in Sources */,
 				ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */,
 				ACDD5DAF202CA2E300076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
 				ACDD5D9A202880C500076E5E /* NutrientSelectionSetting.swift in Sources */,
@@ -401,6 +416,7 @@
 				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
 				ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */,
 				AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */,
+				AC03D468204EEB3E00C9AA16 /* LaunchViewController.swift in Sources */,
 				ACAD7E2420470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift in Sources */,
 				AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */,
 				ACDD5D9E202880D200076E5E /* foodData.swift in Sources */,

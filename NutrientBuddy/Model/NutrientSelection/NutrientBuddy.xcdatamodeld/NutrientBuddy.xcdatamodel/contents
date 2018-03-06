@@ -100,8 +100,8 @@
     </entity>
     <elements>
         <element name="Diary" positionX="-252" positionY="531" width="128" height="660"/>
+        <element name="Goals" positionX="-486" positionY="684" width="128" height="120"/>
         <element name="NutrientToView" positionX="-695" positionY="572" width="128" height="103"/>
         <element name="Summary" positionX="-486" positionY="684" width="128" height="645"/>
-        <element name="Goals" positionX="-486" positionY="684" width="128" height="120"/>
     </elements>
 </model>

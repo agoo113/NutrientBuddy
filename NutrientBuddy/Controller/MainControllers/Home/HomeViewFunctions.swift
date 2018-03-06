@@ -82,8 +82,11 @@ class HomeViewFunctions {
         
         if summary.date != nil{
             percentages.waterPercentage = summary.water/waterGoal
-            percentages.energyPercentage = summary.energy/(energyGoal)
+            percentages.energyPercentage = summary.energy/energyGoal
             
+            if debugHomeView {
+                print(summary)
+            }
             let totalOfThreeConsumed = summary.fat + summary.carbohydrate + summary.protein
             percentages.carboPercentage = summary.carbohydrate/(totalOfThreeConsumed*carboPro)
             percentages.fatPercentage = summary.fat/(totalOfThreeConsumed*fatPro)

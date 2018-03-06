@@ -21,6 +21,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var waterBar: HomeWaterBarView!
     @IBOutlet weak var navigationBar: UINavigationItem!
     //ring graph button
+    @IBOutlet weak var energyLabel: UILabel!
+    @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var proteinLabel: UILabel!
+    @IBOutlet weak var carboLabel: UILabel!
+    @IBOutlet weak var waterLabel: UILabel!
+    
     var buttons: [MKRingProgressGroupButton] = []
     var selectedIndex = 0
     
@@ -83,6 +89,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
         let summary = summaryAndPercentages.summary
         percentages = summaryAndPercentages.percentages
+        energyLabel.text = String(format: "%.2f", percentages.energyPercentage*100) + "%"
+        fatLabel.text = String(format: "%.2f", percentages.fatPercentage*100) + "%"
+        proteinLabel.text = String(format: "%.2f", percentages.proteinPercentage*100) + "%"
+        carboLabel.text = String(format: "%.2f", percentages.carboPercentage*100) + "%"
         
         display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
         
@@ -190,19 +200,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientsDiary", for: indexPath) as! HomeTableViewCell
         let nutrientToDisplay = display_nutrient[indexPath.row]
+        
+        switch nutrientToDisplay.nutrientType {
+        case "Water":
+            cell.nutrientTypeLabel.textColor = UIColor(red: 0, green: 215, blue: 234, alpha: 1)
+            cell.nutrientAmountLabel.textColor = UIColor(red: 0, green: 215, blue: 234, alpha: 1)
+        case "Fat":
+            cell.nutrientTypeLabel.textColor = UIColor.purple
+            cell.nutrientAmountLabel.textColor = UIColor.purple
+        case "Protein":
+            cell.nutrientTypeLabel.textColor = UIColor.blue
+            cell.nutrientAmountLabel.textColor = UIColor.blue
+        case "Energy":
+            cell.nutrientTypeLabel.textColor = UIColor.red
+            cell.nutrientAmountLabel.textColor = UIColor.red
+        case "Carbohydrate":
+            cell.nutrientTypeLabel.textColor = UIColor.yellow
+            cell.nutrientAmountLabel.textColor = UIColor.yellow
+        default:
+            cell.nutrientTypeLabel.textColor = UIColor.white
+            cell.nutrientAmountLabel.textColor = UIColor.white
+        }
         cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
         var amountString = String(format: "%.3f", nutrientToDisplay.amount)
         amountString.append(nutrientToDisplay.unit)
         cell.nutrientAmountLabel.text = amountString
         //cell.contentView.setNeedsLayout()
         return cell
-    }
-   // @IBAction func mybuttonTapped(_ sender: ) {
-     //   print("GJ: home button tapped")
-    //}
-    
-    @IBAction func myhomeYapped(_ sender: UIBarButtonItem) {
-         print("GJ: home button tapped")
     }
     
 }

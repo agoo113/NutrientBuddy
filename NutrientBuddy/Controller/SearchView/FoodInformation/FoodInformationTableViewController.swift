@@ -66,10 +66,9 @@ class FoodInformationTableViewController: UITableViewController {
                 cell.foodDescriptionLabel.lineBreakMode = .byWordWrapping
                 cell.foodDescriptionLabel.numberOfLines = 0
             }
-            //cell.foodItem = selectedFoodInfo
-            if amount != 0 {
-                cell.amountSlider.setValue(Float(amount), animated: true)
-            }
+            
+            cell.amountSlider.setValue(Float(amount), animated: true)
+            
             return cell
         }
         
@@ -104,28 +103,30 @@ class FoodInformationTableViewController: UITableViewController {
             let cell = self.tableView.cellForRow(at: indexPath) as! FoodInformationTableViewCell
             self.amount = Double(cell.amountSlider.value)
             if self.amount == 0{
-                let alertSecond = UIAlertController(title: "Nutrient Buddy", message: "You did not specify food amount! Please cancel and select amount!", preferredStyle: UIAlertControllerStyle.alert)
-                self.present(alertSecond, animated: true, completion: nil)
+                let secondAlert = UIAlertController(title: "Nutrient Buddy", message: "You did not specify food amount! Please cancel and select amount!", preferredStyle: UIAlertControllerStyle.alert)
+                secondAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                if debugLogMeal {
+                    print("GJ: canceled adding food item due to unselected amount")
+                }
+                self.present(secondAlert, animated: true, completion: nil)
             }
             else{
-                print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
+                if debugLogMeal{
+                    print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
+                }
+                
                 NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount)
-                self.goToHome()
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
         let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
-            print("GJ: canceled adding food item")
+            if debugLogMeal {
+                print("GJ: canceled adding food item")
+            }
         }
         alert.addAction(actionOkay)
         alert.addAction(actionCancel)
         present(alert, animated: true, completion: nil)
         
     }
-    func goToHome(){
-        print("GJ: start to go back to myMeal at \(Date())")
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let logFoodViewController = storyBoard.instantiateViewController(withIdentifier: "myMeals") as! LogFoodViewController
-        self.navigationController?.pushViewController(logFoodViewController, animated: true)
-    }
-
 }

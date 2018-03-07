@@ -37,8 +37,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
     
     var percentages = percentageConsumed()
+    @objc func settingButtonTyped(_ sender: UIBarButtonItem!){
+        print("GJ: setting tapped")
+    }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         //load personal goal
         if personalGoals.count == 0 {
             PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
@@ -180,7 +184,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     //get summart for protain, fat, carbohydrate and energy
-    @IBAction func getSummaryPrecentageForRings(_ sender: AnyObject? = nil) {
+    func getSummaryPrecentageForRings(_ sender: AnyObject? = nil) {
         for button in buttons {
             button.contentView.ring1.progress = percentages.energyPercentage
             button.contentView.ring2.progress = percentages.fatPercentage

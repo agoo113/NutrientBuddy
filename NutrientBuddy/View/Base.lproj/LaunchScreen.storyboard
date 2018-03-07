@@ -17,18 +17,7 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch1" translatesAutoresizingMaskIntoConstraints="NO" id="oaz-CN-XRe">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="oaz-CN-XRe" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3eN-hN-gDb"/>
-                            <constraint firstItem="oaz-CN-XRe" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="coy-lv-HLy"/>
-                            <constraint firstItem="oaz-CN-XRe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="lvN-ya-vjD"/>
-                            <constraint firstItem="oaz-CN-XRe" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="mri-ma-o9M"/>
-                        </constraints>
+                        <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -37,7 +26,4 @@
             <point key="canvasLocation" x="69.599999999999994" y="311.69415292353824"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="launch1" width="320" height="480"/>
-    </resources>
 </document>

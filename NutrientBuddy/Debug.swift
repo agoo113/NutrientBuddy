@@ -9,5 +9,7 @@
 import UIKit
 
 let debugHomeView = false // prints out the calculation and logging of the summary
+let debugLogMeal = true
+let debugSearch = true // debug search view controller
 let debugViewLoading = false // prints out the time of loading the view
 let debugPersonalSetting = true //print out the personal settings

@@ -21,6 +21,7 @@ class FoodInformationTableViewCell: UITableViewCell {
         super.awakeFromNib()
         amountSlider.minimumValue = 0
         amountSlider.maximumValue = 200
+        amountSlider.setValue(100, animated: true)
     }
     
     @IBAction func amountSliderChange(_ sender: UISlider) {

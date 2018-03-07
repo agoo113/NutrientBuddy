@@ -51,9 +51,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
                 }
             }
         }
-        //navigation bar
-        //self.navigationController?.hidesBarsOnSwipe = true
-
         textView.isEditable = false
     }
     
@@ -143,19 +140,24 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         }
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        if debugSearch {
+            print("GJ: cancel button clicked on the search bar search view")
+        }
         searchBar.text?.removeAll()
-        textView.text = "Cancelled speech search!"
+        textView.text = "Cancelled speech search! \n"
         searchBar.showsCancelButton = false
+        textView.text.append("Finished Recording!")
+        searchBar.setImage(#imageLiteral(resourceName: "Record"), for: UISearchBarIcon.bookmark, state: UIControlState.normal)
+        audioEngine.stop()
+        recognitionRequest?.endAudio()
     }
 
-    //MARK: search for food items
+    //search for food items
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchForFoodItems()
         searchBar.endEditing(true)
     }
-    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
-        searchForFoodItems()
-    }
+    
     private func searchForFoodItems() {
         if !(searchBar.text?.isEmpty)!{
             //search for food

@@ -48,14 +48,14 @@ class BagOfWord {
     }
     
     //MARK: encode the search string
-    func encodeSearchString(searchStr: String) -> Set<Int>{
-        let allWords = loadAllWords()
+    func encodeSearchString(searchStr: String, allWords: [String]) -> Set<Int>{
+        //let allWords = loadAllWords()
         var codedSearch = Set<Int>()
         
         let split = searchStr.split(separator: " ")
         for word in split{
-            if allWords.contains(String(word)) {
-                let id = allWords.index(of: String(word))
+            if allWords.contains(String(word.lowercased())) {
+                let id = allWords.index(of: String(word.lowercased()))
                 codedSearch.insert(id!)
             }
         }
@@ -63,12 +63,12 @@ class BagOfWord {
     }
     
     //MARK: Search
-    func searchItem(searchFood:String, codeDict:[String: [Int]]) ->[String]{
+    func searchItem(searchFood:String, codeDict:[String: [Int]], allWords: [String]) ->[String]{
         var filteredData: [String] = []
         
         var filteredDict: [String: Double] = [:] //[food_item_name: number_of_words_matched]
        
-        let codedSearch = encodeSearchString(searchStr: searchFood)
+        let codedSearch = encodeSearchString(searchStr: searchFood, allWords: allWords)
         for (key, value) in codeDict {
             let common = value.filter(codedSearch.contains)
             

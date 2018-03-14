@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreData
-import MessageUI
 
 class LoadAttachment {
     func writeCoreDataObjToCSV(object:[NSManagedObject], named: String) -> String {
@@ -24,7 +23,37 @@ class LoadAttachment {
         })
         let csvString = csvArray.reduce("", +)
         return csvHeaderString + csvString
-        
     }
     
+    func feedBackQuestions() -> String {
+        var content: String
+        content = "1. What goal do you wish to accomplish with NutrientBuddy? \n\n\n"
+        content.append("2. Is NutrientBuddy motivational enough to assist you in accomplishing the goal? \n\n\n")
+        content.append("3. Were you able to find most food you consumed with NutrientBuddy? \n\n\n")
+        content.append("4. How was your experience to find food? Is that easy enough to figure out where to go? \n\n\n")
+        content.append("5. Did you know that you can set your own nutrient goal? \n\n\n")
+        content.append("6. Did you know that you can view more nutrients types? \n\n\n")
+        content.append("7. Did you know that you can browse through our whole database? \n\n\n")
+        content.append("8. What are the features of NutrientBuddy that you do not like? \n\n\n")
+        content.append("9. What are the features of NutrientBuddy that you like? \n\n\n")
+        content.append("10. Please rate 1-10, your experience with logging meals. Any comments? \n\n\n")
+        content.append("11. Please rate 1-10, the vitual of home page. Is the graphics understandable? Any comments? \n\n\n")
+        content.append("12. Please rate 1-10, your experience with NutrientBuddy? Any comments? \n\n\n")
+        return content
+    }
 }
+/*
+extension NSMutableAttributedString {
+    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
+        let attributes: [NSAttributedStringKey: Any] = [.font: UIFont(name: "AvenirNext-Medium", size: 12)!]
+        let boldString = NSMutableAttributedString(string: text, attributes: attributes)
+        append(boldString)
+        return self
+    }
+    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
+        let normal = NSAttributedString(string: text)
+        append(normal)
+        return self
+    }
+}
+ */

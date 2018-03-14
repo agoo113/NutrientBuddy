@@ -20,8 +20,10 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     var filteredData: [String] = []
     var searchFood: String = ""
     var codeDict: [String: [Int]] = [:]
+    var allWords:[String] = []
     var food:[String:String] = [:]
-
+    var typeOfMeal: String = ""
+    
     //MARK: pass to categoty view controller
     var catDict: [String:[String]] = [:]
     var catCategories: [String] = []
@@ -155,6 +157,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     //search for food items
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchForFoodItems()
+        textView.text = "Start searching for \(searchFood)..."
         searchBar.endEditing(true)
     }
     
@@ -163,15 +166,17 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             //search for food
             filteredData.removeAll(keepingCapacity: false)
             let searchFood = processSpeechSearch(searchBarText: searchBar.text!)
-            filteredData = BagOfWord().searchItem(searchFood: searchFood, codeDict: codeDict)
+            filteredData = BagOfWord().searchItem(searchFood: searchFood, codeDict: codeDict, allWords: allWords)
             if filteredData.count != 0{
                 tableView.isHidden = false
                 tableView.reloadData()
+                textView.text = "Here are the searched results for \(searchFood)"
             }
             else{
                 let alert = UIAlertController(title: "Alert", message: "Food item is not found", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 present(alert, animated: true, completion: nil)
+                textView.text = "Sorry the item you searched is not found, please browse from the database."
             }
         }
         else{
@@ -231,6 +236,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             
             let strutArray = database.filter{ $0.Food_Name == item }
             foodInformationTableViewController.selectedFoodInfo = strutArray[0]
+            foodInformationTableViewController.typeOfMeal = self.typeOfMeal
         }
         
         if segue.identifier == "loadDatabase" {
@@ -238,6 +244,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             categoryViewController.categories = catCategories
             categoryViewController.database = database
             categoryViewController.dict = catDict
+            categoryViewController.typeOfMeal = self.typeOfMeal
         }
         
         

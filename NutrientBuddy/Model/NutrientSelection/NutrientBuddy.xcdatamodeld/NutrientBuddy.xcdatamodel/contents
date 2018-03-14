@@ -33,6 +33,7 @@
         <attribute name="sodium" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="thiamin" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="tryptophan_p60" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeofmeal" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vitamin_b6" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vitamin_b12" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vitamin_c" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -88,6 +89,7 @@
         <attribute name="thiamin" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="totalWeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="tryptophan_p60" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="typeofmeal" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="vitamin_b6" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vitamin_b12" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vitamin_c" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
@@ -99,9 +101,9 @@
         <attribute name="zinc" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Diary" positionX="-252" positionY="531" width="128" height="660"/>
+        <element name="Diary" positionX="-252" positionY="531" width="128" height="675"/>
         <element name="Goals" positionX="-486" positionY="684" width="128" height="120"/>
         <element name="NutrientToView" positionX="-695" positionY="572" width="128" height="103"/>
-        <element name="Summary" positionX="-486" positionY="684" width="128" height="645"/>
+        <element name="Summary" positionX="-486" positionY="684" width="128" height="660"/>
     </elements>
 </model>

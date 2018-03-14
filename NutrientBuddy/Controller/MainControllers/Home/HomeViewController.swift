@@ -13,19 +13,17 @@ func delay(_ delay: Double, closure: @escaping ()->()) {
 }
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    var tappedRings = false
     //MARK: IBoutlet with the view
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var groupContainerView: UIView!
     @IBOutlet weak var progressGroup: MKRingProgressGroupView!
-    @IBOutlet weak var waterBar: HomeWaterBarView!
-    @IBOutlet weak var navigationBar: UINavigationItem!
     //ring graph button
     @IBOutlet weak var energyLabel: UILabel!
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var carboLabel: UILabel!
-    @IBOutlet weak var waterLabel: UILabel!
+    @IBOutlet weak var labelStack: UIStackView!
     
     var buttons: [MKRingProgressGroupButton] = []
     var selectedIndex = 0
@@ -35,14 +33,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var display_nutrient: [foodInformation] = []
     let date = NutrientDiary().getDate()
     var personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
+    var ringPercentages = percentageConsumedForRings()
+    var barPercentages = percentageConsumedForBars()
     
-    var percentages = percentageConsumed()
-    @objc func settingButtonTyped(_ sender: UIBarButtonItem!){
-        print("GJ: setting tapped")
+    //MARK: controls the display of labels
+    @objc func tappedOnEnergy(_ sender: UITapGestureRecognizer){
+        if tappedRings {
+            labelStack.isHidden = true
+            tappedRings = false
+        }
+        else{
+            labelStack.isHidden = false
+            //waterLabel.isHidden = false
+            tappedRings = true
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnEnergy))
+        self.progressGroup.addGestureRecognizer(gesture)
+        self.progressGroup.bringSubview(toFront: labelStack)
         
+        if debugHomeView {
+            print("GJ: today's date is \(date), from view did appear - HomeViewController")
+        }
         //load personal goal
         if personalGoals.count == 0 {
             PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
@@ -53,8 +67,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //load summary
         let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
         let summary = summaryAndPercentages.summary
-        percentages = summaryAndPercentages.percentages
+        ringPercentages = summaryAndPercentages.ringsPercentage
+        barPercentages = summaryAndPercentages.barsPercentage
         
+        energyLabel.text = "Energy: " + String(format: "%.2f", ringPercentages.energyPercentage*100) + "%"
+        fatLabel.text = "Fat: " + String(format: "%.2f", ringPercentages.fatPercentage*100) + "%"
+        proteinLabel.text = "Protein: " + String(format: "%.2f", ringPercentages.proteinPercentage*100) + "%"
+        carboLabel.text = "Carbo: " + String(format: "%.2f", ringPercentages.carboPercentage*100) + "%"
+        
+        
+        //display other nutrient information
+        if debugNutrientSetting {
+            print("GJ: there are \(nutrientToView.count) items")
+            for each in nutrientToView {
+                print(each)
+            }
+        }
+        nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
+        if debugNutrientSetting {
+            print("GJ: there are \(nutrientToView.count) items")
+            for each in nutrientToView {
+                print(each)
+            }
+        }
+        nutrientToView = HomeViewFunctions().getNutrientToView(nutrientToView: nutrientToView)
         display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
         
         //delete extra summaries
@@ -63,65 +99,27 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //ring graph
         randeringRingView()
         getSummaryPrecentageForRings()
-        //water bar
-        waterBar.drawProgressLayer(percentage: percentages.waterPercentage)
+        
         //reload table
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120
         tableView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if debugHomeView {
-            print("GJ: today's date is \(date)")
-        }
-        //load personal goal
-        if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
-            personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
-        }
-        let goal = personalGoals[0]
-        if  debugPersonalSetting {
-            print("GJ: there are \(personalGoals.count) elements in Goal core data")
-            print("It is carbo: \(goal.carbo_goal), fat: \(goal.fat_goal), protein: \(goal.protein_goal), water: \(goal.water_goal), energy: \(goal.energy_goal)")
-        }
-
-        //MARK: load the views
-        //nutrient to view
-        nutrientToView = HomeViewFunctions().getNutrientToView(nutrientToView: nutrientToView)
-        
-        //load summary
-        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
-        let summary = summaryAndPercentages.summary
-        percentages = summaryAndPercentages.percentages
-        energyLabel.text = String(format: "%.2f", percentages.energyPercentage*100) + "%"
-        fatLabel.text = String(format: "%.2f", percentages.fatPercentage*100) + "%"
-        proteinLabel.text = String(format: "%.2f", percentages.proteinPercentage*100) + "%"
-        carboLabel.text = String(format: "%.2f", percentages.carboPercentage*100) + "%"
-        
-        display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
-        
-        //delete extra summaries
-        HomeViewFunctions().deletePreviousNutrientSummaryIfExist(date: date)
-        
-        if debugHomeView {
-             let newSummary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
-             print("GJ: there are \(newSummary.count) summaries in the core data now")
-        }
-        
-        //ring graph
-        randeringRingView()
-        getSummaryPrecentageForRings()
-        //water bar
-        waterBar.drawProgressLayer(percentage: percentages.waterPercentage)
-        //reload table
-        tableView.reloadData()
+        /*
+        energyLabel.isHidden = true
+        carboLabel.isHidden = true
+        fatLabel.isHidden = true
+        proteinLabel.isHidden = true*/
+        labelStack.isHidden = true
     }
 
     //MARK: ring graphs
     func randeringRingView() {
         let containerView = UIView(frame: navigationController!.navigationBar.bounds)
         
-        //navigationController!.navigationBar.addSubview(containerView)
         groupContainerView.addSubview(containerView)
         let w = (containerView.bounds.width - 16) / CGFloat(7)
         let h = containerView.bounds.height
@@ -186,10 +184,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     //get summart for protain, fat, carbohydrate and energy
     func getSummaryPrecentageForRings(_ sender: AnyObject? = nil) {
         for button in buttons {
-            button.contentView.ring1.progress = percentages.energyPercentage
-            button.contentView.ring2.progress = percentages.fatPercentage
-            button.contentView.ring3.progress = percentages.proteinPercentage
-            button.contentView.ring4.progress = percentages.carboPercentage
+            button.contentView.ring1.progress = ringPercentages.energyPercentage
+            button.contentView.ring2.progress = ringPercentages.fatPercentage
+            button.contentView.ring3.progress = ringPercentages.proteinPercentage
+            button.contentView.ring4.progress = ringPercentages.carboPercentage
         }
         updateMainGroupProgress()
     }
@@ -199,39 +197,25 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return display_nutrient.count
+        return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientsDiary", for: indexPath) as! HomeTableViewCell
-        let nutrientToDisplay = display_nutrient[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! HomeProgressBarTableViewCell
         
-        switch nutrientToDisplay.nutrientType {
-        case "Water":
-            cell.nutrientTypeLabel.textColor = UIColor(red: 0, green: 215, blue: 234, alpha: 1)
-            cell.nutrientAmountLabel.textColor = UIColor(red: 0, green: 215, blue: 234, alpha: 1)
-        case "Fat":
-            cell.nutrientTypeLabel.textColor = UIColor.purple
-            cell.nutrientAmountLabel.textColor = UIColor.purple
-        case "Protein":
-            cell.nutrientTypeLabel.textColor = UIColor.blue
-            cell.nutrientAmountLabel.textColor = UIColor.blue
-        case "Energy":
-            cell.nutrientTypeLabel.textColor = UIColor.red
-            cell.nutrientAmountLabel.textColor = UIColor.red
-        case "Carbohydrate":
-            cell.nutrientTypeLabel.textColor = UIColor.yellow
-            cell.nutrientAmountLabel.textColor = UIColor.yellow
-        default:
-            cell.nutrientTypeLabel.textColor = UIColor.white
-            cell.nutrientAmountLabel.textColor = UIColor.white
-        }
-        cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
-        var amountString = String(format: "%.3f", nutrientToDisplay.amount)
-        amountString.append(nutrientToDisplay.unit)
-        cell.nutrientAmountLabel.text = amountString
-        //cell.contentView.setNeedsLayout()
+        //cell.percentage = barPercentages.waterPercentage
+        cell.drawProgressLayer(percentage: barPercentages.waterPercentage)
+        cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
+        cell.nutrientView.image = UIImage(named: "waterBarIcon")
+        cell.nutrientLabel.text = String(format: "%.2f", barPercentages.waterPercentage * 100) + "%"
         return cell
     }
     
+    //MARK: prepsare for the
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loadNutrientSummary" {
+            let nutrientSummaryDetailViewController: NutrientSummaryDetailViewController = segue.destination as! NutrientSummaryDetailViewController
+            nutrientSummaryDetailViewController.display_nutrient = display_nutrient
+        }
+    }
 }
 

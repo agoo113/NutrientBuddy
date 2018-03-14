@@ -11,6 +11,8 @@
 		AC03D4752050264900C9AA16 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4742050264800C9AA16 /* LaunchScreenViewController.swift */; };
 		AC03D4772050265100C9AA16 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4762050265100C9AA16 /* Swift+Gif.swift */; };
 		AC03D47B20502A5300C9AA16 /* LaunchImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = AC03D47A20502A5300C9AA16 /* LaunchImage.gif */; };
+		AC03D4C42057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4C32057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift */; };
+		AC03D4C82057F74300C9AA16 /* HomeProgressBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4C72057F74300C9AA16 /* HomeProgressBarTableViewCell.swift */; };
 		AC321F4F204084FD0070D289 /* MKGradientGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */; };
 		AC321F51204085100070D289 /* MKRingProgressGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */; };
 		AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F53204085340070D289 /* MKRingProgressGroupView.swift */; };
@@ -54,6 +56,8 @@
 		AC03D4742050264800C9AA16 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchScreenViewController.swift; path = ../../../../../LaunchAnimation/LaunchAnimation/LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		AC03D4762050265100C9AA16 /* Swift+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Swift+Gif.swift"; path = "../../../../../LaunchAnimation/LaunchAnimation/Swift+Gif.swift"; sourceTree = "<group>"; };
 		AC03D47A20502A5300C9AA16 /* LaunchImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LaunchImage.gif; path = ../../../Documents/LaunchImage.gif; sourceTree = "<group>"; };
+		AC03D4C32057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientSummaryDetailViewController.swift; sourceTree = "<group>"; };
+		AC03D4C72057F74300C9AA16 /* HomeProgressBarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressBarTableViewCell.swift; sourceTree = "<group>"; };
 		AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKGradientGenerator.swift; sourceTree = "<group>"; };
 		AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupButton.swift; sourceTree = "<group>"; };
 		AC321F53204085340070D289 /* MKRingProgressGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupView.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				ACDD5D8E20287ED700076E5E /* HomeViewController.swift */,
 				AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */,
 				AC39434C2042208500EE31FA /* HomeTableViewCell.swift */,
+				AC03D4C32057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift */,
+				AC03D4C72057F74300C9AA16 /* HomeProgressBarTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -422,6 +428,8 @@
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
 				ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */,
 				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
+				AC03D4C42057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift in Sources */,
+				AC03D4C82057F74300C9AA16 /* HomeProgressBarTableViewCell.swift in Sources */,
 				ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */,
 				AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */,
 				ACAD7E2420470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift in Sources */,
@@ -573,7 +581,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.GemmaJing.NutrientBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -588,7 +596,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.GemmaJing.NutrientBuddy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

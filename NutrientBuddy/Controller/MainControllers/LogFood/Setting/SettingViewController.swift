@@ -20,15 +20,43 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         
     }
     @IBAction func saveButtonItemTapped(_ sender: UIBarButtonItem) {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting") as! GoalSettingTableViewCell
-    
-        PersonalSettingCoreDataHandler.cleanDelete()
-        let water = Double(cell.carboGoalTextField.text!)!
-        let energy = Double(cell.energyGoalTextField.text!)!
-        let fat = Double(cell.fatGoalTextField.text!)!
-        let protein = Double(cell.proteinGoalTextField.text!)!
-        let carbo = Double(cell.carboGoalTextField.text!)!
+        let goal = goals?.first
         
+        let index = IndexPath(row: 0, section: 0)
+        let cell = tableView.cellForRow(at: index) as! GoalSettingTableViewCell
+        let water: Double
+        let energy: Double
+        let fat: Double
+        let carbo: Double
+        let protein: Double
+        
+        if cell.water != 0 {
+           water  = cell.water
+        } else {
+            water = (goal?.water_goal)!
+        }
+        if cell.energy != 0 {
+            energy  = cell.energy
+        } else {
+            energy = (goal?.energy_goal)!
+        }
+        if cell.protein != 0 {
+            protein  = cell.protein
+        } else {
+            protein = (goal?.protein_goal)!
+        }
+        if cell.fat != 0 {
+            fat  = cell.fat
+        } else {
+            fat = (goal?.fat_goal)!
+        }
+        if cell.carbo != 0 {
+            carbo  = cell.carbo
+        } else {
+            carbo = (goal?.carbo_goal)!
+        }
+        
+        PersonalSettingCoreDataHandler.cleanDelete()
         PersonalSettingCoreDataHandler.saveObject(carboGoal: carbo, energyGoal: energy, fatGoal: fat, proteinGoal: protein, waterGoal: water)
         
         if debugPersonalSetting {
@@ -37,6 +65,7 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
                 print(each)
             }
         }
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     //MARK: table view
@@ -49,11 +78,20 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientSetting")
+            cell?.selectionStyle = UITableViewCellSelectionStyle.none
             return cell!
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting")
         
-        return cell!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting") as! GoalSettingTableViewCell
+        let goal = goals?.first
+        cell.waterGoalTextField.placeholder = String(format: "%.0f", (goal?.water_goal)!)
+        cell.energyGoalTextField.placeholder = String(format: "%.0f", (goal?.energy_goal)!)
+        cell.carboGoalTextField.placeholder = String(format: "%.0f", (goal?.carbo_goal)!)
+        cell.fatGoalTextField.placeholder = String(format: "%.0f", (goal?.fat_goal)!)
+        cell.proteinGoalTextField.placeholder = String(format: "%.0f", (goal?.protein_goal)!)
+
+        cell.selectionStyle = UITableViewCellSelectionStyle.none
+        return cell
     }
 
     override func didReceiveMemoryWarning() {

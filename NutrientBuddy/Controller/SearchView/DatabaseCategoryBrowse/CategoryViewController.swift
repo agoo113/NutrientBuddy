@@ -25,6 +25,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     // MARK: get database and filtered data
+    var typeOfMeal: String = ""
     var database: [FoodInfo] = []
     var dict:[String:[String]] = [:]
     var categories: [String] = []
@@ -107,6 +108,7 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             categoryDetailsViewController.foodItems = categoryDetials
             categoryDetailsViewController.database = database
+            categoryDetailsViewController.typeOfMeal = typeOfMeal
         }
     }
     

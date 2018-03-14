@@ -10,12 +10,9 @@ import UIKit
 
 class CategoryDetailsViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
     
+    var typeOfMeal: String = ""
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +103,7 @@ class CategoryDetailsViewController: UIViewController, UITableViewDelegate, UISe
             
             let strutArray = database.filter{$0.Food_Name == item.replacingOccurrences(of: " ", with: "_")}
             foodInfoTableViewController.selectedFoodInfo = strutArray[0]
+            foodInfoTableViewController.typeOfMeal = self.typeOfMeal
         }
     }
 

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "waterIcon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "cameraView.png",
       "scale" : "2x"
     },
     {

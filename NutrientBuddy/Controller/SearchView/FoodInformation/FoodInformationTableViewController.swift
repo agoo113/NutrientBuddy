@@ -11,6 +11,7 @@ import UIKit
 class FoodInformationTableViewController: UITableViewController {
     
     var selectedFoodInfo = FoodInfo() // loaded from last page
+    var typeOfMeal: String = ""
     // load the nutrient selection core data
     var nutrientToView: [NutrientToView] = []
     //display nutrient on this page
@@ -25,6 +26,8 @@ class FoodInformationTableViewController: UITableViewController {
         //MARK: add default if there is nothing in the nutrient selection core data
         nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
         loadFoodNutrition(nutrientToView: nutrientToView)
+        
+        print("GJ: \(typeOfMeal) -- TYPE OF MEAL")
     }
    
     // MARK: get nutrient information
@@ -115,7 +118,7 @@ class FoodInformationTableViewController: UITableViewController {
                     print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
                 }
                 
-                NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount)
+                NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount, typeOfMeal: self.typeOfMeal)
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }

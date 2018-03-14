@@ -13,6 +13,11 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
     @IBOutlet weak var tableView: UITableView!
     
     var nutrients = NutrientTypeCoreDataHandler.fetchObject()!
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        nutrients = HomeViewFunctions().getNutrientToView(nutrientToView: nutrients)
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +27,7 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         let resetButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "resetView"), style: .plain, target: self, action: #selector(resetButtonTapped))
         
         self.navigationItem.rightBarButtonItems = [doneButtonItem, resetButtonItem]
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,6 +58,7 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         switchView.tag = indexPath.row
         switchView.addTarget(self, action: #selector(self.switchChanged(_:)), for: .valueChanged)
         cell?.accessoryView = switchView
+        cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!
     }
     
@@ -68,7 +75,7 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
 
     // Mark: Done
     @objc func doneButtonTapped(_ sender: UIBarButtonItem) {
-        if debugPersonalSetting {
+        if debugNutrientSetting {
             let nutrientToView = NutrientTypeCoreDataHandler.fetchObject()
             
             print("GJ: the size of nutrient to view is: \(String(describing: nutrientToView?.count))")
@@ -84,13 +91,12 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         let alert = UIAlertController(title: "Alert", message: "Reset nutrient selection to default", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
             NutrientTypeCoreDataHandler.clearnDelete()
-            self.nutrients = NutrientTypeCoreDataHandler.fetchObject()!
             self.navigationController?.popToRootViewController(animated: true)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
         
-        if debugPersonalSetting {
+        if debugNutrientSetting {
             let nutrientToView = NutrientTypeCoreDataHandler.fetchObject()
             print("GJ: the size of nutrient to view is: \(String(describing: nutrientToView?.count))")
             for each in nutrientToView! {

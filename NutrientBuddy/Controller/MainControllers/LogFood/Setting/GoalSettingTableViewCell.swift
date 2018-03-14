@@ -27,49 +27,51 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        waterGoalTextField.keyboardType = UIKeyboardType.numberPad
-        energyGoalTextField.keyboardType = UIKeyboardType.numberPad
-        carboGoalTextField.keyboardType = UIKeyboardType.numberPad
-        proteinGoalTextField.keyboardType = UIKeyboardType.numberPad
-        fatGoalTextField.keyboardType = UIKeyboardType.numberPad
         
         waterGoalTextField.delegate = self
         energyGoalTextField.delegate = self
         carboGoalTextField.delegate = self
         proteinGoalTextField.delegate = self
         fatGoalTextField.delegate = self
-        
-        // Initialization code
-        if debugPersonalSetting {
-            for each in goals! {
-                print(each)
-            }
-            print("GJ: the size of the personal is \(String(format: "%.0f", (goals?.count)!)) -- SettingViewController")
-        }
-        let goal = goals?.first
-        waterGoalTextField.text = String(format: "%.0f", (goal?.water_goal)!)
-        energyGoalTextField.text = String(format: "%.0f", (goal?.energy_goal)!)
-        carboGoalTextField.text = String(format: "%.0f", (goal?.carbo_goal)!)
-        fatGoalTextField.text = String(format: "%.0f", (goal?.fat_goal)!)
-        proteinGoalTextField.text = String(format: "%.0f", (goal?.protein_goal)!)
 
     }
 
+    
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
+        if !(textField.text?.isEmpty)! {
+            switch textField {
+            case self.waterGoalTextField:
+                self.water = Double(textField.text!)!
+            case self.energyGoalTextField:
+                self.energy = Double(textField.text!)!
+            case self.carboGoalTextField:
+                self.carbo = Double(textField.text!)!
+            case self.fatGoalTextField:
+                self.fat = Double(textField.text!)!
+            case self.proteinGoalTextField:
+                self.protein = Double(textField.text!)!
+            default:
+                goalAltered = false
+            }
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case self.waterGoalTextField:
-            water = Double(textField.text!)!
+            self.water = Double(textField.text!)!
         case self.energyGoalTextField:
-            energy = Double(textField.text!)!
+            self.energy = Double(textField.text!)!
         case self.carboGoalTextField:
-            carbo = Double(textField.text!)!
+            self.carbo = Double(textField.text!)!
         case self.fatGoalTextField:
-            fat = Double(textField.text!)!
+            self.fat = Double(textField.text!)!
         case self.proteinGoalTextField:
-            protein = Double(textField.text!)!
+            self.protein = Double(textField.text!)!
         default:
             goalAltered = false
         }
+        return true
     }
 }

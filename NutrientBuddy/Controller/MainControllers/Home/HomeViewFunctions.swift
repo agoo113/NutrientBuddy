@@ -8,15 +8,13 @@
 
 import UIKit
 
-struct percentageConsumed {
-    var waterPercentage: Double
+struct percentageConsumedForRings {
     var proteinPercentage: Double
     var fatPercentage: Double
     var carboPercentage: Double
     var energyPercentage: Double
     
     init() {
-        waterPercentage = 0.0
         proteinPercentage = 0.0
         fatPercentage = 0.0
         carboPercentage = 0.0
@@ -24,6 +22,17 @@ struct percentageConsumed {
     }
 };
 
+struct percentageConsumedForBars{
+    var waterPercentage: Double
+    var sugarPercentage: Double
+    var vitaminPercentage: Double
+    
+    init() {
+        waterPercentage = 0.0
+        sugarPercentage = 0.0
+        vitaminPercentage = 0.0
+    }
+};
 
 class HomeViewFunctions {
     func getNutrientToView(nutrientToView:
@@ -71,32 +80,34 @@ class HomeViewFunctions {
         return displayNutrient
     }
     
-    func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String, carboGoal: Double, proteinGoal: Double, fatGoal: Double) -> (summary: Summary, percentages: percentageConsumed) {
+    func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String, carboGoal: Double, proteinGoal: Double, fatGoal: Double) -> (summary: Summary, ringsPercentage: percentageConsumedForRings, barsPercentage: percentageConsumedForBars) {
         
         let summary = NutrientDiary().updateNutrientsSummaryOfTheDay(date: date)
-        var percentages = percentageConsumed()
+        var ringsPercentage = percentageConsumedForRings()
+        var barPercentage = percentageConsumedForBars()
+        
         let threeTotalGoal = carboGoal + fatGoal + proteinGoal
         let carboPro = carboGoal/threeTotalGoal
         let fatPro = fatGoal/threeTotalGoal
         let proteinPro = proteinGoal/threeTotalGoal
         
+        let totalCarboGoal = carboPro * energyGoal / 4.0
+        let totalFatGoal = fatPro * energyGoal / 9.0
+        let totalProteinGoal = proteinPro * energyGoal / 4.0
         if summary.date != nil{
-            percentages.waterPercentage = summary.water/waterGoal
-            percentages.energyPercentage = summary.energy/energyGoal
+            barPercentage.waterPercentage = summary.water/waterGoal
+            ringsPercentage.energyPercentage = summary.energy/energyGoal
             
             if debugHomeView {
                 print(summary)
             }
-            let totalOfThreeConsumed = summary.fat + summary.carbohydrate + summary.protein
-            percentages.carboPercentage = summary.carbohydrate/(totalOfThreeConsumed*carboPro)
-            percentages.fatPercentage = summary.fat/(totalOfThreeConsumed*fatPro)
-            percentages.proteinPercentage = summary.protein/(totalOfThreeConsumed * proteinPro)
             
-            if debugHomeView {
-                 print("GJ: cunsumed water \(percentages.waterPercentage) g, protein \(percentages.proteinPercentage), fat \(percentages.fatPercentage), carbo \(percentages.energyPercentage)")
-            }
+            ringsPercentage.carboPercentage = summary.carbohydrate / totalCarboGoal
+            ringsPercentage.fatPercentage = summary.fat / totalFatGoal
+            ringsPercentage.proteinPercentage = summary.protein / totalProteinGoal
+            
         }
-        return (summary, percentages)
+        return (summary, ringsPercentage, barPercentage)
     }
     
     func deletePreviousNutrientSummaryIfExist(date: String) {

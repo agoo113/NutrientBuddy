@@ -17,12 +17,13 @@ class NutrientDiaryCoreDataHandler: NSObject {
     }
     
     //save object
-    class func saveObject(date:String, foodname:String, amount:Double, water:Double, fat:Double, protein:Double, carbohydrate:Double, nsp:Double, energy:Double, aoac_fibre:Double, sodium:Double, potassium:Double, calcium:Double, magnesium:Double, phosphorus:Double, iron:Double, copper:Double, zinc:Double, chloride:Double, manganese:Double, selenium:Double, iodine:Double, retinol:Double, carotene:Double, retinol_equivalent:Double, vitamin_d:Double, vitamin_e:Double, vitamin_k1:Double, thiamin:Double, riboflavin:Double, niacin:Double, tryptophan_p60:Double, niacin_equivalent:Double, vitamin_b6:Double, vitamin_b12:Double, folate:Double, pantothenate:Double, biotin:Double, vitamin_c:Double, mineral_total:Double, vitamin_total:Double) {
+    class func saveObject(date:String, typeOfMeal: String, foodname:String, amount:Double, water:Double, fat:Double, protein:Double, carbohydrate:Double, nsp:Double, energy:Double, aoac_fibre:Double, sodium:Double, potassium:Double, calcium:Double, magnesium:Double, phosphorus:Double, iron:Double, copper:Double, zinc:Double, chloride:Double, manganese:Double, selenium:Double, iodine:Double, retinol:Double, carotene:Double, retinol_equivalent:Double, vitamin_d:Double, vitamin_e:Double, vitamin_k1:Double, thiamin:Double, riboflavin:Double, niacin:Double, tryptophan_p60:Double, niacin_equivalent:Double, vitamin_b6:Double, vitamin_b12:Double, folate:Double, pantothenate:Double, biotin:Double, vitamin_c:Double, mineral_total:Double, vitamin_total:Double) {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Diary", in: context)
         let manageObject = NSManagedObject(entity: entity!, insertInto: context)
         
         manageObject.setValue(date, forKey: "date")
+        manageObject.setValue(typeOfMeal, forKey: "typeofmeal")
         manageObject.setValue(amount, forKey: "amount")
         manageObject.setValue(foodname, forKey: "foodname")
         manageObject.setValue(water, forKey: "water")

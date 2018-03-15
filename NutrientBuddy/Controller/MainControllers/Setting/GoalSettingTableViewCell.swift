@@ -15,12 +15,17 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var carboGoalTextField: UITextField!
     @IBOutlet weak var proteinGoalTextField: UITextField!
     @IBOutlet weak var fatGoalTextField: UITextField!
-
+    @IBOutlet weak var vitaminCGoalTextField: UITextField!
+    @IBOutlet weak var sugarLimitTextField: UITextField!
+    
     var water: Double = 0.0
     var protein: Double = 0.0
     var fat: Double = 0.0
     var carbo: Double = 0.0
     var energy: Double = 0.0
+    var vitaminC: Double = 0.0
+    var sugar: Double = 0.0
+    
     var goalAltered: Bool = true
     
     let goals = PersonalSettingCoreDataHandler.fetchObject()
@@ -33,10 +38,9 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
         carboGoalTextField.delegate = self
         proteinGoalTextField.delegate = self
         fatGoalTextField.delegate = self
-
+        vitaminCGoalTextField.delegate = self
+        sugarLimitTextField.delegate = self
     }
-
-    
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         if !(textField.text?.isEmpty)! {
@@ -51,6 +55,10 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
                 self.fat = Double(textField.text!)!
             case self.proteinGoalTextField:
                 self.protein = Double(textField.text!)!
+            case self.vitaminCGoalTextField:
+                self.vitaminC = Double(textField.text!)!
+            case self.sugarLimitTextField:
+                self.sugar = Double(textField.text!)!
             default:
                 goalAltered = false
             }
@@ -69,6 +77,10 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
             self.fat = Double(textField.text!)!
         case self.proteinGoalTextField:
             self.protein = Double(textField.text!)!
+        case self.vitaminCGoalTextField:
+            self.vitaminC = Double(textField.text!)!
+        case self.sugarLimitTextField:
+            self.sugar = Double(textField.text!)!
         default:
             goalAltered = false
         }

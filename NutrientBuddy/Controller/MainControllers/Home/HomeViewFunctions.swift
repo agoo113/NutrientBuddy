@@ -25,12 +25,12 @@ struct percentageConsumedForRings {
 struct percentageConsumedForBars{
     var waterPercentage: Double
     var sugarPercentage: Double
-    var vitaminPercentage: Double
+    var vitaminCPercentage: Double
     
     init() {
         waterPercentage = 0.0
         sugarPercentage = 0.0
-        vitaminPercentage = 0.0
+        vitaminCPercentage = 0.0
     }
 };
 
@@ -38,7 +38,7 @@ class HomeViewFunctions {
     func getNutrientToView(nutrientToView:
         [NutrientToView]) -> [NutrientToView]{
          let selectedFoodInfo = FoodInfo()
-        if nutrientToView.count != 38 {
+        if nutrientToView.count != 39 {
             NutrientTypeCoreDataHandler.clearnDelete()
             NutrientSelectionSetting().setSelectionDefault(selectedFoodInfo: selectedFoodInfo)
             let newNutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
@@ -80,7 +80,7 @@ class HomeViewFunctions {
         return displayNutrient
     }
     
-    func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String, carboGoal: Double, proteinGoal: Double, fatGoal: Double) -> (summary: Summary, ringsPercentage: percentageConsumedForRings, barsPercentage: percentageConsumedForBars) {
+    func loadSummaryAndPercentages(waterGoal: Double, energyGoal: Double, date: String, carboGoal: Double, proteinGoal: Double, vitaminCGoal: Double, fatGoal: Double, sugarGoal: Double) -> (summary: Summary, ringsPercentage: percentageConsumedForRings, barsPercentage: percentageConsumedForBars) {
         
         let summary = NutrientDiary().updateNutrientsSummaryOfTheDay(date: date)
         var ringsPercentage = percentageConsumedForRings()
@@ -96,6 +96,9 @@ class HomeViewFunctions {
         let totalProteinGoal = proteinPro * energyGoal / 4.0
         if summary.date != nil{
             barPercentage.waterPercentage = summary.water/waterGoal
+            barPercentage.vitaminCPercentage = summary.vitamin_c/(vitaminCGoal*0.001)
+            barPercentage.sugarPercentage = summary.sugar/sugarGoal
+            
             ringsPercentage.energyPercentage = summary.energy/energyGoal
             
             if debugHomeView {

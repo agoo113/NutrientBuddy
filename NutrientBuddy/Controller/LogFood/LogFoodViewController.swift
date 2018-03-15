@@ -35,7 +35,23 @@ class LogFoodViewController: UIViewController, MFMailComposeViewControllerDelega
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    @IBAction func logWaterButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Nutrient Buddy", message: "Do you want to add a glass of water?", preferredStyle: .alert)
+        let actionOkay = UIAlertAction(title: "OK", style: .default) { (_) in
+            let water = self.database.filter { $0.Food_Name == "Water,_distilled" }.first
+            NutrientDiary().saveDiaryToCoredata(savedFood: water!, amount: 240, typeOfMeal: "Water")
+            let secondAlert = UIAlertController(title: "Nutrient Buddy", message: "Added water", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .cancel, handler: nil)
+            secondAlert.addAction(action)
+            self.present(secondAlert, animated: true, completion: nil)
+        }
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(actionOkay)
+        alert.addAction(actionCancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
     //MARK: send emails
     @IBAction func shareUserData(_ sender: UIBarButtonItem) {
         let nutrientToView = NutrientTypeCoreDataHandler.fetchObject()

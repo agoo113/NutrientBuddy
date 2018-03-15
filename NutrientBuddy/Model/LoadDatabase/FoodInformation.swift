@@ -16,6 +16,7 @@ struct FoodInfo: Decodable {
         Protein_g = 0
         Fat_g = 0
         Carbohydrate_g = 0
+        Sugar_g = 0
         NSP_g = 0
         Energy_kcal = 0
         AOAC_fibre_g = 0
@@ -50,13 +51,14 @@ struct FoodInfo: Decodable {
         Vitamin_C_mg = 0
         Minerals_mg = 0
         Vitamin_mg = 0
-        NewTotal = 0
+        //NewTotal = 0
     }
     var Food_Name: String
     let Water_g: Double
     let Protein_g: Double
     let Fat_g: Double
     let Carbohydrate_g: Double
+    let Sugar_g: Double
     let NSP_g: Double
     let Energy_kcal: Double
     let AOAC_fibre_g: Double
@@ -91,7 +93,7 @@ struct FoodInfo: Decodable {
     let Vitamin_C_mg: Double
     let Minerals_mg: Double
     let Vitamin_mg: Double
-    let NewTotal: Double
+    //let NewTotal: Double
 };
 
 class foodInformation {

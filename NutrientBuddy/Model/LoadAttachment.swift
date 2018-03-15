@@ -29,9 +29,9 @@ class LoadAttachment {
         var content: String
         content = "1. What goal do you wish to accomplish with NutrientBuddy? \n\n\n"
         content.append("2. Is NutrientBuddy motivational enough to assist you in accomplishing the goal? \n\n\n")
-        content.append("3. Were you able to find most food you consumed with NutrientBuddy? \n\n\n")
-        content.append("4. How was your experience to find food? Is that easy enough to figure out where to go? \n\n\n")
-        content.append("5. Did you know that you can set your own nutrient goal? \n\n\n")
+        content.append("3. Were you able to find most food you consumed with NutrientBuddy? What kind of food can you not find? \n\n\n")
+        content.append("4. How do you like the nutrient visualisation in Home view? Is there any other nutrients you would like to visualise? \n\n\n")
+        content.append("5. How was your experience to find food? Is that easy enough to figure out where to go? And did you know that you can set your own nutrient goal? \n\n\n")
         content.append("6. Did you know that you can view more nutrients types? \n\n\n")
         content.append("7. Did you know that you can browse through our whole database? \n\n\n")
         content.append("8. What are the features of NutrientBuddy that you do not like? \n\n\n")
@@ -42,18 +42,3 @@ class LoadAttachment {
         return content
     }
 }
-/*
-extension NSMutableAttributedString {
-    @discardableResult func bold(_ text: String) -> NSMutableAttributedString {
-        let attributes: [NSAttributedStringKey: Any] = [.font: UIFont(name: "AvenirNext-Medium", size: 12)!]
-        let boldString = NSMutableAttributedString(string: text, attributes: attributes)
-        append(boldString)
-        return self
-    }
-    @discardableResult func normal(_ text: String) -> NSMutableAttributedString {
-        let normal = NSAttributedString(string: text)
-        append(normal)
-        return self
-    }
-}
- */

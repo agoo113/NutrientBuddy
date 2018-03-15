@@ -1,14 +1,14 @@
 //
-//  ImageSearchViewController.swift
+//  CalendarViewController.swift
 //  NutrientBuddy
 //
-//  Created by Gemma Jing on 26/02/2018.
+//  Created by Gemma Jing on 15/03/2018.
 //  Copyright © 2018 Gemma Jing. All rights reserved.
 //
 
 import UIKit
 
-class ImageSearchViewController: UIViewController {
+class CalendarViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

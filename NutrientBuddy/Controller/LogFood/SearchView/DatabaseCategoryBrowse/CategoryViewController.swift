@@ -1,35 +1,33 @@
 //
-//  CatagoryDetailsViewController.swift
+//  CategoryViewController.swift
 //  DemoSearch
 //
-//  Created by Gemma Jing on 22/11/2017.
+//  Created by Gemma Jing on 21/11/2017.
 //  Copyright © 2017 Gemma Jing. All rights reserved.
 //
 
 import UIKit
 
-class CategoryDetailsViewController: UIViewController, UITableViewDelegate, UISearchBarDelegate, UITableViewDataSource {
-    
-    var typeOfMeal: String = ""
+class CategoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        //self.navigationController?.hidesBarsOnSwipe = true
     }
     
-    //MARK: get database and filtered data
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: get database and filtered data
+    var typeOfMeal: String = ""
     var database: [FoodInfo] = []
-    var foodItems: [String] = [] // get from previous segue
+    var dict:[String:[String]] = [:]
+    var categories: [String] = []
     var filteredData: [String] = []
     var isSearching: Bool = false
     
@@ -48,14 +46,14 @@ class CategoryDetailsViewController: UIViewController, UITableViewDelegate, UISe
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = foodItems.filter({(text) -> Bool in
+        filteredData = categories.filter({(text) -> Bool in
             let temp: NSString = text as NSString
             let range = temp.range(of: searchText, options: .caseInsensitive)
             return range.location != NSNotFound
         })
         
         if searchText == "" {
-            filteredData = foodItems
+            filteredData = categories
         }
         
         self.tableView.reloadData()
@@ -69,42 +67,49 @@ class CategoryDetailsViewController: UIViewController, UITableViewDelegate, UISe
         if isSearching {
             return filteredData.count
         }
-        return foodItems.count
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FoodTableViewCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell")
         
         if isSearching {
-            let item = filteredData[indexPath.row]
-            cell?.textLabel?.text = String(item)
+            let item = filteredData[indexPath.row].split(separator: ",", maxSplits: 1, omittingEmptySubsequences: true)
+            cell?.textLabel?.text = String(item[0])
         } else {
-            let item = foodItems[indexPath.row]
-            cell?.textLabel?.text = String(item)
+            let item = categories[indexPath.row].split(separator: ",", maxSplits: 1, omittingEmptySubsequences: true)
+            cell?.textLabel?.text = String(item[0])
         }
         
         cell?.textLabel?.numberOfLines = 0
         return cell!
     }
     
-    //MARK: pass to the next segue -> food information view controller
+    //MARK: pass to the next view -> CatagoryDetailsViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showFoodInfo" {
+        if segue.identifier == "showCategoryDetails" {
             var selectedRowIndex = self.tableView.indexPathForSelectedRow
-            let foodInfoTableViewController: FoodInformationTableViewController = segue.destination as! FoodInformationTableViewController
+            let categoryDetailsViewController: CategoryDetailsViewController = segue.destination as! CategoryDetailsViewController
+
             var item: String = ""
-            
-            if isSearching{
-                item = filteredData[(selectedRowIndex?.row)!]
+            if filteredData.count > 0 {
+               item  = filteredData[(selectedRowIndex?.row)!]
+                //let st = database!.filter{$0.Food_Name == item}
                 
-            } else {
-                item = foodItems[(selectedRowIndex?.row)!]
+            }
+            else {
+               item = categories[(selectedRowIndex?.row)!]
             }
             
-            let strutArray = database.filter{$0.Food_Name == item.replacingOccurrences(of: " ", with: "_")}
-            foodInfoTableViewController.selectedFoodInfo = strutArray[0]
-            foodInfoTableViewController.typeOfMeal = self.typeOfMeal
+            guard let categoryDetials = dict[item]
+                else{
+                    print("GJ: something wrong with category string array")
+                    return
+                }
+            categoryDetailsViewController.foodItems = categoryDetials
+            categoryDetailsViewController.database = database
+            categoryDetailsViewController.typeOfMeal = typeOfMeal
         }
     }
-
+    
 }

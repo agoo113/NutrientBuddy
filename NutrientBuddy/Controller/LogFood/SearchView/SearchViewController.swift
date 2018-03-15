@@ -14,7 +14,8 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tableView: UITableView!
-
+    @IBOutlet weak var searchButton: UIButton!
+    
     //MARK: get database and filtered data
     var database: [FoodInfo] = []
     var filteredData: [String] = []
@@ -30,6 +31,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchButton.setTitle("\(#imageLiteral(resourceName: "searchView")) Search", for: .normal)
         //search bar
         searchBar.delegate = self
         searchBar.showsBookmarkButton = true
@@ -125,7 +127,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         super.didReceiveMemoryWarning()
     }
     
-    //MARK: searchBar
     //record button
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
@@ -154,12 +155,19 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         recognitionRequest?.endAudio()
     }
 
-    //search for food items
+    //MARK: searchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchForFoodItems()
         textView.text = "Start searching for \(searchFood)..."
         searchBar.endEditing(true)
     }
+    //search for food items
+    @IBAction func searchedButtonClicked(_ sender: UIButton) {
+        searchForFoodItems()
+        textView.text = "Start searching for \(searchFood)..."
+        searchBar.endEditing(true)
+    }
+    
     
     private func searchForFoodItems() {
         if !(searchBar.text?.isEmpty)!{

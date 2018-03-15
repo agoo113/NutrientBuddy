@@ -25,6 +25,7 @@ class NutrientDiary {
         let fat = savedFood.Fat_g * amount/100
         let protein = savedFood.Protein_g * amount/100
         let carbohydrate = savedFood.Carbohydrate_g * amount/100
+        let sugar = savedFood.Sugar_g * amount/100
         let nsp = savedFood.NSP_g  * amount/100
         let energy = savedFood.Energy_kcal * amount/100
         let aoac_fibre = savedFood.AOAC_fibre_g * amount/100
@@ -60,7 +61,7 @@ class NutrientDiary {
         let minerals_total = savedFood.Minerals_mg * amount/100000
         let vitamin_total = savedFood.Vitamin_mg * amount/100000
         
-        NutrientDiaryCoreDataHandler.saveObject(date: date, typeOfMeal: typeOfMeal, foodname: savedFood.Food_Name, amount: amount, water: water, fat: fat, protein: protein, carbohydrate: carbohydrate, nsp: nsp, energy: energy, aoac_fibre: aoac_fibre, sodium: sodium, potassium: potassium, calcium: calcium, magnesium: magnesium, phosphorus: phosphorus, iron: iron, copper: copper, zinc: zinc, chloride: chloride, manganese: manganese, selenium: selenium, iodine: iodine, retinol: retinol, carotene: carotene, retinol_equivalent: retinol_equivalent, vitamin_d: vitamin_d, vitamin_e: vitamin_e, vitamin_k1: vitamin_k1, thiamin: thiamin, riboflavin: riboflavin, niacin: niacin, tryptophan_p60: tryptophan_p60, niacin_equivalent: niacin_equivalent, vitamin_b6: vitamin_b6, vitamin_b12: vitamin_b12, folate: folate, pantothenate: pantothenate, biotin: biotin, vitamin_c: vitamin_c, mineral_total: minerals_total, vitamin_total: vitamin_total)
+        NutrientDiaryCoreDataHandler.saveObject(date: date, typeOfMeal: typeOfMeal, foodname: savedFood.Food_Name, amount: amount, water: water, fat: fat, protein: protein, carbohydrate: carbohydrate, sugar: sugar, nsp: nsp, energy: energy, aoac_fibre: aoac_fibre, sodium: sodium, potassium: potassium, calcium: calcium, magnesium: magnesium, phosphorus: phosphorus, iron: iron, copper: copper, zinc: zinc, chloride: chloride, manganese: manganese, selenium: selenium, iodine: iodine, retinol: retinol, carotene: carotene, retinol_equivalent: retinol_equivalent, vitamin_d: vitamin_d, vitamin_e: vitamin_e, vitamin_k1: vitamin_k1, thiamin: thiamin, riboflavin: riboflavin, niacin: niacin, tryptophan_p60: tryptophan_p60, niacin_equivalent: niacin_equivalent, vitamin_b6: vitamin_b6, vitamin_b12: vitamin_b12, folate: folate, pantothenate: pantothenate, biotin: biotin, vitamin_c: vitamin_c, mineral_total: minerals_total, vitamin_total: vitamin_total)
         
     }
     // MARK: save summary
@@ -84,6 +85,7 @@ class NutrientDiary {
             summary.biotin += each.biotin
             summary.calcium += each.calcium
             summary.carbohydrate += each.carbohydrate
+            summary.sugar += each.sugar
             summary.carotene += each.carotene
             summary.chloride += each.chloride
             summary.copper += each.copper
@@ -133,7 +135,7 @@ class NutrientDiary {
         return summary
     }
     private func initialiseSummary(date: String) -> Summary {
-        SummaryDiaryCoreDataHandler.saveInitialObject(date: date, typeOfMeal: "unknown", totalWeight: 0, water: 0, fat: 0, protein: 0, carbohydrate: 0, nsp: 0, energy: 0, aoac_fibre: 0, sodium: 0, potassium: 0, calcium: 0, magnesium: 0, phosphorus: 0, iron: 0, copper: 0, zinc: 0, chloride: 0, manganese: 0, selenium: 0, iodine: 0, retinol: 0, carotene: 0, retinol_equivalent: 0, vitamin_d: 0, vitamin_e: 0, vitamin_k1: 0, thiamin: 0, riboflavin: 0, niacin: 0, tryptophan_p60: 0, niacin_equivalent: 0, vitamin_b6: 0, vitamin_b12: 0, folate: 0, pantothenate: 0, biotin: 0, vitamin_c: 0, mineral_total: 0, vitamin_total: 0)
+        SummaryDiaryCoreDataHandler.saveInitialObject(date: date, typeOfMeal: "unknown", totalWeight: 0, water: 0, fat: 0, protein: 0, carbohydrate: 0, sugar: 0, nsp: 0, energy: 0, aoac_fibre: 0, sodium: 0, potassium: 0, calcium: 0, magnesium: 0, phosphorus: 0, iron: 0, copper: 0, zinc: 0, chloride: 0, manganese: 0, selenium: 0, iodine: 0, retinol: 0, carotene: 0, retinol_equivalent: 0, vitamin_d: 0, vitamin_e: 0, vitamin_k1: 0, thiamin: 0, riboflavin: 0, niacin: 0, tryptophan_p60: 0, niacin_equivalent: 0, vitamin_b6: 0, vitamin_b12: 0, folate: 0, pantothenate: 0, biotin: 0, vitamin_c: 0, mineral_total: 0, vitamin_total: 0)
             let summary = SummaryDiaryCoreDataHandler.fetchObject(date: date)
         return summary.last!
     }

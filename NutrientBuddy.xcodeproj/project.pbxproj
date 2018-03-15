@@ -11,24 +11,23 @@
 		AC03D4752050264900C9AA16 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4742050264800C9AA16 /* LaunchScreenViewController.swift */; };
 		AC03D4772050265100C9AA16 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4762050265100C9AA16 /* Swift+Gif.swift */; };
 		AC03D47B20502A5300C9AA16 /* LaunchImage.gif in Resources */ = {isa = PBXBuildFile; fileRef = AC03D47A20502A5300C9AA16 /* LaunchImage.gif */; };
-		AC03D4C42057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4C32057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift */; };
 		AC03D4C82057F74300C9AA16 /* HomeProgressBarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4C72057F74300C9AA16 /* HomeProgressBarTableViewCell.swift */; };
+		AC03D4E82059CEDA00C9AA16 /* datasetJSON2.json in Resources */ = {isa = PBXBuildFile; fileRef = AC03D4E72059CEDA00C9AA16 /* datasetJSON2.json */; };
 		AC321F4F204084FD0070D289 /* MKGradientGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */; };
 		AC321F51204085100070D289 /* MKRingProgressGroupButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */; };
 		AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F53204085340070D289 /* MKRingProgressGroupView.swift */; };
 		AC321F56204085340070D289 /* MKRingProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F54204085340070D289 /* MKRingProgressView.swift */; };
 		AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC321F812041B5B00070D289 /* LogFoodViewController.swift */; };
 		AC39071920443D0D00EC644B /* NutrientTypeCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D97202880C500076E5E /* NutrientTypeCoreDataHandler.swift */; };
-		AC39434D2042208500EE31FA /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC39434C2042208500EE31FA /* HomeTableViewCell.swift */; };
+		AC39434D2042208500EE31FA /* NutrientSummayDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC39434C2042208500EE31FA /* NutrientSummayDetailTableViewCell.swift */; };
 		AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */; };
 		AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB220441BD700C26309 /* SettingViewController.swift */; };
 		AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */; };
 		AC7E72512045B04B00D0393F /* HomeViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */; };
+		ACA899B7205AA63000C6EC63 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA899B6205AA63000C6EC63 /* CalendarViewController.swift */; };
 		ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E212046F81D0033FC30 /* Debug.swift */; };
 		ACAD7E2420470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */; };
 		ACAD7E29204722950033FC30 /* GoalSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */; };
-		ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */; };
-		ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */; };
 		ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDD5D662028779F00076E5E /* AppDelegate.swift */; };
 		ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D702028779F00076E5E /* Assets.xcassets */; };
 		ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */; };
@@ -55,24 +54,23 @@
 		AC03D463204D972B00C9AA16 /* LoadAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAttachment.swift; sourceTree = "<group>"; };
 		AC03D4742050264800C9AA16 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchScreenViewController.swift; path = ../../../../../LaunchAnimation/LaunchAnimation/LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		AC03D4762050265100C9AA16 /* Swift+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Swift+Gif.swift"; path = "../../../../../LaunchAnimation/LaunchAnimation/Swift+Gif.swift"; sourceTree = "<group>"; };
-		AC03D47A20502A5300C9AA16 /* LaunchImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = LaunchImage.gif; path = ../../../Documents/LaunchImage.gif; sourceTree = "<group>"; };
-		AC03D4C32057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientSummaryDetailViewController.swift; sourceTree = "<group>"; };
+		AC03D47A20502A5300C9AA16 /* LaunchImage.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LaunchImage.gif; sourceTree = "<group>"; };
 		AC03D4C72057F74300C9AA16 /* HomeProgressBarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeProgressBarTableViewCell.swift; sourceTree = "<group>"; };
+		AC03D4E72059CEDA00C9AA16 /* datasetJSON2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = datasetJSON2.json; sourceTree = "<group>"; };
 		AC321F4E204084FD0070D289 /* MKGradientGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKGradientGenerator.swift; sourceTree = "<group>"; };
 		AC321F50204085100070D289 /* MKRingProgressGroupButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupButton.swift; sourceTree = "<group>"; };
 		AC321F53204085340070D289 /* MKRingProgressGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressGroupView.swift; sourceTree = "<group>"; };
 		AC321F54204085340070D289 /* MKRingProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKRingProgressView.swift; sourceTree = "<group>"; };
 		AC321F812041B5B00070D289 /* LogFoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFoodViewController.swift; sourceTree = "<group>"; };
-		AC39434C2042208500EE31FA /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
+		AC39434C2042208500EE31FA /* NutrientSummayDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientSummayDetailTableViewCell.swift; sourceTree = "<group>"; };
 		AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDiaryCoreDataHandler.swift; sourceTree = "<group>"; };
 		AC5C9BB220441BD700C26309 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 		AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFunctions.swift; sourceTree = "<group>"; };
+		ACA899B6205AA63000C6EC63 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		ACAD7E212046F81D0033FC30 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingCoreDataHandler.swift; sourceTree = "<group>"; };
 		ACAD7E28204722950033FC30 /* GoalSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalSettingTableViewCell.swift; sourceTree = "<group>"; };
-		ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWaterBarView.swift; sourceTree = "<group>"; };
-		ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWaterBarView.xib; sourceTree = "<group>"; };
 		ACDD5D632028779F00076E5E /* NutrientBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutrientBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACDD5D662028779F00076E5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACDD5D702028779F00076E5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -141,9 +139,8 @@
 			children = (
 				ACDD5D8E20287ED700076E5E /* HomeViewController.swift */,
 				AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */,
-				AC39434C2042208500EE31FA /* HomeTableViewCell.swift */,
-				AC03D4C32057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift */,
 				AC03D4C72057F74300C9AA16 /* HomeProgressBarTableViewCell.swift */,
+				AC39434C2042208500EE31FA /* NutrientSummayDetailTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -151,8 +148,8 @@
 		AC39434F2042282800EE31FA /* LogFood */ = {
 			isa = PBXGroup;
 			children = (
+				ACDD5DB2202CABC300076E5E /* SearchView */,
 				AC321F812041B5B00070D289 /* LogFoodViewController.swift */,
-				AC5C9BB120441BA000C26309 /* Setting */,
 			);
 			path = LogFood;
 			sourceTree = "<group>";
@@ -175,21 +172,20 @@
 			path = ImageSearch;
 			sourceTree = "<group>";
 		};
+		ACA899B5205A7E6700C6EC63 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				ACA899B6205AA63000C6EC63 /* CalendarViewController.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		ACAD7E2520470A8B0033FC30 /* UserInformation */ = {
 			isa = PBXGroup;
 			children = (
 				ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */,
 			);
 			path = UserInformation;
-			sourceTree = "<group>";
-		};
-		ACC078E72044B56500A686EE /* HomeWaterBar */ = {
-			isa = PBXGroup;
-			children = (
-				ACC078E32044B4A700A686EE /* HomeWaterBarView.swift */,
-				ACC078E52044B4F700A686EE /* HomeWaterBarView.xib */,
-			);
-			path = HomeWaterBar;
 			sourceTree = "<group>";
 		};
 		ACDD5D5A2028779F00076E5E = {
@@ -218,6 +214,7 @@
 				ACDD5D9420287FCD00076E5E /* Model */,
 				ACDD5D662028779F00076E5E /* AppDelegate.swift */,
 				ACDD5DAB202C9E4800076E5E /* datasetJSON.json */,
+				AC03D4E72059CEDA00C9AA16 /* datasetJSON2.json */,
 				ACDD5D702028779F00076E5E /* Assets.xcassets */,
 				AC03D47A20502A5300C9AA16 /* LaunchImage.gif */,
 				ACDD5D752028779F00076E5E /* Info.plist */,
@@ -230,7 +227,6 @@
 			children = (
 				ACDD5D722028779F00076E5E /* LaunchScreen.storyboard */,
 				ACDD5DA92028819D00076E5E /* Main.storyboard */,
-				ACC078E72044B56500A686EE /* HomeWaterBar */,
 				AC321F57204085470070D289 /* MKRingProgressView */,
 			);
 			path = View;
@@ -240,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDD5D9020287EE700076E5E /* MainControllers */,
-				ACDD5DB2202CABC300076E5E /* SearchView */,
+				AC39434F2042282800EE31FA /* LogFood */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -268,7 +264,8 @@
 			children = (
 				AC03D469204EEB5000C9AA16 /* LaunchScreen */,
 				AC39434E2042281A00EE31FA /* Home */,
-				AC39434F2042282800EE31FA /* LogFood */,
+				ACA899B5205A7E6700C6EC63 /* Calendar */,
+				AC5C9BB120441BA000C26309 /* Setting */,
 			);
 			path = MainControllers;
 			sourceTree = "<group>";
@@ -394,11 +391,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACC078E62044B4F700A686EE /* HomeWaterBarView.xib in Resources */,
 				ACDD5DAC202C9E4800076E5E /* datasetJSON.json in Resources */,
 				ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */,
 				ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */,
 				ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */,
+				AC03D4E82059CEDA00C9AA16 /* datasetJSON2.json in Resources */,
 				AC03D47B20502A5300C9AA16 /* LaunchImage.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -415,6 +412,7 @@
 				ACDD5DA1202880DE00076E5E /* NutrientDiaryCoreDataHandler.swift in Sources */,
 				ACDD5D8920287E2C00076E5E /* CategoryDetailsViewController.swift in Sources */,
 				AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */,
+				ACA899B7205AA63000C6EC63 /* CalendarViewController.swift in Sources */,
 				AC03D464204D972B00C9AA16 /* LoadAttachment.swift in Sources */,
 				ACDD5D8A20287E2C00076E5E /* CategoryViewController.swift in Sources */,
 				ACDD5DAF202CA2E300076E5E /* NutrientBuddy.xcdatamodeld in Sources */,
@@ -423,12 +421,11 @@
 				AC321F56204085340070D289 /* MKRingProgressView.swift in Sources */,
 				ACDD5D8420287E2300076E5E /* FoodInformationTableViewCell.swift in Sources */,
 				AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */,
-				AC39434D2042208500EE31FA /* HomeTableViewCell.swift in Sources */,
+				AC39434D2042208500EE31FA /* NutrientSummayDetailTableViewCell.swift in Sources */,
 				AC03D4772050265100C9AA16 /* Swift+Gif.swift in Sources */,
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
 				ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */,
 				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
-				AC03D4C42057E8B900C9AA16 /* NutrientSummaryDetailViewController.swift in Sources */,
 				AC03D4C82057F74300C9AA16 /* HomeProgressBarTableViewCell.swift in Sources */,
 				ACDD5D8F20287ED700076E5E /* HomeViewController.swift in Sources */,
 				AC321F822041B5B00070D289 /* LogFoodViewController.swift in Sources */,
@@ -437,7 +434,6 @@
 				ACDD5D9E202880D200076E5E /* foodData.swift in Sources */,
 				ACDD5DA82028815E00076E5E /* BagOfWords.swift in Sources */,
 				ACDD5E022039CE9400076E5E /* SearchViewController.swift in Sources */,
-				ACC078E42044B4A700A686EE /* HomeWaterBarView.swift in Sources */,
 				ACDD5D9D202880D200076E5E /* FoodInformation.swift in Sources */,
 				ACDD5DA2202880DE00076E5E /* NutrientDiary.swift in Sources */,
 				ACDD5D8520287E2300076E5E /* NutrientTypeSelectionViewController.swift in Sources */,

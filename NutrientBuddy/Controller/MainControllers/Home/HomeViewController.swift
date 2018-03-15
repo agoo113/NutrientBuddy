@@ -24,6 +24,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var carboLabel: UILabel!
     @IBOutlet weak var labelStack: UIStackView!
+    @IBOutlet weak var nutrientNameLabelStack: UIStackView!
     
     var buttons: [MKRingProgressGroupButton] = []
     var selectedIndex = 0
@@ -40,40 +41,43 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @objc func tappedOnEnergy(_ sender: UITapGestureRecognizer){
         if tappedRings {
             labelStack.isHidden = true
+            nutrientNameLabelStack.isHidden = true
             tappedRings = false
         }
         else{
             labelStack.isHidden = false
-            //waterLabel.isHidden = false
+            nutrientNameLabelStack.isHidden = false
             tappedRings = true
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        //ring view
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnEnergy))
         self.progressGroup.addGestureRecognizer(gesture)
         self.progressGroup.bringSubview(toFront: labelStack)
+        self.progressGroup.bringSubview(toFront: nutrientNameLabelStack)
         
         if debugHomeView {
             print("GJ: today's date is \(date), from view did appear - HomeViewController")
         }
         //load personal goal
         if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, waterGoal: 1200)
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 1200)
         }
         personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         let goal = personalGoals[0]
     
         //load summary
-        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, fatGoal: goal.fat_goal)
+        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, vitaminCGoal: goal.vitamin_c_goal, fatGoal: goal.fat_goal, sugarGoal: goal.sugar_goal)
         let summary = summaryAndPercentages.summary
         ringPercentages = summaryAndPercentages.ringsPercentage
         barPercentages = summaryAndPercentages.barsPercentage
         
-        energyLabel.text = "Energy: " + String(format: "%.2f", ringPercentages.energyPercentage*100) + "%"
-        fatLabel.text = "Fat: " + String(format: "%.2f", ringPercentages.fatPercentage*100) + "%"
-        proteinLabel.text = "Protein: " + String(format: "%.2f", ringPercentages.proteinPercentage*100) + "%"
-        carboLabel.text = "Carbo: " + String(format: "%.2f", ringPercentages.carboPercentage*100) + "%"
+        energyLabel.text = String(format: "%.2f", ringPercentages.energyPercentage*100) + "%"
+        fatLabel.text = String(format: "%.2f", ringPercentages.fatPercentage*100) + "%"
+        proteinLabel.text = String(format: "%.2f", ringPercentages.proteinPercentage*100) + "%"
+        carboLabel.text = String(format: "%.2f", ringPercentages.carboPercentage*100) + "%"
         
         
         //display other nutrient information
@@ -104,16 +108,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         tableView.reloadData()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-        energyLabel.isHidden = true
-        carboLabel.isHidden = true
-        fatLabel.isHidden = true
-        proteinLabel.isHidden = true*/
+        
         labelStack.isHidden = true
+        nutrientNameLabelStack.isHidden = true
+        
+        let goal = personalGoals[0]
+        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, vitaminCGoal: goal.vitamin_c_goal, fatGoal: goal.fat_goal, sugarGoal: goal.sugar_goal)
+        let summary = summaryAndPercentages.summary
+        display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
+        
     }
 
     //MARK: ring graphs
@@ -194,28 +202,64 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     //MARK: table view
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! HomeProgressBarTableViewCell
-        
-        //cell.percentage = barPercentages.waterPercentage
-        cell.drawProgressLayer(percentage: barPercentages.waterPercentage)
-        cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
-        cell.nutrientView.image = UIImage(named: "waterBarIcon")
-        cell.nutrientLabel.text = String(format: "%.2f", barPercentages.waterPercentage * 100) + "%"
-        return cell
-    }
-    
-    //MARK: prepsare for the
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "loadNutrientSummary" {
-            let nutrientSummaryDetailViewController: NutrientSummaryDetailViewController = segue.destination as! NutrientSummaryDetailViewController
-            nutrientSummaryDetailViewController.display_nutrient = display_nutrient
+        if section == 0 {
+            return 3
+        }
+        else {
+            return display_nutrient.count
         }
     }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! HomeProgressBarTableViewCell
+            if indexPath.row == 0 {
+                let fillColor = UIColor(red: 0, green: 215, blue: 234, alpha: 1).cgColor
+                let barColor = UIColor.blue.cgColor
+                cell.drawProgressLayer(percentage: barPercentages.waterPercentage, fillColor: fillColor, barColor: barColor)
+                cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
+                cell.nutrientView.image = UIImage(named: "waterBarIcon")
+                cell.nutrientLabel.text = String(format: "%.2f", barPercentages.waterPercentage * 100) + "%"
+            }
+            if indexPath.row == 1 {
+                let fillColor = UIColor(red: 247, green: 214, blue: 0, alpha: 1).cgColor
+                let barColor = UIColor.orange.cgColor
+                cell.drawProgressLayer(percentage: barPercentages.vitaminCPercentage, fillColor: fillColor, barColor: barColor)
+                cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
+                cell.nutrientView.image = UIImage(named: "vitaminCView")
+                cell.nutrientLabel.text = String(format: "%.2f", barPercentages.vitaminCPercentage * 100) + "%"
+            }
+            if indexPath.row == 2 {
+                let fillColor = UIColor.red.cgColor
+                let barColor = UIColor.magenta.cgColor
+                cell.drawProgressLayer(percentage: barPercentages.sugarPercentage, fillColor: fillColor, barColor: barColor)
+                cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
+                cell.nutrientView.image = UIImage(named: "sugarView")
+                cell.nutrientLabel.text = String(format: "%.2f", barPercentages.sugarPercentage * 100) + "%"
+            }
+             return cell
+        }
+        
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientsSummaryDetails", for: indexPath) as! NutrientSummayDetailTableViewCell
+            
+            let nutrientToDisplay = display_nutrient[indexPath.row]
+            cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
+            var amountString = String(format: "%.3f", nutrientToDisplay.amount)
+            amountString.append(nutrientToDisplay.unit)
+            cell.nutrientAmountLabel.text = amountString
+            return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Nutrient Diary Details"
+        }
+        return "Other Nurition View"
+    }
+    
 }
 

@@ -17,7 +17,7 @@ class SummaryDiaryCoreDataHandler: NSObject {
     }
     
     //MARK: save initial object
-    class func saveInitialObject(date:String, typeOfMeal: String, totalWeight: Double, water:Double, fat:Double, protein:Double, carbohydrate:Double, nsp:Double, energy:Double, aoac_fibre:Double, sodium:Double, potassium:Double, calcium:Double, magnesium:Double, phosphorus:Double, iron:Double, copper:Double, zinc:Double, chloride:Double, manganese:Double, selenium:Double, iodine:Double, retinol:Double, carotene:Double, retinol_equivalent:Double, vitamin_d:Double, vitamin_e:Double, vitamin_k1:Double, thiamin:Double, riboflavin:Double, niacin:Double, tryptophan_p60:Double, niacin_equivalent:Double, vitamin_b6:Double, vitamin_b12:Double, folate:Double, pantothenate:Double, biotin:Double, vitamin_c:Double, mineral_total:Double, vitamin_total:Double){
+    class func saveInitialObject(date:String, typeOfMeal: String, totalWeight: Double, water:Double, fat:Double, protein:Double, carbohydrate:Double, sugar: Double, nsp:Double, energy:Double, aoac_fibre:Double, sodium:Double, potassium:Double, calcium:Double, magnesium:Double, phosphorus:Double, iron:Double, copper:Double, zinc:Double, chloride:Double, manganese:Double, selenium:Double, iodine:Double, retinol:Double, carotene:Double, retinol_equivalent:Double, vitamin_d:Double, vitamin_e:Double, vitamin_k1:Double, thiamin:Double, riboflavin:Double, niacin:Double, tryptophan_p60:Double, niacin_equivalent:Double, vitamin_b6:Double, vitamin_b12:Double, folate:Double, pantothenate:Double, biotin:Double, vitamin_c:Double, mineral_total:Double, vitamin_total:Double){
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Summary", in: context)
         let manageObject = NSManagedObject(entity: entity!, insertInto: context)
@@ -29,6 +29,7 @@ class SummaryDiaryCoreDataHandler: NSObject {
         manageObject.setValue(fat, forKey: "fat")
         manageObject.setValue(protein, forKey: "protein")
         manageObject.setValue(carbohydrate, forKey: "carbohydrate")
+        manageObject.setValue(sugar, forKey: "sugar")
         manageObject.setValue(nsp, forKey: "nsp")
         manageObject.setValue(energy, forKey: "energy")
         manageObject.setValue(aoac_fibre, forKey: "aoac_fibre")
@@ -84,6 +85,7 @@ class SummaryDiaryCoreDataHandler: NSObject {
         manageObject.setValue(summary.fat, forKey: "fat")
         manageObject.setValue(summary.protein, forKey: "protein")
         manageObject.setValue(summary.carbohydrate, forKey: "carbohydrate")
+        manageObject.setValue(summary.sugar, forKey: "sugar")
         manageObject.setValue(summary.nsp, forKey: "nsp")
         manageObject.setValue(summary.energy, forKey: "energy")
         manageObject.setValue(summary.aoac_fibre, forKey: "aoac_fibre")

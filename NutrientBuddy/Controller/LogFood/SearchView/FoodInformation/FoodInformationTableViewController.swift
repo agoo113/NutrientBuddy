@@ -43,16 +43,21 @@ class FoodInformationTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return (display_nutrient.count + 1)
+        if section == 0 {
+            return 1
+        }
+        else {
+            return display_nutrient.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInfo", for: indexPath) as! FoodInformationTableViewCell
             let nameArray = getFoodNameAndImage()
             cell.foodNameLabel.text = nameArray[0]
@@ -71,19 +76,24 @@ class FoodInformationTableViewController: UITableViewController {
             }
             
             cell.amountSlider.setValue(Float(amount), animated: true)
-            
             return cell
         }
         
         // Nutrients table cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientInfo", for: indexPath) as! FoodInformationSecondTableViewCell
-        let nutrientToView = display_nutrient[indexPath.row - 1]
+        let nutrientToView = display_nutrient[indexPath.row]
         cell.nutrientTypeLabel.text = nutrientToView.nutrientType
         var amountString = String(format: "%.3f", nutrientToView.amount)
         amountString.append(nutrientToView.unit)
         cell.amountLabel.text = amountString
         cell.contentView.setNeedsLayout()
         return cell
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Nutrient per 100 grams"
+        }
+        return "Food item"
     }
     
     //MARK: prepare for the first type of cell
@@ -100,7 +110,7 @@ class FoodInformationTableViewController: UITableViewController {
     
     // open the nutrientToView selection view controller
     @objc func addFoodButtonItemTapped(_ sender: UIBarButtonItem!){
-        let alert = UIAlertController(title: "Nutrient Buddy", message: "Do you want to save this item?", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Nutrient Buddy", message: "Do you want to save this item?", preferredStyle: .alert)
         let actionOkay = UIAlertAction(title: "OK", style: .default) { (_) in
             let indexPath = IndexPath(row: 0, section: 0)
             let cell = self.tableView.cellForRow(at: indexPath) as! FoodInformationTableViewCell
@@ -122,11 +132,7 @@ class FoodInformationTableViewController: UITableViewController {
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }
-        let actionCancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
-            if debugLogMeal {
-                print("GJ: canceled adding food item")
-            }
-        }
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(actionOkay)
         alert.addAction(actionCancel)
         present(alert, animated: true, completion: nil)

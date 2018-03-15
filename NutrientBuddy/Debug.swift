@@ -13,4 +13,4 @@ let debugLogMeal = false
 let debugSearch = false // debug search view controller
 let debugViewLoading = false // prints out the time of loading the view
 let debugPersonalSetting = false //print out the personal settings
-let debugNutrientSetting = true // debug search view controller
+let debugNutrientSetting = false // debug search view controller

@@ -18,11 +18,13 @@ class PersonalSettingCoreDataHandler: NSObject {
     }
     
     //save object
-    class func saveObject(carboGoal: Double, energyGoal: Double, fatGoal: Double, proteinGoal: Double, waterGoal: Double) {
+    class func saveObject(carboGoal: Double, energyGoal: Double, fatGoal: Double, proteinGoal: Double, vitaminCGoal: Double, sugarGoal:Double, waterGoal: Double) {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Goals", in: context)
         let manageObject = NSManagedObject(entity: entity!, insertInto: context)
         
+        manageObject.setValue(sugarGoal, forKey: "sugar_goal")
+        manageObject.setValue(vitaminCGoal, forKey: "vitamin_c_goal")
         manageObject.setValue(carboGoal, forKey: "carbo_goal")
         manageObject.setValue(energyGoal, forKey: "energy_goal")
         manageObject.setValue(fatGoal, forKey: "fat_goal")

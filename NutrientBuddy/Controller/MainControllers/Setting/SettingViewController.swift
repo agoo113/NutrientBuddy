@@ -29,6 +29,8 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         let fat: Double
         let carbo: Double
         let protein: Double
+        let vitaminC: Double
+        let sugar: Double
         
         if cell.water != 0 {
            water  = cell.water
@@ -55,9 +57,18 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         } else {
             carbo = (goal?.carbo_goal)!
         }
-        
+        if cell.vitaminC != 0 {
+            vitaminC = cell.vitaminC
+        } else {
+            vitaminC = (goal?.vitamin_c_goal)!
+        }
+        if cell.sugar != 0 {
+            sugar = cell.sugar
+        } else {
+            sugar = (goal?.sugar_goal)!
+        }
         PersonalSettingCoreDataHandler.cleanDelete()
-        PersonalSettingCoreDataHandler.saveObject(carboGoal: carbo, energyGoal: energy, fatGoal: fat, proteinGoal: protein, waterGoal: water)
+        PersonalSettingCoreDataHandler.saveObject(carboGoal: carbo, energyGoal: energy, fatGoal: fat, proteinGoal: protein, vitaminCGoal: vitaminC, sugarGoal: sugar, waterGoal: water)
         
         if debugPersonalSetting {
             let goals = PersonalSettingCoreDataHandler.fetchObject()
@@ -89,7 +100,9 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         cell.carboGoalTextField.placeholder = String(format: "%.0f", (goal?.carbo_goal)!)
         cell.fatGoalTextField.placeholder = String(format: "%.0f", (goal?.fat_goal)!)
         cell.proteinGoalTextField.placeholder = String(format: "%.0f", (goal?.protein_goal)!)
-
+        cell.vitaminCGoalTextField.placeholder = String(format: "%.0f", (goal?.vitamin_c_goal)!)
+        cell.sugarLimitTextField.placeholder = String(format: "%.0f", (goal?.sugar_goal)!)
+        
         cell.selectionStyle = UITableViewCellSelectionStyle.none
         return cell
     }

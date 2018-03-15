@@ -49,7 +49,7 @@ class foodData{
     // MARK: load json text file in an array of struct -- database
     // Singulize all the food item names
     func loadFoodDatabase() -> [FoodInfo]?{
-        let path = Bundle.main.path(forResource: "datasetJSON", ofType: "json")
+        let path = Bundle.main.path(forResource: "datasetJSON2", ofType: "json")
         var contents: String?
         try! contents = String(contentsOfFile: path!)
         let jsonString = formatForJson(contents: contents!)

@@ -86,6 +86,9 @@ class CategoryDetailsViewController: UIViewController, UITableViewDelegate, UISe
         cell?.textLabel?.numberOfLines = 0
         return cell!
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     //MARK: pass to the next segue -> food information view controller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

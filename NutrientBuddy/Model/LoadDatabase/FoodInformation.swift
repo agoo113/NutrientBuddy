@@ -111,16 +111,3 @@ class foodInformation {
         self.unit = unit
     }
 }
-
-
-
-//MARK: captilize the first letter
-//(not used yet 26/12/17)
-extension String{
-    func captilizeFirstLetter() -> String{
-        return prefix(1).uppercased() + dropFirst()
-    }
-    mutating func captilizeFirstLetter(){
-        self = self.captilizeFirstLetter()
-    }
-}

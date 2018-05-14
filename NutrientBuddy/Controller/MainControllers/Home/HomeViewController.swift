@@ -63,7 +63,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         //load personal goal
         if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 1200)
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 8700, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 8)
         }
         personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         let goal = personalGoals[0]
@@ -74,10 +74,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         ringPercentages = summaryAndPercentages.ringsPercentage
         barPercentages = summaryAndPercentages.barsPercentage
         
-        energyLabel.text = String(format: "%.2f", ringPercentages.energyPercentage*100) + "%"
-        fatLabel.text = String(format: "%.2f", ringPercentages.fatPercentage*100) + "%"
-        proteinLabel.text = String(format: "%.2f", ringPercentages.proteinPercentage*100) + "%"
-        carboLabel.text = String(format: "%.2f", ringPercentages.carboPercentage*100) + "%"
+        energyLabel.text = String(format: "%.0f", ringPercentages.energyPercentage*100) + "%"
+        fatLabel.text = String(format: "%.0f", ringPercentages.fatPercentage*100) + "%"
+        proteinLabel.text = String(format: "%.0f", ringPercentages.proteinPercentage*100) + "%"
+        carboLabel.text = String(format: "%.0f", ringPercentages.carboPercentage*100) + "%"
         
         
         //display other nutrient information
@@ -114,9 +114,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelStack.isHidden = true
-        nutrientNameLabelStack.isHidden = true
-        
+        //load personal goal
+        if personalGoals.count == 0 {
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 8)
+        }
+        personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         let goal = personalGoals[0]
         let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, vitaminCGoal: goal.vitamin_c_goal, fatGoal: goal.fat_goal, sugarGoal: goal.sugar_goal)
         let summary = summaryAndPercentages.summary
@@ -193,9 +195,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func getSummaryPrecentageForRings(_ sender: AnyObject? = nil) {
         for button in buttons {
             button.contentView.ring1.progress = ringPercentages.energyPercentage
-            button.contentView.ring2.progress = ringPercentages.fatPercentage
+            button.contentView.ring2.progress = ringPercentages.carboPercentage
             button.contentView.ring3.progress = ringPercentages.proteinPercentage
-            button.contentView.ring4.progress = ringPercentages.carboPercentage
+            button.contentView.ring4.progress = ringPercentages.fatPercentage
         }
         updateMainGroupProgress()
     }
@@ -217,28 +219,30 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! HomeProgressBarTableViewCell
             if indexPath.row == 0 {
-                let fillColor = UIColor(red: 0, green: 215, blue: 234, alpha: 1).cgColor
-                let barColor = UIColor.blue.cgColor
-                cell.drawProgressLayer(percentage: barPercentages.waterPercentage, fillColor: fillColor, barColor: barColor)
+                let barColor = UIColor(hue: 0.5417, saturation: 0.37, brightness: 0.98, alpha: 1.0).cgColor
+                let fillColor = UIColor(hue: 0.5417, saturation: 1, brightness: 0.98, alpha: 1.0).cgColor
+                let persentage = barPercentages.waterGlassesConsumed/barPercentages.waterGlassesGoal
+                cell.drawProgressLayer(percentage: persentage, fillColor: fillColor, barColor: barColor)
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "waterBarIcon")
-                cell.nutrientLabel.text = String(format: "%.2f", barPercentages.waterPercentage * 100) + "%"
+                
+                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.waterGlassesConsumed) + "/" + String(format: "%.0f",barPercentages.waterGlassesGoal) + " Glass(es)"
             }
             if indexPath.row == 1 {
-                let fillColor = UIColor(red: 247, green: 214, blue: 0, alpha: 1).cgColor
-                let barColor = UIColor.orange.cgColor
+                let barColor = UIColor(hue: 0.1306, saturation: 0.36, brightness: 0.99, alpha: 1.0).cgColor
+                let fillColor = UIColor(hue: 0.1306, saturation: 1, brightness: 0.99, alpha: 1.0).cgColor
                 cell.drawProgressLayer(percentage: barPercentages.vitaminCPercentage, fillColor: fillColor, barColor: barColor)
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "vitaminCView")
-                cell.nutrientLabel.text = String(format: "%.2f", barPercentages.vitaminCPercentage * 100) + "%"
+                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.vitaminCPercentage * 100) + "%"
             }
             if indexPath.row == 2 {
                 let fillColor = UIColor.red.cgColor
-                let barColor = UIColor.magenta.cgColor
+                let barColor = UIColor(hue: 0.05, saturation: 0.47, brightness: 0.95, alpha: 1.0).cgColor
                 cell.drawProgressLayer(percentage: barPercentages.sugarPercentage, fillColor: fillColor, barColor: barColor)
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "sugarView")
-                cell.nutrientLabel.text = String(format: "%.2f", barPercentages.sugarPercentage * 100) + "%"
+                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.sugarPercentage * 100) + "%"
             }
              return cell
         }

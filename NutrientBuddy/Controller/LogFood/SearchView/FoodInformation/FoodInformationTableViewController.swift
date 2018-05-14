@@ -25,6 +25,12 @@ class FoodInformationTableViewController: UITableViewController {
         
         //MARK: add default if there is nothing in the nutrient selection core data
         nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
+        if nutrientToView.count != 39 {
+            NutrientTypeCoreDataHandler.clearnDelete()
+            NutrientSelectionSetting().setSelectionDefault(selectedFoodInfo: selectedFoodInfo)
+        }
+        nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
+        
         loadFoodNutrition(nutrientToView: nutrientToView)
         
         print("GJ: \(typeOfMeal) -- TYPE OF MEAL")
@@ -133,8 +139,8 @@ class FoodInformationTableViewController: UITableViewController {
             }
         }
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(actionOkay)
         alert.addAction(actionCancel)
+        alert.addAction(actionOkay)
         present(alert, animated: true, completion: nil)
         
     }

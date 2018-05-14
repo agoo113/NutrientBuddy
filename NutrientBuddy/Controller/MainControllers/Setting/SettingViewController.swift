@@ -24,6 +24,7 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         
         let index = IndexPath(row: 0, section: 0)
         let cell = tableView.cellForRow(at: index) as! GoalSettingTableViewCell
+        
         let water: Double
         let energy: Double
         let fat: Double

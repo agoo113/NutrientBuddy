@@ -26,13 +26,12 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
     var vitaminC: Double = 0.0
     var sugar: Double = 0.0
     
-    var goalAltered: Bool = true
+    var goalAltered: Bool = false
     
     let goals = PersonalSettingCoreDataHandler.fetchObject()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         waterGoalTextField.delegate = self
         energyGoalTextField.delegate = self
         carboGoalTextField.delegate = self
@@ -41,9 +40,12 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
         vitaminCGoalTextField.delegate = self
         sugarLimitTextField.delegate = self
     }
-    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        goalAltered = true
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if !(textField.text?.isEmpty)! {
+            goalAltered = true
             switch textField {
             case self.waterGoalTextField:
                 self.water = Double(textField.text!)!
@@ -66,6 +68,7 @@ class GoalSettingTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        goalAltered = true
         switch textField {
         case self.waterGoalTextField:
             self.water = Double(textField.text!)!

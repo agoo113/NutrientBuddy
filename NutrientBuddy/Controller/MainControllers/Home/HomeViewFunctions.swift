@@ -23,12 +23,14 @@ struct percentageConsumedForRings {
 };
 
 struct percentageConsumedForBars{
-    var waterPercentage: Double
+    var waterGlassesConsumed: Double
+    var waterGlassesGoal: Double
     var sugarPercentage: Double
     var vitaminCPercentage: Double
     
     init() {
-        waterPercentage = 0.0
+        waterGlassesConsumed = 0.0
+        waterGlassesGoal = 0.0
         sugarPercentage = 0.0
         vitaminCPercentage = 0.0
     }
@@ -95,7 +97,8 @@ class HomeViewFunctions {
         let totalFatGoal = fatPro * energyGoal / 9.0
         let totalProteinGoal = proteinPro * energyGoal / 4.0
         if summary.date != nil{
-            barPercentage.waterPercentage = summary.water/waterGoal
+            barPercentage.waterGlassesConsumed = summary.water/240
+            barPercentage.waterGlassesGoal = waterGoal
             barPercentage.vitaminCPercentage = summary.vitamin_c/(vitaminCGoal*0.001)
             barPercentage.sugarPercentage = summary.sugar/sugarGoal
             

@@ -10,6 +10,13 @@ import UIKit
 import MessageUI
 
 class LogFoodViewController: UIViewController, MFMailComposeViewControllerDelegate {
+    
+    @IBOutlet weak var buttonBreakfast: UIButton!
+    @IBOutlet weak var buttonLunch: UIButton!
+    @IBOutlet weak var buttonDinner: UIButton!
+    @IBOutlet weak var buttonSnack: UIButton!
+    @IBOutlet weak var buttonWater: UIButton!
+    
     //MARK: loading database
     var database: [FoodInfo] = []
     var dictViewCont: [String:[String]] = [:]
@@ -30,6 +37,12 @@ class LogFoodViewController: UIViewController, MFMailComposeViewControllerDelega
         categoryViewCont = foodData().categorizeItems().keys.sorted(by: <)
         codeDict = BagOfWord().loadDictionary()
         allWords = BagOfWord().loadAllWords()
+        
+        buttonBreakfast.layer.cornerRadius = 10
+        buttonLunch.layer.cornerRadius = 10
+        buttonDinner.layer.cornerRadius = 10
+        buttonSnack.layer.cornerRadius = 10
+        buttonWater.layer.cornerRadius = 10
     }
     
     override func didReceiveMemoryWarning() {

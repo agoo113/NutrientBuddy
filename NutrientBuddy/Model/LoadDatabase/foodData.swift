@@ -16,7 +16,7 @@ class foodData{
     // 2. Remove "\n  ", "\n", " }", space after ": " and change other " " to "_"
     // 3. Add on "}" for all
     // 4. Delete the comma if there is one at the start
-    func formatForJson(contents: String) -> [String]?{
+    private func formatForJson(contents: String) -> [String]?{
         let content_null = contents.replacingOccurrences(of: "null", with: "0")
         let lines = content_null.split(separator: "}", maxSplits: 2897, omittingEmptySubsequences: true)
         
@@ -122,7 +122,7 @@ class foodData{
     }
     
     //Mark: singulize the food item name
-    func singulize(food_name: String)-> String {
+    private func singulize(food_name: String)-> String {
         let breakdown = food_name.split(separator: ",", maxSplits: 1, omittingEmptySubsequences: true)
         let original_food_name = String(breakdown[0])
         var array = Array(original_food_name)

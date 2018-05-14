@@ -232,7 +232,9 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         cell?.textLabel?.numberOfLines = 0
         return cell!
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
     // MARK: navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -148,8 +148,8 @@
 		AC39434F2042282800EE31FA /* LogFood */ = {
 			isa = PBXGroup;
 			children = (
-				ACDD5DB2202CABC300076E5E /* SearchView */,
 				AC321F812041B5B00070D289 /* LogFoodViewController.swift */,
+				ACDD5DB2202CABC300076E5E /* SearchView */,
 			);
 			path = LogFood;
 			sourceTree = "<group>";

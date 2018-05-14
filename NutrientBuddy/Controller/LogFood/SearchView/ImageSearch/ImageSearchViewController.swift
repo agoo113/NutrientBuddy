@@ -56,8 +56,8 @@ class ImageSearchViewController: UIViewController,     UIImagePickerControllerDe
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
             self.navigationController?.popToRootViewController(animated: true)
         }
-        alert.addAction(actionOK)
         alert.addAction(actionCancel)
+        alert.addAction(actionOK)
         present(alert, animated: true, completion: nil)
     }
     

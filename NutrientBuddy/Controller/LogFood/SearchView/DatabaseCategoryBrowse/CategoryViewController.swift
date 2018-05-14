@@ -84,7 +84,9 @@ class CategoryViewController: UIViewController, UITableViewDelegate, UITableView
         cell?.textLabel?.numberOfLines = 0
         return cell!
     }
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     //MARK: pass to the next view -> CatagoryDetailsViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showCategoryDetails" {

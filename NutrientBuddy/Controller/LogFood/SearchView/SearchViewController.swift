@@ -167,9 +167,9 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         }
         
         startActivityIndicator(activityIndicator: activityIndicator)
-        
+        let searchItem = searchBar.text!
         DispatchQueue.global(qos: .background).async {
-            self.searchForFoodItems(searchText: searchBar.text!)
+            self.searchForFoodItems(searchText: searchItem)
             DispatchQueue.main.async {
                 self.stopActivityIndicator(activityIndicator: activityIndicator)
             }
@@ -222,6 +222,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
             DispatchQueue.main.async {
+                self.tableView.reloadData()
                 self.textView.text = "Sorry the item you searched is not found, please browse from the database."
             }
         }

@@ -13,26 +13,38 @@ struct percentageConsumedForRings {
     var fatPercentage: Double
     var carboPercentage: Double
     var energyPercentage: Double
+    var energyGoal: Double
+    var totalCarboGoal: Double
+    var totalFatGoal: Double
+    var totalProteinGoal:Double
     
     init() {
         proteinPercentage = 0.0
         fatPercentage = 0.0
         carboPercentage = 0.0
         energyPercentage = 0.0
+        energyGoal = 0.0
+        totalCarboGoal = 0.0
+        totalFatGoal = 0.0
+        totalProteinGoal = 0.0
     }
 };
 
 struct percentageConsumedForBars{
     var waterGlassesConsumed: Double
-    var waterGlassesGoal: Double
     var sugarPercentage: Double
     var vitaminCPercentage: Double
+    var waterGlassesGoal: Double
+    var sugarSpoonGoal: Double
+    var vitaminCGoal: Double
     
     init() {
         waterGlassesConsumed = 0.0
-        waterGlassesGoal = 0.0
         sugarPercentage = 0.0
         vitaminCPercentage = 0.0
+        waterGlassesGoal = 0.0
+        sugarSpoonGoal = 0.0
+        vitaminCGoal = 0.0
     }
 };
 
@@ -96,22 +108,25 @@ class HomeViewFunctions {
         let totalCarboGoal = carboPro * energyGoal / 4.0
         let totalFatGoal = fatPro * energyGoal / 9.0
         let totalProteinGoal = proteinPro * energyGoal / 4.0
+        
         if summary.date != nil{
-            barPercentage.waterGlassesConsumed = summary.water/240
-            barPercentage.waterGlassesGoal = waterGoal
+            barPercentage.waterGlassesConsumed = summary.water/240 // 240ml per glass of water
             barPercentage.vitaminCPercentage = summary.vitamin_c/(vitaminCGoal*0.001)
-            barPercentage.sugarPercentage = summary.sugar/sugarGoal
+            barPercentage.sugarPercentage = summary.sugar/4 // 4g per teaspoon of sugar
+            
+            barPercentage.waterGlassesGoal = waterGoal
+            barPercentage.sugarSpoonGoal = sugarGoal
+            barPercentage.vitaminCGoal = vitaminCGoal
             
             ringsPercentage.energyPercentage = summary.energy/energyGoal
-            
-            if debugHomeView {
-                print(summary)
-            }
-            
             ringsPercentage.carboPercentage = summary.carbohydrate / totalCarboGoal
             ringsPercentage.fatPercentage = summary.fat / totalFatGoal
             ringsPercentage.proteinPercentage = summary.protein / totalProteinGoal
             
+            ringsPercentage.energyGoal = energyGoal
+            ringsPercentage.totalCarboGoal = totalCarboGoal
+            ringsPercentage.totalProteinGoal = totalProteinGoal
+            ringsPercentage.totalFatGoal = totalFatGoal
         }
         return (summary, ringsPercentage, barPercentage)
     }

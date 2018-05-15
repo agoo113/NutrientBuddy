@@ -34,6 +34,7 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         let vitaminC: Double
         let sugar: Double
         
+        //Non of the goal can be zero
         if cell.water != 0 {
            water  = cell.water
         } else {

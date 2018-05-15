@@ -18,14 +18,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var groupContainerView: UIView!
     @IBOutlet weak var progressGroup: MKRingProgressGroupView!
-    //ring graph button
-    /*@IBOutlet weak var energyLabel: UILabel!
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var carboLabel: UILabel!
-    @IBOutlet weak var labelStack: UIStackView!
-    @IBOutlet weak var nutrientNameLabelStack: UIStackView!
-    */
+    
     var buttons: [MKRingProgressGroupButton] = []
     var selectedIndex = 0
     
@@ -37,20 +30,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var ringPercentages = percentageConsumedForRings()
     var barPercentages = percentageConsumedForBars()
     
-    //MARK: controls the display of labels
-   /* @objc func tappedOnEnergy(_ sender: UITapGestureRecognizer){
-        if tappedRings {
-            labelStack.isHidden = true
-            nutrientNameLabelStack.isHidden = true
-            tappedRings = false
-        }
-        else{
-            labelStack.isHidden = false
-            nutrientNameLabelStack.isHidden = false
-            tappedRings = true
-        }
-    }*/
-    
     override func viewDidAppear(_ animated: Bool) {
         if debugHomeView {
             print("GJ: today's date is \(date), from view did appear - HomeViewController")
@@ -58,7 +37,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //load personal goal
         if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 8700, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 8)
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 8700, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 6, waterGoal: 8)
         }
         personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         let goal = personalGoals[0]
@@ -68,11 +47,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let summary = summaryAndPercentages.summary
         ringPercentages = summaryAndPercentages.ringsPercentage
         barPercentages = summaryAndPercentages.barsPercentage
-        
-        /*energyLabel.text = String(format: "%.0f", ringPercentages.energyPercentage*100) + "%"
-        fatLabel.text = String(format: "%.0f", ringPercentages.fatPercentage*100) + "%"
-        proteinLabel.text = String(format: "%.0f", ringPercentages.proteinPercentage*100) + "%"
-        carboLabel.text = String(format: "%.0f", ringPercentages.carboPercentage*100) + "%"*/
         
         
         //display other nutrient information
@@ -108,17 +82,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //load personal goal
-        if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 30, energyGoal: 8700, fatGoal: 20, proteinGoal: 50, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 8)
-        }
-        personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
-        let goal = personalGoals[0]
-        let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, vitaminCGoal: goal.vitamin_c_goal, fatGoal: goal.fat_goal, sugarGoal: goal.sugar_goal)
-        let summary = summaryAndPercentages.summary
-        display_nutrient = HomeViewFunctions().loadFoodNutrition(nutrientToView: nutrientToView, summary: summary, date: date)
-        
     }
 
     //MARK: ring graphs
@@ -217,12 +180,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if indexPath.row == 0 {
                 let barColor = UIColor(hue: 0.5417, saturation: 0.37, brightness: 0.98, alpha: 1.0).cgColor
                 let fillColor = UIColor(hue: 0.5417, saturation: 1, brightness: 0.98, alpha: 1.0).cgColor
-                let persentage = barPercentages.waterGlassesConsumed/barPercentages.waterGlassesGoal
-                cell.drawProgressLayer(percentage: persentage, fillColor: fillColor, barColor: barColor)
+                let percentage = barPercentages.waterGlassesConsumed/barPercentages.waterGlassesGoal
+                cell.drawProgressLayer(percentage: percentage, fillColor: fillColor, barColor: barColor)
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "waterBarIcon")
                 
-                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.waterGlassesConsumed) + "/" + String(format: "%.0f",barPercentages.waterGlassesGoal) + " Glass(es)"
+                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.waterGlassesConsumed) + "/" + String(format: "%.0f", barPercentages.waterGlassesGoal) + " Glass(es)"
             }
             if indexPath.row == 1 {
                 let barColor = UIColor(hue: 0.1306, saturation: 0.36, brightness: 0.99, alpha: 1.0).cgColor
@@ -235,10 +198,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if indexPath.row == 2 {
                 let fillColor = UIColor.red.cgColor
                 let barColor = UIColor(hue: 0.05, saturation: 0.47, brightness: 0.95, alpha: 1.0).cgColor
-                cell.drawProgressLayer(percentage: barPercentages.sugarPercentage, fillColor: fillColor, barColor: barColor)
+                let percentage = barPercentages.sugarPercentage/barPercentages.sugarSpoonGoal
+                cell.drawProgressLayer(percentage: percentage, fillColor: fillColor, barColor: barColor)
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "sugarView")
-                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.sugarPercentage * 100) + "%"
+                cell.nutrientLabel.text = String(format: "%.0f", barPercentages.sugarPercentage) + "/" + String(format: "%.0f", barPercentages.sugarSpoonGoal) + "Teaspoon(s)"
             }
              return cell
         }
@@ -248,24 +212,45 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let nutrientToDisplay = display_nutrient[indexPath.row]
             cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
+            
+            var amountString: String
+            
+            // measured in mg
+            if nutrientToDisplay.amount < 0.000001{
+                amountString = String(format: "%.0f", nutrientToDisplay.amount*1000000)
+                amountString.append("(μg)")
+            }
+            else if nutrientToDisplay.amount < 1 {
+                amountString = String(format: "%.0f", nutrientToDisplay.amount*1000)
+                amountString.append("(mg)")
+            }
+            else {
+                amountString = String(format: "%.0f", nutrientToDisplay.amount)
+                amountString.append("(g)")
+            }
+        
             switch nutrientToDisplay.nutrientType {
-                case "Energy":  cell.nutrientTypeLabel.textColor = UIColor.red
+                case "Energy": cell.nutrientTypeLabel.textColor = UIColor.red
                 cell.nutrientAmountLabel.textColor = UIColor.red
+                cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.energyGoal) + "(kcal)"
                 case "Carbohydrate": cell.nutrientTypeLabel.textColor = UIColor.orange
                 cell.nutrientAmountLabel.textColor = UIColor.orange
+                cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.totalCarboGoal) + "(g)"
 
                 case "Protein": cell.nutrientTypeLabel.textColor = UIColor.blue
                 cell.nutrientAmountLabel.textColor = UIColor.blue
+                cell.nutrientAmountLabel.text = amountString + "/" +  String(format: "%.0f", ringPercentages.totalProteinGoal) + "(g)"
 
                 case "Fat": cell.nutrientTypeLabel.textColor = UIColor.purple
                 cell.nutrientAmountLabel.textColor = UIColor.purple
+                cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.totalFatGoal) + "(g)"
 
                 default:
                     cell.nutrientTypeLabel.textColor = UIColor.black
+                    cell.nutrientAmountLabel.textColor = UIColor.black
+                    cell.nutrientAmountLabel.text = amountString
+
             }
-            var amountString = String(format: "%.0f", nutrientToDisplay.amount)
-            amountString.append(nutrientToDisplay.unit)
-            cell.nutrientAmountLabel.text = amountString
             return cell
         }
     }

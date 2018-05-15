@@ -18,10 +18,13 @@ class FoodInformationTableViewController: UITableViewController {
     var display_nutrient: [foodInformation] = []
     var amount: Double = 0
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: edit button to select nutrients
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addView"), style: .plain, target: self, action: #selector(addFoodButtonItemTapped))
+        let nameArray = getFoodNameAndImage()
+        self.navigationItem.title = nameArray[0]
         
         //MARK: add default if there is nothing in the nutrient selection core data
         nutrientToView = NutrientTypeCoreDataHandler.fetchObject()!
@@ -66,7 +69,7 @@ class FoodInformationTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInfo", for: indexPath) as! FoodInformationTableViewCell
             let nameArray = getFoodNameAndImage()
-            cell.foodNameLabel.text = nameArray[0]
+            
             if (UIImage(named: nameArray[0]) != nil) {
                 cell.foodImage.image = UIImage(named: nameArray[0])
             }
@@ -89,7 +92,7 @@ class FoodInformationTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientInfo", for: indexPath) as! FoodInformationSecondTableViewCell
         let nutrientToView = display_nutrient[indexPath.row]
         cell.nutrientTypeLabel.text = nutrientToView.nutrientType
-        var amountString = String(format: "%.3f", nutrientToView.amount)
+        var amountString = String(format: "%.0f", nutrientToView.amount)
         amountString.append(nutrientToView.unit)
         cell.amountLabel.text = amountString
         cell.contentView.setNeedsLayout()

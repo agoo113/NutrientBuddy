@@ -38,11 +38,11 @@ class LogFoodViewController: UIViewController, MFMailComposeViewControllerDelega
         codeDict = BagOfWord().loadDictionary()
         allWords = BagOfWord().loadAllWords()
         
-        buttonBreakfast.layer.cornerRadius = 10
-        buttonLunch.layer.cornerRadius = 10
-        buttonDinner.layer.cornerRadius = 10
-        buttonSnack.layer.cornerRadius = 10
-        buttonWater.layer.cornerRadius = 10
+        buttonBreakfast.layer.cornerRadius = 20
+        buttonLunch.layer.cornerRadius = 20
+        buttonDinner.layer.cornerRadius = 20
+        buttonSnack.layer.cornerRadius = 20
+        buttonWater.layer.cornerRadius = 20
     }
     
     override func didReceiveMemoryWarning() {

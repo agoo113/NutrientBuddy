@@ -19,13 +19,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var groupContainerView: UIView!
     @IBOutlet weak var progressGroup: MKRingProgressGroupView!
     //ring graph button
-    @IBOutlet weak var energyLabel: UILabel!
+    /*@IBOutlet weak var energyLabel: UILabel!
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var carboLabel: UILabel!
     @IBOutlet weak var labelStack: UIStackView!
     @IBOutlet weak var nutrientNameLabelStack: UIStackView!
-    
+    */
     var buttons: [MKRingProgressGroupButton] = []
     var selectedIndex = 0
     
@@ -38,7 +38,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var barPercentages = percentageConsumedForBars()
     
     //MARK: controls the display of labels
-    @objc func tappedOnEnergy(_ sender: UITapGestureRecognizer){
+   /* @objc func tappedOnEnergy(_ sender: UITapGestureRecognizer){
         if tappedRings {
             labelStack.isHidden = true
             nutrientNameLabelStack.isHidden = true
@@ -49,18 +49,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             nutrientNameLabelStack.isHidden = false
             tappedRings = true
         }
-    }
+    }*/
     
     override func viewDidAppear(_ animated: Bool) {
-        //ring view
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(tappedOnEnergy))
-        self.progressGroup.addGestureRecognizer(gesture)
-        self.progressGroup.bringSubview(toFront: labelStack)
-        self.progressGroup.bringSubview(toFront: nutrientNameLabelStack)
-        
         if debugHomeView {
             print("GJ: today's date is \(date), from view did appear - HomeViewController")
         }
+        
         //load personal goal
         if personalGoals.count == 0 {
             PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 8700, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 25, waterGoal: 8)
@@ -74,10 +69,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         ringPercentages = summaryAndPercentages.ringsPercentage
         barPercentages = summaryAndPercentages.barsPercentage
         
-        energyLabel.text = String(format: "%.0f", ringPercentages.energyPercentage*100) + "%"
+        /*energyLabel.text = String(format: "%.0f", ringPercentages.energyPercentage*100) + "%"
         fatLabel.text = String(format: "%.0f", ringPercentages.fatPercentage*100) + "%"
         proteinLabel.text = String(format: "%.0f", ringPercentages.proteinPercentage*100) + "%"
-        carboLabel.text = String(format: "%.0f", ringPercentages.carboPercentage*100) + "%"
+        carboLabel.text = String(format: "%.0f", ringPercentages.carboPercentage*100) + "%"*/
         
         
         //display other nutrient information
@@ -146,6 +141,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         button.contentView.ring4EndColor = progressGroup.ring4EndColor
         containerView.addSubview(button)
         buttons.append(button)
+        button.isHidden = true
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         buttons[0].isSelected = true
         
@@ -207,7 +203,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 2
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
+        if section == 1 {
             return 3
         }
         else {
@@ -216,7 +212,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        if indexPath.section == 0{
+        if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! HomeProgressBarTableViewCell
             if indexPath.row == 0 {
                 let barColor = UIColor(hue: 0.5417, saturation: 0.37, brightness: 0.98, alpha: 1.0).cgColor
@@ -252,14 +248,29 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             let nutrientToDisplay = display_nutrient[indexPath.row]
             cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
-            var amountString = String(format: "%.3f", nutrientToDisplay.amount)
+            switch nutrientToDisplay.nutrientType {
+                case "Energy":  cell.nutrientTypeLabel.textColor = UIColor.red
+                cell.nutrientAmountLabel.textColor = UIColor.red
+                case "Carbohydrate": cell.nutrientTypeLabel.textColor = UIColor.orange
+                cell.nutrientAmountLabel.textColor = UIColor.orange
+
+                case "Protein": cell.nutrientTypeLabel.textColor = UIColor.blue
+                cell.nutrientAmountLabel.textColor = UIColor.blue
+
+                case "Fat": cell.nutrientTypeLabel.textColor = UIColor.purple
+                cell.nutrientAmountLabel.textColor = UIColor.purple
+
+                default:
+                    cell.nutrientTypeLabel.textColor = UIColor.black
+            }
+            var amountString = String(format: "%.0f", nutrientToDisplay.amount)
             amountString.append(nutrientToDisplay.unit)
             cell.nutrientAmountLabel.text = amountString
             return cell
         }
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
+        if section == 0 {
             return "Nutrient Diary Details"
         }
         return "Other Nurition View"

@@ -31,7 +31,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchButton.setTitle("\(#imageLiteral(resourceName: "searchView")) Search", for: .normal)
+        //searchButton.setTitle("\(#imageLiteral(resourceName: "searchView")) Search", for: .normal)
         //search bar
         searchBar.delegate = self
         searchBar.showsBookmarkButton = true
@@ -155,40 +155,75 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         recognitionRequest?.endAudio()
     }
 
+    
     //MARK: searchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchForFoodItems()
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        if (searchBar.text?.isEmpty)! {
+            let alert = UIAlertController(title: "Alert", message: "Search Bar is empty", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            textView.text = "Please search for the food item..."
+        }
+        
+        startActivityIndicator(activityIndicator: activityIndicator)
+        
+        DispatchQueue.global(qos: .background).async {
+            self.searchForFoodItems(searchText: searchBar.text!)
+            DispatchQueue.main.async {
+                self.stopActivityIndicator(activityIndicator: activityIndicator)
+            }
+        }
+        
         textView.text = "Start searching for \(searchFood)..."
         searchBar.endEditing(true)
     }
+    
+    func startActivityIndicator(activityIndicator: UIActivityIndicatorView) {
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            self.view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+        
+    }
+    func stopActivityIndicator(activityIndicator: UIActivityIndicatorView) {
+        
+            UIApplication.shared.endIgnoringInteractionEvents()
+            activityIndicator.stopAnimating()
+        
+    }
+    
+    
+    /* search button deleted
     //search for food items
     @IBAction func searchedButtonClicked(_ sender: UIButton) {
         searchForFoodItems()
         textView.text = "Start searching for \(searchFood)..."
         searchBar.endEditing(true)
     }
-    
-    
-    private func searchForFoodItems() {
-        if !(searchBar.text?.isEmpty)!{
-            //search for food
-            filteredData.removeAll(keepingCapacity: false)
-            let searchFood = processSpeechSearch(searchBarText: searchBar.text!)
-            filteredData = BagOfWord().searchItem(searchFood: searchFood, codeDict: codeDict, allWords: allWords)
-            if filteredData.count != 0{
-                tableView.isHidden = false
-                tableView.reloadData()
-                textView.text = "Here are the searched results for \(searchFood)"
-            }
-            else{
-                let alert = UIAlertController(title: "Alert", message: "Food item is not found", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
-                textView.text = "Sorry the item you searched is not found, please browse from the database."
+    */
+    private func searchForFoodItems(searchText: String) {
+        //search for food
+        filteredData.removeAll(keepingCapacity: false)
+        
+        let searchFood = processSpeechSearch(searchBarText: searchText)
+        filteredData = BagOfWord().searchItem(searchFood: searchFood, codeDict: codeDict, allWords: allWords)
+        if filteredData.count != 0{
+            DispatchQueue.main.async {
+                self.tableView.isHidden = false
+                self.tableView.reloadData()
+                self.textView.text = "Here are the searched results for \(searchFood)"
             }
         }
         else{
-            textView.text = "Please search for the food item..."
+            let alert = UIAlertController(title: "Alert", message: "Food item is not found", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.textView.text = "Sorry the item you searched is not found, please browse from the database."
+            }
         }
     }
     
@@ -197,23 +232,31 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         food = NaturalLanguageProcess().findInformation(speech: searchBarText)
         if ((food["Noun"]! == "") && (food["Determiner"]! == "")) {
             let lowerCaseText = searchBarText.lowercased()
-            textView.text = "Searching for \(lowerCaseText)..."
+            DispatchQueue.main.async {
+                self.textView.text = "Searching for \(lowerCaseText)..."
+            }
+            
             return lowerCaseText
         }
         else{
             if (food["Determiner"]! == "") {
-                textView.text = "You have eaten: "
-                textView.text.append(" ")
-                textView.text.append(food["Noun"]!)
-                 textView.text.append("\nSearching for \(food["Noun"]!)...")
-                textView.text = "You can also tell me what you have eaten and how much to log in quicker"
+                DispatchQueue.main.async {
+                    self.textView.text = "You have eaten: "
+                    self.textView.text.append(" ")
+                    self.textView.text.append(self.food["Noun"]!)
+                    self.textView.text.append("\nSearching for \(self.food["Noun"]!)...")
+                    self.textView.text = "You can also tell me what you have eaten and how much to log in quicker"
+                }
+                
             }
             else{
-                textView.text = "You have eaten: "
-                textView.text.append(food["Determiner"]!)
-                textView.text.append(" ")
-                textView.text.append(food["Noun"]!)
-                textView.text.append("\nSearching for \(food["Noun"]!)...")
+                DispatchQueue.main.async {
+                    self.textView.text = "You have eaten: "
+                    self.textView.text.append(self.food["Determiner"]!)
+                    self.textView.text.append(" ")
+                    self.textView.text.append(self.food["Noun"]!)
+                    self.textView.text.append("\nSearching for \(self.food["Noun"]!)...")
+                }
             }
             return food["Noun"]!
         }

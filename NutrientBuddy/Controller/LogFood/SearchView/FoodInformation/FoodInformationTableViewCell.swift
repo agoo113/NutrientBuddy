@@ -10,7 +10,6 @@ import UIKit
 //MARK: element of the first cell
 class FoodInformationTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodDescriptionLabel: UILabel!
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var amountLabel: UILabel!
@@ -27,7 +26,7 @@ class FoodInformationTableViewCell: UITableViewCell {
     @IBAction func amountSliderChange(_ sender: UISlider) {
         amount = Double(sender.value)
         amountLabel.text = "Amount: "
-        amountLabel.text?.append(String(format: "%.1f", amount))
+        amountLabel.text?.append(String(format: "%.0f", amount))
         amountLabel.text?.append("(g)")
         
     }

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SafariServices
 
-class SettingViewController: UIViewController, UITabBarDelegate, UITableViewDataSource {
+class SettingViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -82,35 +83,57 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
     
     //MARK: table view
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 1{
+        if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting") as! GoalSettingTableViewCell
+            let goal = goals?.first
+            cell.waterGoalTextField.placeholder = String(format: "%.0f", (goal?.water_goal)!)
+            cell.energyGoalTextField.placeholder = String(format: "%.0f", (goal?.energy_goal)!)
+            cell.carboGoalTextField.placeholder = String(format: "%.0f", (goal?.carbo_goal)!)
+            cell.fatGoalTextField.placeholder = String(format: "%.0f", (goal?.fat_goal)!)
+            cell.proteinGoalTextField.placeholder = String(format: "%.0f", (goal?.protein_goal)!)
+            cell.vitaminCGoalTextField.placeholder = String(format: "%.0f", (goal?.vitamin_c_goal)!)
+            cell.sugarLimitTextField.placeholder = String(format: "%.0f", (goal?.sugar_goal)!)
+            
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
+            return cell
+        }
+        if indexPath.section == 1{
             let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientSetting")
             cell?.selectionStyle = UITableViewCellSelectionStyle.none
             return cell!
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting") as! GoalSettingTableViewCell
-        let goal = goals?.first
-        cell.waterGoalTextField.placeholder = String(format: "%.0f", (goal?.water_goal)!)
-        cell.energyGoalTextField.placeholder = String(format: "%.0f", (goal?.energy_goal)!)
-        cell.carboGoalTextField.placeholder = String(format: "%.0f", (goal?.carbo_goal)!)
-        cell.fatGoalTextField.placeholder = String(format: "%.0f", (goal?.fat_goal)!)
-        cell.proteinGoalTextField.placeholder = String(format: "%.0f", (goal?.protein_goal)!)
-        cell.vitaminCGoalTextField.placeholder = String(format: "%.0f", (goal?.vitamin_c_goal)!)
-        cell.sugarLimitTextField.placeholder = String(format: "%.0f", (goal?.sugar_goal)!)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "goalGuide")
+        cell?.selectionStyle = UITableViewCellSelectionStyle.none
         
-        cell.selectionStyle = UITableViewCellSelectionStyle.none
-        return cell
+        return cell!
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let link = "https://www.healthline.com/nutrition/how-many-calories-per-day"
+            let url = URL(string: link)
+            
+            let svc = SFSafariViewController(url: url!)
+            svc.delegate = self
+            self.present(svc, animated: true, completion: nil)
+        }
     }
     
-
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "My Nutrient Goal"
+        }
+        if section == 1 {
+            return "Select Nutrient"
+        }
+        else {
+            return "Help"
+        }
+    }
 }

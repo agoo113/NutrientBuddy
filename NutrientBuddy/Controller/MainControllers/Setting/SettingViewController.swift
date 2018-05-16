@@ -12,8 +12,8 @@ import SafariServices
 class SettingViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    let links = ["https://www.healthline.com/nutrition/how-many-calories-per-day","https://www.choosemyplate.gov"]
-    let help = ["Energy Setting Guide", "Ratio Setting Guide"]
+    let links = ["https://www.nhs.uk/news/food-and-diet/six-to-eight-glasses-of-water-still-best/", "https://www.healthline.com/nutrition/how-many-calories-per-day", "https://www.nhs.uk/conditions/vitamins-and-minerals/vitamin-c/", "https://www.nhs.uk/chq/pages/1139.aspx?categoryid=51", "https://www.choosemyplate.gov"]
+    let help = ["Water Setting Guide", "Energy Setting Guide", "Vitamin Setting Guide", "Sugar Setting Guide", "Ratio Setting Guide"]
     let goals = PersonalSettingCoreDataHandler.fetchObject()
     let attribute: [NSAttributedStringKey: Any] = [
         NSAttributedStringKey.foregroundColor: UIColor.blue,
@@ -93,13 +93,13 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         if indexPath.section == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "goalSetting") as! GoalSettingTableViewCell
             let goal = goals?.first
-            cell.waterGoalTextField.placeholder = String(format: "%.0f", (goal?.water_goal)!)
-            cell.energyGoalTextField.placeholder = String(format: "%.0f", (goal?.energy_goal)!)
-            cell.carboGoalTextField.placeholder = String(format: "%.0f", (goal?.carbo_goal)!)
-            cell.fatGoalTextField.placeholder = String(format: "%.0f", (goal?.fat_goal)!)
-            cell.proteinGoalTextField.placeholder = String(format: "%.0f", (goal?.protein_goal)!)
-            cell.vitaminCGoalTextField.placeholder = String(format: "%.0f", (goal?.vitamin_c_goal)!)
-            cell.sugarLimitTextField.placeholder = String(format: "%.0f", (goal?.sugar_goal)!)
+            cell.waterGoalTextField.text = String(format: "%.0f", (goal?.water_goal)!)
+            cell.energyGoalTextField.text = String(format: "%.0f", (goal?.energy_goal)!)
+            cell.carboGoalTextField.text = String(format: "%.0f", (goal?.carbo_goal)!)
+            cell.fatGoalTextField.text = String(format: "%.0f", (goal?.fat_goal)!)
+            cell.proteinGoalTextField.text = String(format: "%.0f", (goal?.protein_goal)!)
+            cell.vitaminCGoalTextField.text = String(format: "%.0f", (goal?.vitamin_c_goal)!)
+            cell.sugarLimitTextField.text = String(format: "%.0f", (goal?.sugar_goal)!)
             
             cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell

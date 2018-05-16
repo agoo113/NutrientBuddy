@@ -45,9 +45,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         //load summary
         let summaryAndPercentages = HomeViewFunctions().loadSummaryAndPercentages(waterGoal: goal.water_goal, energyGoal: goal.energy_goal, date: date, carboGoal: goal.carbo_goal, proteinGoal: goal.protein_goal, vitaminCGoal: goal.vitamin_c_goal, fatGoal: goal.fat_goal, sugarGoal: goal.sugar_goal)
         let summary = summaryAndPercentages.summary
+        
         ringPercentages = summaryAndPercentages.ringsPercentage
         barPercentages = summaryAndPercentages.barsPercentage
         
+        alertIfNeeded(ringPercentages: ringPercentages, barPercentages: barPercentages)
         //display other nutrient information
         if debugNutrientSetting {
             print("GJ: there are \(nutrientToView.count) items")
@@ -78,6 +80,59 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
     }
 
+    //MARK: display alert for over consumption and goal achievement
+    func alertIfNeeded (ringPercentages: percentageConsumedForRings, barPercentages: percentageConsumedForBars) {
+        if (ringPercentages.energyPercentage > 1 || ringPercentages.carboPercentage > 1 || ringPercentages.proteinPercentage > 1 || ringPercentages.fatPercentage > 1 || barPercentages.waterGlassesConsumed > barPercentages.waterGlassesGoal || barPercentages.sugarPercentage > barPercentages.sugarSpoonGoal) {
+            var messageGood: String = ""
+            var messageBad: String = ""
+            
+            if (ringPercentages.energyPercentage > 1) {
+                messageBad.append("energy")
+            }
+            if ringPercentages.carboPercentage > 1 {
+                if messageBad != "" {
+                    messageBad.append(", ")
+                }
+                messageBad.append("carbohydrate")
+            }
+            if ringPercentages.proteinPercentage > 1 {
+                messageGood.append("protein")
+            }
+            if ringPercentages.fatPercentage > 1 {
+                if messageBad != "" {
+                    messageBad.append(", ")
+                }
+                messageBad.append("fat")
+            }
+            
+            if barPercentages.waterGlassesConsumed > barPercentages.waterGlassesGoal {
+                if messageGood != ""{
+                    messageGood.append(", ")
+                }
+                messageGood.append("water")
+            }
+            if barPercentages.sugarPercentage > barPercentages.sugarSpoonGoal {
+                if messageBad != "" {
+                    messageBad.append(", ")
+                }
+                messageBad.append("sugar")
+            }
+            
+            if (messageBad != "" || messageGood != "") {
+                var message: String
+                if (messageBad == "") {
+                    message = "You have achieved goal on: " + messageGood + ". Well Done!"
+                }
+                if (messageGood == "") {
+                    message = "You have reached energy limit on: " + messageBad + ". Now go and do some exercise and stop eating!"
+                }
+                else {
+                    message = "You have reached energy limit on: " + messageBad + ". And you have achieved goal on: " + messageGood + "."
+                }
+                createAlert(message: message)
+            }
+        }
+    }
     //MARK: ring graphs
     func randeringRingView() {
         let containerView = UIView(frame: navigationController!.navigationBar.bounds)
@@ -151,18 +206,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             button.contentView.ring2.progress = ringPercentages.carboPercentage
             button.contentView.ring3.progress = ringPercentages.proteinPercentage
             button.contentView.ring4.progress = ringPercentages.fatPercentage
-            if ringPercentages.energyPercentage > 1 {
-                createAlert(message: "You have reached your energy limit, go do some exercise!")
-            }
-            if ringPercentages.carboPercentage > 1 {
-                createAlert(message: "You have reached your carbohydrate limit, go do some exercise!")
-            }
-            if ringPercentages.proteinPercentage > 1 {
-                createAlert(message: "You have reached your protein limit!")
-            }
-            if ringPercentages.fatPercentage > 1 {
-                createAlert(message: "You have reached your fat limit, go do some exercise!")
-            }
         }
         updateMainGroupProgress()
     }
@@ -192,10 +235,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.nutrientView.image = UIImage(named: "waterBarIcon")
                 
                 cell.nutrientLabel.text = String(format: "%.0f", barPercentages.waterGlassesConsumed) + "/" + String(format: "%.0f", barPercentages.waterGlassesGoal) + " Glass(es)"
-                
-                if barPercentages.waterGlassesConsumed > barPercentages.waterGlassesGoal {
-                    createAlert(message: "You have reached your water goal, well done!")
-                }
             }
             if indexPath.row == 1 {
                 let barColor = UIColor(hue: 0.1306, saturation: 0.36, brightness: 0.99, alpha: 1.0).cgColor
@@ -213,10 +252,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "sugarView")
                 cell.nutrientLabel.text = String(format: "%.0f", barPercentages.sugarPercentage) + "/" + String(format: "%.0f", barPercentages.sugarSpoonGoal) + "Teaspoon(s)"
-                
-                if barPercentages.sugarPercentage > barPercentages.sugarSpoonGoal {
-                    createAlert(message: "You have reached your sugar limit, stop eating sweets!")
-                }
             }
              return cell
         }

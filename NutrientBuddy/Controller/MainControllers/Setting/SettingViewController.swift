@@ -12,20 +12,17 @@ import SafariServices
 class SettingViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    
+    let links = ["https://www.healthline.com/nutrition/how-many-calories-per-day","https://www.choosemyplate.gov"]
+    let help = ["Energy Setting Guide", "Ratio Setting Guide"]
     let goals = PersonalSettingCoreDataHandler.fetchObject()
+    let attribute: [NSAttributedStringKey: Any] = [
+        NSAttributedStringKey.foregroundColor: UIColor.blue,
+        NSAttributedStringKey.underlineStyle: NSUnderlineStyle.styleSingle.rawValue ]
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     @IBAction func saveButtonItemTapped(_ sender: UIBarButtonItem) {
         let goal = goals?.first
-        
         let index = IndexPath(row: 0, section: 0)
         let cell = tableView.cellForRow(at: index) as! GoalSettingTableViewCell
-        
         let water: Double
         let energy: Double
         let fat: Double
@@ -87,6 +84,9 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 2 {
+            return help.count
+        }
         return 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,15 +111,18 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "goalGuide")
+        //cell?.textLabel?.textColor = UIColor.blue
+        let attributeString = NSMutableAttributedString(string: help[indexPath.row], attributes: attribute)
+        cell?.textLabel?.attributedText = attributeString
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
         
         return cell!
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 2 {
-            let link = "https://www.healthline.com/nutrition/how-many-calories-per-day"
+            let link = links[indexPath.row]
             let url = URL(string: link)
-            
             let svc = SFSafariViewController(url: url!)
             svc.delegate = self
             self.present(svc, animated: true, completion: nil)

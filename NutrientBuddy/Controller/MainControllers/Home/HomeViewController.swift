@@ -79,10 +79,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.reloadData()
         
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     //MARK: ring graphs
     func randeringRingView() {
@@ -260,6 +256,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         return "Other Nurition View"
     }
+    /*func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: (tableView.headerView(forSection: section)?.bounds.size.height)!))
+        headerView.backgroundColor = UIColor.white
+        return headerView
+    }*/
     
 }
 

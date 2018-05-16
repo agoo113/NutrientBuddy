@@ -12,9 +12,7 @@ import Speech
 class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchButton: UIButton!
     
     //MARK: get database and filtered data
     var database: [FoodInfo] = []
@@ -31,8 +29,9 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //searchButton.setTitle("\(#imageLiteral(resourceName: "searchView")) Search", for: .normal)
+        
         //search bar
+        searchBar.placeholder = "Enter Food"
         searchBar.delegate = self
         searchBar.showsBookmarkButton = true
         searchBar.setImage(#imageLiteral(resourceName: "Record"), for: UISearchBarIcon.bookmark, state: UIControlState.normal)
@@ -55,7 +54,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
                 }
             }
         }
-        textView.isEditable = false
     }
     
     //MARK: record and speech recognizer
@@ -95,7 +93,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest, resultHandler: {(result, error) in
             var isFinal = false //if recognition is final
             if result != nil{
-                self.textView.text = result?.bestTranscription.formattedString //textView as result of recognition
                 self.searchBar.text = result?.bestTranscription.formattedString //searchbar as result of recognition
                 isFinal = (result?.isFinal)!
             }
@@ -118,8 +115,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         }catch{
             print("AudioEngine couldn't start because of an error")
         }
-        
-        textView.text = "Say something, I am listening!"
     }
 
 
@@ -131,14 +126,12 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
         if audioEngine.isRunning{
-            textView.text = "Finished Recording!"
             searchBar.setImage(#imageLiteral(resourceName: "Record"), for: UISearchBarIcon.bookmark, state: UIControlState.normal)
             audioEngine.stop()
             recognitionRequest?.endAudio()
         }
         else{
             searchBar.setImage(#imageLiteral(resourceName: "Recording"), for: UISearchBarIcon.bookmark, state: UIControlState.normal)
-            textView.text = "Say something, I am listening!"
             startRecording()
         }
     }
@@ -147,9 +140,7 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             print("GJ: cancel button clicked on the search bar search view")
         }
         searchBar.text?.removeAll()
-        textView.text = "Cancelled speech search! \n"
         searchBar.showsCancelButton = false
-        textView.text.append("Finished Recording!")
         searchBar.setImage(#imageLiteral(resourceName: "Record"), for: UISearchBarIcon.bookmark, state: UIControlState.normal)
         audioEngine.stop()
         recognitionRequest?.endAudio()
@@ -163,7 +154,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             let alert = UIAlertController(title: "Alert", message: "Search Bar is empty", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
-            textView.text = "Please search for the food item..."
         }
         
         startActivityIndicator(activityIndicator: activityIndicator)
@@ -175,7 +165,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             }
         }
         
-        textView.text = "Start searching for \(searchFood)..."
         searchBar.endEditing(true)
     }
     
@@ -214,17 +203,12 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
             DispatchQueue.main.async {
                 self.tableView.isHidden = false
                 self.tableView.reloadData()
-                self.textView.text = "Here are the searched results for \(searchFood)"
             }
         }
         else{
             let alert = UIAlertController(title: "Alert", message: "Food item is not found", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.textView.text = "Sorry the item you searched is not found, please browse from the database."
-            }
         }
     }
     
@@ -233,32 +217,9 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         food = NaturalLanguageProcess().findInformation(speech: searchBarText)
         if ((food["Noun"]! == "") && (food["Determiner"]! == "")) {
             let lowerCaseText = searchBarText.lowercased()
-            DispatchQueue.main.async {
-                self.textView.text = "Searching for \(lowerCaseText)..."
-            }
-            
             return lowerCaseText
         }
         else{
-            if (food["Determiner"]! == "") {
-                DispatchQueue.main.async {
-                    self.textView.text = "You have eaten: "
-                    self.textView.text.append(" ")
-                    self.textView.text.append(self.food["Noun"]!)
-                    self.textView.text.append("\nSearching for \(self.food["Noun"]!)...")
-                    self.textView.text = "You can also tell me what you have eaten and how much to log in quicker"
-                }
-                
-            }
-            else{
-                DispatchQueue.main.async {
-                    self.textView.text = "You have eaten: "
-                    self.textView.text.append(self.food["Determiner"]!)
-                    self.textView.text.append(" ")
-                    self.textView.text.append(self.food["Noun"]!)
-                    self.textView.text.append("\nSearching for \(self.food["Noun"]!)...")
-                }
-            }
             return food["Noun"]!
         }
     }

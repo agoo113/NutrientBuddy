@@ -48,7 +48,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         ringPercentages = summaryAndPercentages.ringsPercentage
         barPercentages = summaryAndPercentages.barsPercentage
         
-        
         //display other nutrient information
         if debugNutrientSetting {
             print("GJ: there are \(nutrientToView.count) items")
@@ -77,7 +76,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         tableView.reloadData()
-        
     }
 
     //MARK: ring graphs
@@ -209,22 +207,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             let nutrientToDisplay = display_nutrient[indexPath.row]
             cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
             
-            var amountString: String
+            var amountString: String = String(format: "%.0f", nutrientToDisplay.amount)
             
-            // measured in mg
-            if nutrientToDisplay.amount < 0.000001{
-                amountString = String(format: "%.0f", nutrientToDisplay.amount*1000000)
-                amountString.append("(μg)")
-            }
-            else if nutrientToDisplay.amount < 1 {
-                amountString = String(format: "%.0f", nutrientToDisplay.amount*1000)
-                amountString.append("(mg)")
-            }
-            else {
-                amountString = String(format: "%.0f", nutrientToDisplay.amount)
-                amountString.append("(g)")
-            }
-        
             switch nutrientToDisplay.nutrientType {
                 case "Energy": cell.nutrientTypeLabel.textColor = UIColor.red
                 cell.nutrientAmountLabel.textColor = UIColor.red
@@ -242,6 +226,19 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.totalFatGoal) + "(g)"
 
                 default:
+                    // measured in mg
+                    if nutrientToDisplay.amount < 0.000001{
+                        amountString = String(format: "%.0f", nutrientToDisplay.amount*1000000)
+                        amountString.append("(μg)")
+                    }
+                    else if nutrientToDisplay.amount < 1 {
+                        amountString = String(format: "%.0f", nutrientToDisplay.amount*1000)
+                        amountString.append("(mg)")
+                    }
+                    else {
+                        amountString = String(format: "%.0f", nutrientToDisplay.amount)
+                        amountString.append("(g)")
+                    }
                     cell.nutrientTypeLabel.textColor = UIColor.black
                     cell.nutrientAmountLabel.textColor = UIColor.black
                     cell.nutrientAmountLabel.text = amountString

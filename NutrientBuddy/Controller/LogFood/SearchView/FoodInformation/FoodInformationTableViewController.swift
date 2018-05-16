@@ -17,7 +17,8 @@ class FoodInformationTableViewController: UITableViewController {
     //display nutrient on this page
     var display_nutrient: [foodInformation] = []
     var amount: Double = 0
-    
+    var amountScaleFactor: Double = 1
+    var sliderMaxValue: Float = 200
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,21 +70,48 @@ class FoodInformationTableViewController: UITableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "basicInfo", for: indexPath) as! FoodInformationTableViewCell
             let nameArray = getFoodNameAndImage()
-            
+            // measures
+            if (selectedFoodInfo.Cup_Weight != 0){
+                cell.measureUnitLabel.text = "Measured in cups, 1 cup = " + String(format: "%.0f", selectedFoodInfo.Cup_Weight) + " grams"
+                amountScaleFactor = selectedFoodInfo.Cup_Weight
+                sliderMaxValue = 10
+            }
+            else if (selectedFoodInfo.Quantity_Weight != 0){
+                cell.measureUnitLabel.text = "Measured in quantity, 1 quantity = " + String(format: "%.0f", selectedFoodInfo.Quantity_Weight) + " grams"
+                amountScaleFactor = selectedFoodInfo.Quantity_Weight
+                sliderMaxValue = 10
+            }
+            else if (selectedFoodInfo.Tablespoon_Weight != 0){
+                cell.measureUnitLabel.text = "Measured in tablespoons, 1 tbsp = " + String(format: "%.0f", selectedFoodInfo.Tablespoon_Weight) + " grams"
+                amountScaleFactor = selectedFoodInfo.Tablespoon_Weight
+                sliderMaxValue = 5
+            }
+            else if (selectedFoodInfo.Liquid_Volume != 0) {
+                cell.measureUnitLabel.text = "Measured in ml, 1 ml = " + String(format: "%.0f", selectedFoodInfo.Liquid_Volume) + " grams"
+                amountScaleFactor = selectedFoodInfo.Liquid_Volume
+                sliderMaxValue = 300
+            }
+            else {
+                cell.measureUnitLabel.text = "Measured in grams"
+            }
+            cell.measureUnitLabel.lineBreakMode = .byWordWrapping
+            cell.measureUnitLabel.numberOfLines = 0
+            // food description text
+            cell.foodDescriptionLabel.text = "Description: " + nameArray [0] + ", "
+            if nameArray.count == 2 {
+                cell.foodDescriptionLabel.text?.append(nameArray[1])
+                cell.foodDescriptionLabel.lineBreakMode = .byWordWrapping
+                cell.foodDescriptionLabel.numberOfLines = 0
+            }
+            // image
             if (UIImage(named: nameArray[0]) != nil) {
                 cell.foodImage.image = UIImage(named: nameArray[0])
             }
             else {
                 cell.foodImage.image = UIImage(named: "Placeholder")
             }
-            //clear foodDescriptionLabel.text before appending
-            cell.foodDescriptionLabel.text = "Description: "
-            if nameArray.count == 2 {
-                cell.foodDescriptionLabel.text?.append(nameArray[1])
-                cell.foodDescriptionLabel.lineBreakMode = .byWordWrapping
-                cell.foodDescriptionLabel.numberOfLines = 0
-            }
             
+            cell.sliderMaxValue = sliderMaxValue
             cell.amountSlider.setValue(Float(amount), animated: true)
             return cell
         }
@@ -124,7 +152,7 @@ class FoodInformationTableViewController: UITableViewController {
             let indexPath = IndexPath(row: 0, section: 0)
             let cell = self.tableView.cellForRow(at: indexPath) as! FoodInformationTableViewCell
             self.amount = Double(cell.amountSlider.value)
-            if self.amount == 0{
+            if self.amount == 0 {
                 let secondAlert = UIAlertController(title: "Nutrient Buddy", message: "You did not specify food amount! Please cancel and select amount!", preferredStyle: UIAlertControllerStyle.alert)
                 secondAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 if debugLogMeal {
@@ -136,8 +164,9 @@ class FoodInformationTableViewController: UITableViewController {
                 if debugLogMeal{
                     print("GJ: saved on \(NutrientDiary().getDate()), amount = \(self.amount) grams of \(self.selectedFoodInfo.Food_Name)")
                 }
+                let logAmount = self.amount * self.amountScaleFactor
                 
-                NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: self.amount, typeOfMeal: self.typeOfMeal)
+                NutrientDiary().saveDiaryToCoredata(savedFood: self.selectedFoodInfo, amount: logAmount, typeOfMeal: self.typeOfMeal)
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }

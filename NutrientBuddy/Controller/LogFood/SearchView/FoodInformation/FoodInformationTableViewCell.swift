@@ -14,21 +14,21 @@ class FoodInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var foodImage: UIImageView!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var amountSlider: UISlider!
+    @IBOutlet weak var measureUnitLabel: UILabel!
     
+    var sliderMaxValue: Float = 200
     var amount: Double = 0
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         amountSlider.minimumValue = 0
-        amountSlider.maximumValue = 200
-        amountSlider.setValue(100, animated: true)
     }
     
     @IBAction func amountSliderChange(_ sender: UISlider) {
+        amountSlider.maximumValue = sliderMaxValue
         amount = Double(sender.value)
         amountLabel.text = "Amount: "
         amountLabel.text?.append(String(format: "%.0f", amount))
-        amountLabel.text?.append("(g)")
-        
     }
 }
 

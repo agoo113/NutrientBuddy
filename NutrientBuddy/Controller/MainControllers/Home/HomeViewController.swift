@@ -151,6 +151,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             button.contentView.ring2.progress = ringPercentages.carboPercentage
             button.contentView.ring3.progress = ringPercentages.proteinPercentage
             button.contentView.ring4.progress = ringPercentages.fatPercentage
+            if ringPercentages.energyPercentage > 1 {
+                createAlert(message: "You have reached your energy limit, go do some exercise!")
+            }
+            if ringPercentages.carboPercentage > 1 {
+                createAlert(message: "You have reached your carbohydrate limit, go do some exercise!")
+            }
+            if ringPercentages.proteinPercentage > 1 {
+                createAlert(message: "You have reached your protein limit!")
+            }
+            if ringPercentages.fatPercentage > 1 {
+                createAlert(message: "You have reached your fat limit, go do some exercise!")
+            }
         }
         updateMainGroupProgress()
     }
@@ -180,6 +192,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.nutrientView.image = UIImage(named: "waterBarIcon")
                 
                 cell.nutrientLabel.text = String(format: "%.0f", barPercentages.waterGlassesConsumed) + "/" + String(format: "%.0f", barPercentages.waterGlassesGoal) + " Glass(es)"
+                
+                if barPercentages.waterGlassesConsumed > barPercentages.waterGlassesGoal {
+                    createAlert(message: "You have reached your water goal, well done!")
+                }
             }
             if indexPath.row == 1 {
                 let barColor = UIColor(hue: 0.1306, saturation: 0.36, brightness: 0.99, alpha: 1.0).cgColor
@@ -197,6 +213,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 cell.viewProg.bringSubview(toFront: cell.nutrientLabel)
                 cell.nutrientView.image = UIImage(named: "sugarView")
                 cell.nutrientLabel.text = String(format: "%.0f", barPercentages.sugarPercentage) + "/" + String(format: "%.0f", barPercentages.sugarSpoonGoal) + "Teaspoon(s)"
+                
+                if barPercentages.sugarPercentage > barPercentages.sugarSpoonGoal {
+                    createAlert(message: "You have reached your sugar limit, stop eating sweets!")
+                }
             }
              return cell
         }
@@ -253,11 +273,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         return "Other Nurition View"
     }
-    /*func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: (tableView.headerView(forSection: section)?.bounds.size.height)!))
-        headerView.backgroundColor = UIColor.white
-        return headerView
-    }*/
+    
+    func createAlert(message: String) {
+        let alert = UIAlertController(title: "Nutrient Buddy", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
     
 }
 

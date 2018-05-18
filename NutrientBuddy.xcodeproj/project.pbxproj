@@ -23,8 +23,8 @@
 		AC3943512042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */; };
 		AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB220441BD700C26309 /* SettingViewController.swift */; };
 		AC5C9BB620441C8100C26309 /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */; };
-		AC6D10C620ACBEC20006716C /* datasetJSON3.json in Resources */ = {isa = PBXBuildFile; fileRef = AC6D10C520ACBEC20006716C /* datasetJSON3.json */; };
 		AC7E72512045B04B00D0393F /* HomeViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */; };
+		AC8E6C1E20AED7C50023217C /* datasetJSON3.json in Resources */ = {isa = PBXBuildFile; fileRef = AC8E6C1D20AED7C40023217C /* datasetJSON3.json */; };
 		ACA899B7205AA63000C6EC63 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA899B6205AA63000C6EC63 /* CalendarViewController.swift */; };
 		ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E212046F81D0033FC30 /* Debug.swift */; };
 		ACAD7E2420470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */; };
@@ -67,8 +67,8 @@
 		AC3943502042D58B00EE31FA /* SummaryDiaryCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryDiaryCoreDataHandler.swift; sourceTree = "<group>"; };
 		AC5C9BB220441BD700C26309 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		AC5C9BB520441C8100C26309 /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
-		AC6D10C520ACBEC20006716C /* datasetJSON3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = datasetJSON3.json; sourceTree = "<group>"; };
 		AC7E72502045B04B00D0393F /* HomeViewFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewFunctions.swift; sourceTree = "<group>"; };
+		AC8E6C1D20AED7C40023217C /* datasetJSON3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = datasetJSON3.json; sourceTree = "<group>"; };
 		ACA899B6205AA63000C6EC63 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		ACAD7E212046F81D0033FC30 /* Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		ACAD7E2320470A6F0033FC30 /* PersonalSettingCoreDataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalSettingCoreDataHandler.swift; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				ACDD5D662028779F00076E5E /* AppDelegate.swift */,
 				ACDD5DAB202C9E4800076E5E /* datasetJSON.json */,
 				AC03D4E72059CEDA00C9AA16 /* datasetJSON2.json */,
-				AC6D10C520ACBEC20006716C /* datasetJSON3.json */,
+				AC8E6C1D20AED7C40023217C /* datasetJSON3.json */,
 				ACDD5D702028779F00076E5E /* Assets.xcassets */,
 				AC03D47A20502A5300C9AA16 /* LaunchImage.gif */,
 				ACDD5D752028779F00076E5E /* Info.plist */,
@@ -398,7 +398,7 @@
 				ACDD5DAA2028819D00076E5E /* Main.storyboard in Resources */,
 				ACDD5D742028779F00076E5E /* LaunchScreen.storyboard in Resources */,
 				ACDD5D712028779F00076E5E /* Assets.xcassets in Resources */,
-				AC6D10C620ACBEC20006716C /* datasetJSON3.json in Resources */,
+				AC8E6C1E20AED7C50023217C /* datasetJSON3.json in Resources */,
 				AC03D4E82059CEDA00C9AA16 /* datasetJSON2.json in Resources */,
 				AC03D47B20502A5300C9AA16 /* LaunchImage.gif in Resources */,
 			);

@@ -184,15 +184,6 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
         
     }
     
-    
-    /* search button deleted
-    //search for food items
-    @IBAction func searchedButtonClicked(_ sender: UIButton) {
-        searchForFoodItems()
-        textView.text = "Start searching for \(searchFood)..."
-        searchBar.endEditing(true)
-    }
-    */
     private func searchForFoodItems(searchText: String) {
         //search for food
         filteredData.removeAll(keepingCapacity: false)

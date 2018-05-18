@@ -12,7 +12,7 @@ import SafariServices
 class SettingViewController: UIViewController, UITabBarDelegate, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    let links = ["https://www.nhs.uk/news/food-and-diet/six-to-eight-glasses-of-water-still-best/", "https://www.healthline.com/nutrition/how-many-calories-per-day", "https://www.nhs.uk/conditions/vitamins-and-minerals/vitamin-c/", "https://www.nhs.uk/chq/pages/1139.aspx?categoryid=51", "https://www.choosemyplate.gov"]
+    let links = ["https://www.nhs.uk/news/food-and-diet/six-to-eight-glasses-of-water-still-best/", "https://www.healthline.com/nutrition/how-many-calories-per-day", "https://www.nhs.uk/conditions/vitamins-and-minerals/vitamin-c/", "https://www.nhs.uk/chq/pages/1139.aspx?categoryid=51", "https://shapescale.com/blog/health/nutrition/calculate-macronutrient-ratio/"]
     let help = ["Water Setting Guide", "Energy Setting Guide", "Vitamin Setting Guide", "Sugar Setting Guide", "Ratio Setting Guide"]
     let goals = PersonalSettingCoreDataHandler.fetchObject()
     let attribute: [NSAttributedStringKey: Any] = [

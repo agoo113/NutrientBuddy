@@ -23,7 +23,7 @@ class FoodInformationTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //MARK: edit button to select nutrients
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "addView"), style: .plain, target: self, action: #selector(addFoodButtonItemTapped))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(addFoodButtonItemTapped))
         let nameArray = getFoodNameAndImage()
         self.navigationItem.title = nameArray[0]
         
@@ -72,27 +72,27 @@ class FoodInformationTableViewController: UITableViewController {
             let nameArray = getFoodNameAndImage()
             // measures
             if (selectedFoodInfo.Cup_Weight != 0){
-                cell.measureUnitLabel.text = "Measured in cups, 1 cup = " + String(format: "%.0f", selectedFoodInfo.Cup_Weight) + " grams"
+                cell.measureUnitLabel.text = "Please select the number of cups"
                 amountScaleFactor = selectedFoodInfo.Cup_Weight
-                sliderMaxValue = 10
+                sliderMaxValue = 5
             }
             else if (selectedFoodInfo.Quantity_Weight != 0){
-                cell.measureUnitLabel.text = "Measured in quantity, 1 quantity = " + String(format: "%.0f", selectedFoodInfo.Quantity_Weight) + " grams"
+                cell.measureUnitLabel.text = "Please select the quantities"
                 amountScaleFactor = selectedFoodInfo.Quantity_Weight
-                sliderMaxValue = 10
+                sliderMaxValue = 5
             }
             else if (selectedFoodInfo.Tablespoon_Weight != 0){
-                cell.measureUnitLabel.text = "Measured in tablespoons, 1 tbsp = " + String(format: "%.0f", selectedFoodInfo.Tablespoon_Weight) + " grams"
+                cell.measureUnitLabel.text = "Please select the number of tablespoons"
                 amountScaleFactor = selectedFoodInfo.Tablespoon_Weight
                 sliderMaxValue = 5
             }
             else if (selectedFoodInfo.Liquid_Volume != 0) {
-                cell.measureUnitLabel.text = "Measured in ml, 1 ml = " + String(format: "%.0f", selectedFoodInfo.Liquid_Volume) + " grams"
+                cell.measureUnitLabel.text = "Please the consumed volume in ml"
                 amountScaleFactor = selectedFoodInfo.Liquid_Volume
                 sliderMaxValue = 300
             }
             else {
-                cell.measureUnitLabel.text = "Measured in grams"
+                cell.measureUnitLabel.text = "Please the consumed weight in grams"
             }
             cell.measureUnitLabel.lineBreakMode = .byWordWrapping
             cell.measureUnitLabel.numberOfLines = 0

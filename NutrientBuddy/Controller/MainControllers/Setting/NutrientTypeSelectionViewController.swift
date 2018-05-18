@@ -24,9 +24,10 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         //self.navigationController?.hidesBarsOnSwipe = true
         let doneButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "doneView"), style: .plain, target: self, action: #selector(doneButtonTapped))
         
-        let resetButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "resetView"), style: .plain, target: self, action: #selector(resetButtonTapped))
+        //let resetButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "resetView"), style: .plain, target: self, action: #selector(resetButtonTapped))
         
-        self.navigationItem.rightBarButtonItems = [doneButtonItem, resetButtonItem]
+        //self.navigationItem.rightBarButtonItems = [doneButtonItem, resetButtonItem]
+        self.navigationItem.rightBarButtonItem = doneButtonItem
         tableView.reloadData()
     }
 
@@ -98,7 +99,7 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         self.navigationController?.popToRootViewController(animated: true)
     }
     
-    @objc func resetButtonTapped(_ sender: UIBarButtonItem) {
+    /*@objc func resetButtonTapped(_ sender: UIBarButtonItem) {
        
         let alert = UIAlertController(title: "Alert", message: "Reset nutrient selection to default", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
@@ -118,4 +119,5 @@ class NutrientTypeSelectionViewController: UIViewController, UITableViewDelegate
         
        
     }
+ */
 }

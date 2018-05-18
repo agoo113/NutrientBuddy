@@ -35,9 +35,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             print("GJ: today's date is \(date), from view did appear - HomeViewController")
         }
         
-        //load personal goal
+        //load personal goal default
         if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 8700, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 6, waterGoal: 8)
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 2000, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 6, waterGoal: 8)
         }
         personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         let goal = personalGoals[0]

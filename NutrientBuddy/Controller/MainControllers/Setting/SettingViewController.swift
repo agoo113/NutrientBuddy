@@ -131,7 +131,7 @@ class SettingViewController: UIViewController, UITabBarDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "My Nutrient Goal"
+            return "My Nutritional Goals"
         }
         if section == 1 {
             return "Select Nutrient"

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "vcView.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "vcView.png",
       "scale" : "2x"
     },
     {

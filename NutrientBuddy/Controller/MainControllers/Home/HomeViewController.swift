@@ -37,7 +37,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //load personal goal default
         if personalGoals.count == 0 {
-            PersonalSettingCoreDataHandler.saveObject(carboGoal: 3, energyGoal: 2000, fatGoal: 2, proteinGoal: 5, vitaminCGoal: 40, sugarGoal: 6, waterGoal: 8)
+            PersonalSettingCoreDataHandler.saveObject(carboGoal: 4, energyGoal: 2000, fatGoal: 2, proteinGoal: 4, vitaminCGoal: 40, sugarGoal: 6, waterGoal: 8)
         }
         personalGoals = PersonalSettingCoreDataHandler.fetchObject()!
         let goal = personalGoals[0]
@@ -76,61 +76,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //reload table
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120
+        tableView.estimatedRowHeight = 50
         tableView.reloadData()
     }
 
     //MARK: display alert for over consumption and goal achievement
     func alertIfNeeded (ringPercentages: percentageConsumedForRings, barPercentages: percentageConsumedForBars) {
         if (ringPercentages.energyPercentage > 1 || ringPercentages.carboPercentage > 1 || ringPercentages.proteinPercentage > 1 || ringPercentages.fatPercentage > 1 || barPercentages.waterGlassesConsumed > barPercentages.waterGlassesGoal || barPercentages.sugarPercentage > barPercentages.sugarSpoonGoal) {
-            var messageGood: String = ""
-            var messageBad: String = ""
-            
-            if (ringPercentages.energyPercentage > 1) {
-                messageBad.append("energy")
-            }
-            if ringPercentages.carboPercentage > 1 {
-                if messageBad != "" {
-                    messageBad.append(", ")
-                }
-                messageBad.append("carbohydrate")
-            }
-            if ringPercentages.proteinPercentage > 1 {
-                messageGood.append("protein")
-            }
-            if ringPercentages.fatPercentage > 1 {
-                if messageBad != "" {
-                    messageBad.append(", ")
-                }
-                messageBad.append("fat")
-            }
-            
-            if barPercentages.waterGlassesConsumed > barPercentages.waterGlassesGoal {
-                if messageGood != ""{
-                    messageGood.append(", ")
-                }
-                messageGood.append("water")
-            }
-            if barPercentages.sugarPercentage > barPercentages.sugarSpoonGoal {
-                if messageBad != "" {
-                    messageBad.append(", ")
-                }
-                messageBad.append("sugar")
-            }
-            
-            if (messageBad != "" || messageGood != "") {
-                var message: String
-                if (messageBad == "") {
-                    message = "You have achieved goal on: " + messageGood + ". Well Done!"
-                }
-                if (messageGood == "") {
-                    message = "You have reached energy limit on: " + messageBad + ". Now go and do some exercise and stop eating!"
-                }
-                else {
-                    message = "You have reached energy limit on: " + messageBad + ". And you have achieved goal on: " + messageGood + "."
-                }
-                createAlert(message: message)
-            }
+            createAlert(message: "Some goals/limits has been reached, please refer to Nutrition section for detials")
         }
     }
     //MARK: ring graphs
@@ -226,6 +179,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
         if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "progressCell", for: indexPath) as! HomeProgressBarTableViewCell
+            cell.nutrientLabel.textAlignment = .right
+            
             if indexPath.row == 0 {
                 let barColor = UIColor(hue: 0.5417, saturation: 0.37, brightness: 0.98, alpha: 1.0).cgColor
                 let fillColor = UIColor(hue: 0.5417, saturation: 1, brightness: 0.98, alpha: 1.0).cgColor
@@ -258,6 +213,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "nutrientsSummaryDetails", for: indexPath) as! NutrientSummayDetailTableViewCell
+            cell.adviceLabel.textColor = UIColor.red
+            cell.adviceLabel.isHidden = true
+            cell.adviceLabel.frame = CGRect(x: 0, y: 0, width: 345, height: 0)
+            cell.nutrientAmountLabel.textAlignment = .right
             
             let nutrientToDisplay = display_nutrient[indexPath.row]
             cell.nutrientTypeLabel.text = nutrientToDisplay.nutrientType
@@ -265,20 +224,67 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             var amountString: String = String(format: "%.0f", nutrientToDisplay.amount)
             
             switch nutrientToDisplay.nutrientType {
-                case "Energy": cell.nutrientTypeLabel.textColor = UIColor.red
-                cell.nutrientAmountLabel.textColor = UIColor.red
+                case "Energy": cell.nutrientTypeLabel.textColor = UIColor(red: 209/254, green: 5/255, blue: 17/255, alpha: 1)
+                cell.nutrientAmountLabel.textColor = UIColor(red: 209/255, green: 5/255, blue: 17/255, alpha: 1)
                 cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.energyGoal) + "(kcal)"
+                if ringPercentages.energyPercentage > 1 {
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "You have reached the energy goal, please go for some cardio workouts!"
+                }
                 case "Carbohydrate": cell.nutrientTypeLabel.textColor = UIColor.orange
                 cell.nutrientAmountLabel.textColor = UIColor.orange
                 cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.totalCarboGoal) + "(g)"
+                if ringPercentages.carboPercentage > 1 {
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "You have reached the carbohydrate limit, you can do some cardio or increase protein consumption."
+                }
 
                 case "Protein": cell.nutrientTypeLabel.textColor = UIColor.blue
                 cell.nutrientAmountLabel.textColor = UIColor.blue
                 cell.nutrientAmountLabel.text = amountString + "/" +  String(format: "%.0f", ringPercentages.totalProteinGoal) + "(g)"
+                if ringPercentages.proteinPercentage > 1 {
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "You have reached the protein limit, well done!"
+                }
 
                 case "Fat": cell.nutrientTypeLabel.textColor = UIColor.purple
                 cell.nutrientAmountLabel.textColor = UIColor.purple
                 cell.nutrientAmountLabel.text = amountString + "/" + String(format: "%.0f", ringPercentages.totalFatGoal) + "(g)"
+                if ringPercentages.fatPercentage > 1 {
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "You have reached the fat limit, you can do some cardio or increase protein consumption."
+                }
+                
+                case "Water": cell.nutrientTypeLabel.textColor = UIColor.black
+                    cell.nutrientAmountLabel.text = amountString + "(ml)"
+                if barPercentages.waterGlassesConsumed >=  barPercentages.waterGlassesGoal {
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "Well done, you have had enough water today!"
+                }
+                case "Sugar":
+                cell.nutrientTypeLabel.textColor = UIColor.black
+                cell.nutrientAmountLabel.textColor = UIColor.black
+                cell.nutrientAmountLabel.text = amountString + ("(g)")
+                if barPercentages.sugarPercentage > barPercentages.waterGlassesGoal {
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "You have reached the sugar limit, you have to be careful with carbohydate consumption today."
+                }
+                case "Vitamin C":
+                    cell.nutrientTypeLabel.textColor = UIColor.black
+                    cell.nutrientAmountLabel.textColor = UIColor.black
+                    amountString = String(format: "%.0f", nutrientToDisplay.amount*1000)
+                    cell.nutrientAmountLabel.text = amountString + ("(mg)")
+                if barPercentages.vitaminCPercentage > 1{
+                    cell.adviceLabel.isHidden = false
+                    cell.adviceLabel.numberOfLines = 0
+                    cell.adviceLabel.text = "You have reached the vitamin C goal, well done!"
+                }
 
                 default:
                     // measured in mg
@@ -304,9 +310,74 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Nutrient Diary Details"
+            return "Nutrition"
         }
-        return "Other Nurition View"
+        return "Other Tracked Nutrients"
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            let nutrientToDisplay = display_nutrient[indexPath.row]
+            let rowHeightWithAdvice = CGFloat(150)
+            let rowHeightDefault = CGFloat(65)
+            
+            switch nutrientToDisplay.nutrientType {
+            case "Energy":
+                if ringPercentages.energyPercentage > 1 {
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+            case "Carbohydrate":
+                if ringPercentages.carboPercentage > 1 {
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+            case "Protein":
+                if ringPercentages.proteinPercentage > 1 {
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+            case "Fat":
+                if ringPercentages.fatPercentage > 1 {
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+            case "Water":
+                if barPercentages.waterGlassesConsumed >=  barPercentages.waterGlassesGoal {
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+            case "Sugar":
+                if barPercentages.sugarPercentage > barPercentages.waterGlassesGoal {
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+            case "Vitamin C":
+                if barPercentages.vitaminCPercentage > 1{
+                    return rowHeightWithAdvice
+                }
+                else {
+                    return rowHeightDefault
+                }
+                
+            default:
+                return rowHeightDefault
+            }
+        }
+        let nutrientBarHeight = CGFloat(90)
+        return nutrientBarHeight
     }
     
     func createAlert(message: String) {

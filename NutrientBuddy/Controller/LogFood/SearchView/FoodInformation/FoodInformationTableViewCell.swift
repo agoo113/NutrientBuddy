@@ -17,7 +17,7 @@ class FoodInformationTableViewCell: UITableViewCell {
     @IBOutlet weak var measureUnitLabel: UILabel!
     
     var sliderMaxValue: Float = 200
-    var amount: Double = 0
+    var amount: Double = 100
     
     override func awakeFromNib() {
         super.awakeFromNib()

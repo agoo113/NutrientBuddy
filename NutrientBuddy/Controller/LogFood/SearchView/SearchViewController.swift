@@ -29,9 +29,8 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //search bar
-        searchBar.placeholder = "Enter Food"
+        searchBar.placeholder = "Enter Food in singular form"
         searchBar.delegate = self
         searchBar.showsBookmarkButton = true
         searchBar.setImage(#imageLiteral(resourceName: "Record"), for: UISearchBarIcon.bookmark, state: UIControlState.normal)
@@ -148,6 +147,25 @@ class SearchViewController: UIViewController, SFSpeechRecognizerDelegate, UISear
 
     
     //MARK: searchBar
+    @IBAction func searchButtonClicked(_ sender: UIButton) {
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+        if (searchBar.text?.isEmpty)! {
+            let alert = UIAlertController(title: "Alert", message: "Search Bar is empty", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+        
+        startActivityIndicator(activityIndicator: activityIndicator)
+        let searchItem = searchBar.text!
+        DispatchQueue.global(qos: .background).async {
+            self.searchForFoodItems(searchText: searchItem)
+            DispatchQueue.main.async {
+                self.stopActivityIndicator(activityIndicator: activityIndicator)
+            }
+        }
+        
+        searchBar.endEditing(true)
+    }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
         if (searchBar.text?.isEmpty)! {

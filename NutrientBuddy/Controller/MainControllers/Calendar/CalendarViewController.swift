@@ -19,6 +19,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     var year = Int()
     var calendar = Calendar.current
     let date = Date()
+    var selectedDateString = String()
     
     func getCurrentDate(){
         day = calendar.component(.day, from: date)
@@ -199,13 +200,24 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedDay = indexPath.row + 1 - positionIndex
         let selectedMonth = month + 1
-        let selectedDateString = String(format: "%02d", selectedDay) + "/" + String(format: "%02d", selectedMonth) + "/" + "\(year)"
-        //print("GJ: \(selectedMonth), \(year), \(selectedDay)")
-        //print(selectedDateString)
-        
+        selectedDateString = String(format: "%02d", selectedDay) + "/" + String(format: "%02d", selectedMonth) + "/" + "\(year)"
+        pushDiary()
     }
     
-    
+    /*//MARK: pass to the next view
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "selectedDiaryView" {
+            let selectedDiaryViewController: SelectedDiaryViewController = segue.destination as! SelectedDiaryViewController
+            selectedDiaryViewController.date = selectedDateString
+        }
+    }
+ */
+    func pushDiary(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let selectedDiaryViewController = storyboard.instantiateViewController(withIdentifier: "selectedDiaryView") as! SelectedDiaryViewController
+        selectedDiaryViewController.date = selectedDateString
+        navigationController?.pushViewController(selectedDiaryViewController, animated: true)
+    }
 }
 
 

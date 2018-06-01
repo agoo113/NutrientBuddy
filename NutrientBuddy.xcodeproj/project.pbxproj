@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC0144FE20C198C7005283D5 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0144FD20C198C7005283D5 /* DateCollectionViewCell.swift */; };
 		AC03D464204D972B00C9AA16 /* LoadAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D463204D972B00C9AA16 /* LoadAttachment.swift */; };
 		AC03D4752050264900C9AA16 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4742050264800C9AA16 /* LaunchScreenViewController.swift */; };
 		AC03D4772050265100C9AA16 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC03D4762050265100C9AA16 /* Swift+Gif.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC0144FD20C198C7005283D5 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		AC03D463204D972B00C9AA16 /* LoadAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadAttachment.swift; sourceTree = "<group>"; };
 		AC03D4742050264800C9AA16 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LaunchScreenViewController.swift; path = ../../../../../LaunchAnimation/LaunchAnimation/LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		AC03D4762050265100C9AA16 /* Swift+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Swift+Gif.swift"; path = "../../../../../LaunchAnimation/LaunchAnimation/Swift+Gif.swift"; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				ACA899B6205AA63000C6EC63 /* CalendarViewController.swift */,
+				AC0144FD20C198C7005283D5 /* DateCollectionViewCell.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				AC5C9BB320441BD700C26309 /* SettingViewController.swift in Sources */,
 				AC39434D2042208500EE31FA /* NutrientSummayDetailTableViewCell.swift in Sources */,
 				AC03D4772050265100C9AA16 /* Swift+Gif.swift in Sources */,
+				AC0144FE20C198C7005283D5 /* DateCollectionViewCell.swift in Sources */,
 				ACDD5D672028779F00076E5E /* AppDelegate.swift in Sources */,
 				ACAD7E222046F81D0033FC30 /* Debug.swift in Sources */,
 				AC321F55204085340070D289 /* MKRingProgressGroupView.swift in Sources */,
